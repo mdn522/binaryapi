@@ -1,3 +1,4 @@
 requests
 websocket-client==0.56
-simplejson
+orjson
+pause

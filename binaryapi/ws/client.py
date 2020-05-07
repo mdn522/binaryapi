@@ -1,14 +1,10 @@
 """Module for Binary websocket."""
 
-import json
+import orjson as json
 import logging
-from collections import OrderedDict
 
 import websocket
-import binaryapi.constants as OP_code
 import binaryapi.global_value as global_value
-
-import time
 
 
 class WebsocketClient:
@@ -23,16 +19,29 @@ class WebsocketClient:
             on_error=self.on_error, on_close=self.on_close,
             on_open=self.on_open)
 
-    @staticmethod
     def on_message(self, message):
         """Method to process websocket messages."""
         logger = logging.getLogger(__name__)
         logger.debug(message)
 
         message = json.loads(str(message))
+        msg_type = message.get('msg_type')
 
-        if (message['msg_type'] == 'authorize'):
-            # TODO
+        if msg_type not in [""] and message.get("req_id"):
+            self.api.msg_by_request_id[message.get("req_id")] = message
+            self.api.msg_by_name[msg_type][message.get("req_id")] = message
+        # TODO callback
+
+        # TODO error key
+        if msg_type == 'authorize':
+            self.api.profile.msg = message["authorize"]
+
+            try:
+                self.api.profile.balance = message["authorize"]["balance"]
+            except Exception as e:
+                pass
+        elif msg_type == 'balance':
+            self.api.profile.balance = message["balance"]["balance"]
             pass
 
         print('-> %s' % message)
