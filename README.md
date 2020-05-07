@@ -1,4 +1,4 @@
-# binaryapi
+# Binary.com API for Python
 #### Supports
 * `authorize` [builtin]
 * `balance`
