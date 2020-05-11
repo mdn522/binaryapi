@@ -44,7 +44,8 @@ class WebsocketClient:
             self.api.profile.balance = message["balance"]["balance"]
             pass
 
-        print('-> %s' % message)
+        if self.api.message_callback is not None:
+            self.api.message_callback(message)
 
     @staticmethod
     def on_error(wss, error):  # pylint: disable=unused-argument

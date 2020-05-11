@@ -1,17 +1,12 @@
-import sys
-
 from binaryapi.api import BinaryAPI
 import binaryapi.constants as OP_code
-import threading
 import time
 import logging
-import operator
 
-from collections import defaultdict, OrderedDict
-# from binaryapi.expiration import get_expiration_time, get_remaning_time
-from datetime import datetime, timedelta
+from collections import defaultdict
 
 
+# noinspection PyShadowingBuiltins
 def nested_dict(n, type):
     if n == 1:
         return defaultdict(type)
@@ -20,9 +15,13 @@ def nested_dict(n, type):
 
 
 class Binary:
-    def __init__(self, app_id, token):
+    api: BinaryAPI
+
+    def __init__(self, app_id, token, message_callback=None):
         self.app_id = app_id
         self.token = token
+
+        self.message_callback = message_callback
 
         self.max_reconnect = 5
         self.connect_count = 0
@@ -34,31 +33,37 @@ class Binary:
         while True:
             try:
                 self.api.close()
-            except:
+            except Exception:
                 pass
                 # logging.error('**warning** self.api.close() fail')
             if self.connect_count < self.max_reconnect or self.max_reconnect < 0:
                 self.api = BinaryAPI(self.app_id, self.token)
+                self.api.message_callback = self.message_callback
                 check = None
 
                 check = self.api.connect()
 
-                if check == True:
+                if check:
+                    self.api.balance(subscribe=True)
+                    self.api.transaction(subscribe=True)
                     break
+
                 time.sleep(self.suspend * 2)
                 self.connect_count = self.connect_count + 1
             else:
                 logging.error(
                     '**error** reconnect() too many time please look log file')
-                # exit(1) # TODO
 
-    def buy(self, contract_type, amount, symbol, duration, duration_unit, min_payout=0, passthrough=None,
-            request_id=None, instant=False, is_async=False):
+    # buy_call_put
+    # TODO buy_higher_lower
+    def buy_call_put(self, contract_type, amount, symbol, duration, duration_unit, min_payout=0, passthrough=None,
+                     req_id=None, instant=False, is_async=False):
+
+        buy_id = None
+        parameters = None
         if instant:
             parameters = dict(symbol=symbol, duration=duration, duration_unit=duration_unit,
                               basis=OP_code.PROPOSAL_BASIS.STAKE, amount=amount, currency=self.api.profile.currency, )
-            request_id = self.api.buy(buy_id=None, max_price=amount, parameters=parameters, passthrough=passthrough,
-                                      request_id=request_id)
         else:
             prop_req_id = self.api.proposal(contract_type=contract_type, symbol=symbol, duration_unit=duration_unit,
                                             duration=duration, amount=amount)
@@ -71,25 +76,30 @@ class Binary:
             proposal_res = self.api.msg_by_request_id[prop_req_id]
             if 'error' in proposal_res:
                 return False, None, prop_req_id
-
-            payout = (proposal_res['proposal']['payout'] - proposal_res['proposal']['ask_price']) / proposal_res['proposal']['ask_price'] * 100
+            # min_payout
+            proposal_obj = proposal_res['proposal']
+            payout = (proposal_obj['payout'] - proposal_obj['ask_price']) / proposal_obj['ask_price'] * 100
             if payout >= min_payout:
-                request_id = self.api.buy(buy_id=proposal_res['proposal']['id'], max_price=amount, passthrough=passthrough, request_id=request_id)
+                buy_id = proposal_obj['id']
             else:
                 return False, None, prop_req_id
 
+        req_id = self.api.buy(buy_id=buy_id, max_price=amount, parameters=parameters, passthrough=passthrough, req_id=req_id)
+
         if is_async:
-            return True, None, request_id
+            return True, None, req_id
         else:
             start_t = time.time()
-            while self.api.msg_by_name['buy'].get(request_id) is None:
+            while self.api.msg_by_name['buy'].get(req_id) is None:
                 if time.time() - start_t >= 30:
                     logging.error('**warning** buy late 30 sec')
-                    return False, None, request_id
+                    return False, None, req_id
 
-            res = self.api.msg_by_name['buy'][request_id]
+            res = self.api.msg_by_name['buy'][req_id]
             if 'error' in res:
-                return False, None, request_id
+                return False, None, req_id
 
             # TODO
-            return True, res['buy']['contract_id'], request_id
+            return True, res['buy']['contract_id'], req_id
+
+    buy = buy_call_put

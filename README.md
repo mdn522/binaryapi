@@ -1,8 +1,5 @@
 # Binary.com API for Python
-#### Supports
-* `authorize` [builtin]
-* `balance`
-* `proposal`
-* `buy` [partial]
 
-Inspired from [IQ Option API for Python](https://github.com/Lu-Yi-Hsun/iqoptionapi)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/mdn522)
+
+
