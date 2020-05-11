@@ -9,7 +9,7 @@ class Mt5LoginList(Base):
 
     name = "mt5_login_list"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to mt5_login_list websocket chanel.
         MT5: Accounts List (request)
         Get list of MT5 accounts for client

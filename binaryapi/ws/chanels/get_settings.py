@@ -9,7 +9,7 @@ class GetSettings(Base):
 
     name = "get_settings"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to get_settings websocket chanel.
         Get Account Settings (request)
         Get User Settings (email, date of birth, address etc)

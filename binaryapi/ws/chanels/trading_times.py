@@ -9,7 +9,7 @@ class TradingTimes(Base):
 
     name = "trading_times"
 
-    def __call__(self, trading_times: str, passthrough=None, req_id: int=None):
+    def __call__(self, trading_times: str, passthrough=None, req_id: int = None):
         """Method to send message to trading_times websocket chanel.
         Trading Times (request)
         Receive a list of market opening times for a given date.

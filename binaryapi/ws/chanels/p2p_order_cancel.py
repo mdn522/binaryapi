@@ -9,7 +9,7 @@ class P2POrderCancel(Base):
 
     name = "p2p_order_cancel"
 
-    def __call__(self, id: str, passthrough=None, req_id: int=None):
+    def __call__(self, id: str, passthrough=None, req_id: int = None):
         """Method to send message to p2p_order_cancel websocket chanel.
         P2P Order Cancel (request)
         Cancel a P2P order. **This API call is still in Beta.**

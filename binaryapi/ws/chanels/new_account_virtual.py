@@ -9,7 +9,7 @@ class NewAccountVirtual(Base):
 
     name = "new_account_virtual"
 
-    def __call__(self, client_password: str, residence: str, verification_code: str, affiliate_token: str=None, date_first_contact: str=None, gclid_url: str=None, signup_device: str=None, utm_campaign: str=None, utm_medium: str=None, utm_source: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, client_password: str, residence: str, verification_code: str, affiliate_token: str = None, date_first_contact: str = None, gclid_url: str = None, signup_device: str = None, utm_campaign: str = None, utm_medium: str = None, utm_source: str = None, passthrough=None, req_id: int = None):
         """Method to send message to new_account_virtual websocket chanel.
         New Virtual-Money Account (request)
         Create a new virtual-money account.
@@ -47,24 +47,24 @@ class NewAccountVirtual(Base):
         }
 
         if affiliate_token:
-            data['affiliate_token'] = affiliate_token
+            data['affiliate_token'] = str(affiliate_token)
 
         if date_first_contact:
-            data['date_first_contact'] = date_first_contact
+            data['date_first_contact'] = str(date_first_contact)
 
         if gclid_url:
-            data['gclid_url'] = gclid_url
+            data['gclid_url'] = str(gclid_url)
 
         if signup_device:
-            data['signup_device'] = signup_device
+            data['signup_device'] = str(signup_device)
 
         if utm_campaign:
-            data['utm_campaign'] = utm_campaign
+            data['utm_campaign'] = str(utm_campaign)
 
         if utm_medium:
-            data['utm_medium'] = utm_medium
+            data['utm_medium'] = str(utm_medium)
 
         if utm_source:
-            data['utm_source'] = utm_source
+            data['utm_source'] = str(utm_source)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

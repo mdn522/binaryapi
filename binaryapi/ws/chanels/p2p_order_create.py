@@ -9,7 +9,7 @@ class P2POrderCreate(Base):
 
     name = "p2p_order_create"
 
-    def __call__(self, advert_id: str, amount, contact_info: str=None, payment_info: str=None, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, advert_id: str, amount, contact_info: str = None, payment_info: str = None, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to p2p_order_create websocket chanel.
         P2P Order Create (request)
         Creates a P2P order for the specified advert. **This API call is still in Beta.**
@@ -36,10 +36,10 @@ class P2POrderCreate(Base):
         }
 
         if contact_info:
-            data['contact_info'] = contact_info
+            data['contact_info'] = str(contact_info)
 
         if payment_info:
-            data['payment_info'] = payment_info
+            data['payment_info'] = str(payment_info)
 
         if subscribe:
             data['subscribe'] = int(subscribe)

@@ -9,7 +9,7 @@ class P2PAdvertInfo(Base):
 
     name = "p2p_advert_info"
 
-    def __call__(self, id: str, passthrough=None, req_id: int=None):
+    def __call__(self, id: str, passthrough=None, req_id: int = None):
         """Method to send message to p2p_advert_info websocket chanel.
         P2P Advert Information (request)
         Retrieve information about a P2P advert. **This API call is still in Beta.**

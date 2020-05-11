@@ -9,7 +9,7 @@ class VerifyEmail(Base):
 
     name = "verify_email"
 
-    def __call__(self, verify_email: str, type: str, url_parameters=None, passthrough=None, req_id: int=None):
+    def __call__(self, verify_email: str, type: str, url_parameters=None, passthrough=None, req_id: int = None):
         """Method to send message to verify_email websocket chanel.
         Verify Email (request)
         Verify an email address for various purposes. The system will send an email to the address containing a security code for verification.

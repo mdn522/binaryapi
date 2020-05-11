@@ -9,7 +9,7 @@ class GetAccountStatus(Base):
 
     name = "get_account_status"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to get_account_status websocket chanel.
         Account Status (request)
         Get Account Status

@@ -9,7 +9,7 @@ class Proposal(Base):
 
     name = "proposal"
 
-    def __call__(self, contract_type: str, currency: str, symbol: str, amount=None, barrier: str=None, barrier2: str=None, basis: str=None, cancellation: str=None, date_expiry: int=None, date_start: int=None, duration: int=None, duration_unit: str=None, limit_order=None, multiplier=None, product_type: str=None, selected_tick: int=None, subscribe: bool=None, trading_period_start: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, contract_type: str, currency: str, symbol: str, amount=None, barrier: str = None, barrier2: str = None, basis: str = None, cancellation: str = None, date_expiry: int = None, date_start: int = None, duration: int = None, duration_unit: str = None, limit_order=None, multiplier=None, product_type: str = None, selected_tick: int = None, subscribe: bool = None, trading_period_start: int = None, passthrough=None, req_id: int = None):
         """Method to send message to proposal websocket chanel.
         Price Proposal (request)
         Gets latest price for a specific contract.
@@ -66,28 +66,28 @@ class Proposal(Base):
             data['amount'] = amount
 
         if barrier:
-            data['barrier'] = barrier
+            data['barrier'] = str(barrier)
 
         if barrier2:
-            data['barrier2'] = barrier2
+            data['barrier2'] = str(barrier2)
 
         if basis:
-            data['basis'] = basis
+            data['basis'] = str(basis)
 
         if cancellation:
-            data['cancellation'] = cancellation
+            data['cancellation'] = str(cancellation)
 
         if date_expiry:
-            data['date_expiry'] = date_expiry
+            data['date_expiry'] = int(date_expiry)
 
         if date_start:
-            data['date_start'] = date_start
+            data['date_start'] = int(date_start)
 
         if duration:
-            data['duration'] = duration
+            data['duration'] = int(duration)
 
         if duration_unit:
-            data['duration_unit'] = duration_unit
+            data['duration_unit'] = str(duration_unit)
 
         if limit_order:
             data['limit_order'] = limit_order
@@ -96,15 +96,15 @@ class Proposal(Base):
             data['multiplier'] = multiplier
 
         if product_type:
-            data['product_type'] = product_type
+            data['product_type'] = str(product_type)
 
         if selected_tick:
-            data['selected_tick'] = selected_tick
+            data['selected_tick'] = int(selected_tick)
 
         if subscribe:
             data['subscribe'] = int(subscribe)
 
         if trading_period_start:
-            data['trading_period_start'] = trading_period_start
+            data['trading_period_start'] = int(trading_period_start)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

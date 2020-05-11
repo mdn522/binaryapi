@@ -10,18 +10,14 @@ import orjson as json
 from threading import Thread
 from collections import defaultdict, OrderedDict
 
+from binaryapi.ws.abstract import AbstractAPI
 from binaryapi.ws.client import WebsocketClient
 import binaryapi.global_value as global_value
-
-from binaryapi.ws.chanels.balance import Balance
-from binaryapi.ws.chanels.transaction import Transaction
-from binaryapi.ws.chanels.proposal import Proposal
-from binaryapi.ws.chanels.buy import Buy
-from binaryapi.ws.chanels.authorize import Authorize
 
 from binaryapi.ws.objects.authorize import Authorize as AuthorizeObject
 
 
+# noinspection PyShadowingBuiltins
 def nested_dict(n, type):
     if n == 1:
         return defaultdict(type)
@@ -30,6 +26,7 @@ def nested_dict(n, type):
 
 
 class FixSizeOrderedDict(OrderedDict):
+    # noinspection PyShadowingBuiltins
     def __init__(self, *args, max=0, **kwargs):
         self._max = max
         super().__init__(*args, **kwargs)
@@ -41,10 +38,15 @@ class FixSizeOrderedDict(OrderedDict):
                 self.popitem(False)
 
 
-class BinaryAPI:
+class BinaryAPI(AbstractAPI):
     websocket_thread: Thread
     profile = AuthorizeObject()
     message_callback = None
+
+    results = FixSizeOrderedDict(max=300)
+    msg_by_req_id = FixSizeOrderedDict(max=300)
+    msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=300))
+    _request_id = 1
 
     def __init__(self, app_id, token):
         self.app_id = app_id
@@ -72,12 +74,12 @@ class BinaryAPI:
                     return False
                 elif global_value.check_websocket_if_connect == 1:
                     break
-            except:
+            except Exception:
                 pass
 
             pass
 
-        self.authorize(self.token)
+        self.authorize(authorize=self.token)
 
         start_t = time.time()
         while self.profile.msg is None:
@@ -106,61 +108,10 @@ class BinaryAPI:
     def websocket_alive(self):
         return self.websocket_thread.is_alive()
 
-    # Code Custom
-    _request_id = 100
-
-    results = FixSizeOrderedDict(max=300)
-    msg_by_request_id = FixSizeOrderedDict(max=300)
-    msg_by_name = nested_dict(1, lambda: FixSizeOrderedDict(max=300))
-
     @property
     def request_id(self):
         self._request_id += 1
         return self._request_id - 1
-
-    @property
-    def authorize(self) -> Authorize.__call__:
-        """Property for get Binary ws authorize resource.
-
-        :returns: The instance of :class:`Authorize<binaryapi.ws.chanels.authorize.Authorize>`.
-        """
-        return Authorize(self).__call__
-
-    @property
-    def balance(self):
-        """Property for get Binary ws balance resource.
-
-        :returns: The instance of :class:`Balance
-            <binaryapi.ws.chanels.balance.Balance>`.
-        """
-        return Balance(self).__call__
-
-    @property
-    def transaction(self):
-        """Property for get Binary ws transaction resource.
-
-        :returns: The instance of :class:`Transaction
-            <binaryapi.ws.chanels.transaction.Transaction>`.
-        """
-        return Transaction(self).__call__
-
-    @property
-    def proposal(self):
-        """Property for get Binary ws proposal resource.
-
-        :returns: The instance of :class:`Proposal
-            <binaryapi.ws.chanels.proposal.Proposal>`.
-        """
-        return Proposal(self).__call__
-
-    @property
-    def buy(self):
-        """Property for get Binary ws buy resource.
-
-        :returns: The instance of :class:`Buy
-            <binaryapi.ws.chanels.buy.Buy>`.
-        """
-        return Buy(self).__call__
 
     def send_websocket_request(self, name: str, msg, passthrough=None, req_id: int = None):
         """Send websocket request to Binary server.
@@ -177,8 +128,8 @@ class BinaryAPI:
         if req_id:
             msg['req_id'] = req_id
             self.results[req_id] = None
-            self.msg_by_request_id[req_id] = None
-            self.msg_by_name[name][req_id] = None
+            self.msg_by_req_id[req_id] = None
+            self.msg_by_type[name][req_id] = None
 
         if passthrough:
             msg["passthrough"] = passthrough

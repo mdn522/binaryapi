@@ -9,7 +9,7 @@ class AppGet(Base):
 
     name = "app_get"
 
-    def __call__(self, app_get: int, passthrough=None, req_id: int=None):
+    def __call__(self, app_get: int, passthrough=None, req_id: int = None):
         """Method to send message to app_get websocket chanel.
         Application: Get Details (request)
         To get the information of the OAuth application specified by 'app_id'

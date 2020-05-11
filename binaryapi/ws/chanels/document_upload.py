@@ -9,7 +9,7 @@ class DocumentUpload(Base):
 
     name = "document_upload"
 
-    def __call__(self, document_format: str, document_type: str, expected_checksum: str, file_size: int, document_id: str=None, expiration_date: str=None, page_type: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, document_format: str, document_type: str, expected_checksum: str, file_size: int, document_id: str = None, expiration_date: str = None, page_type: str = None, passthrough=None, req_id: int = None):
         """Method to send message to document_upload websocket chanel.
         Document Upload (request)
         Request KYC information from client
@@ -42,12 +42,12 @@ class DocumentUpload(Base):
         }
 
         if document_id:
-            data['document_id'] = document_id
+            data['document_id'] = str(document_id)
 
         if expiration_date:
-            data['expiration_date'] = expiration_date
+            data['expiration_date'] = str(expiration_date)
 
         if page_type:
-            data['page_type'] = page_type
+            data['page_type'] = str(page_type)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

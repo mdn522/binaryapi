@@ -9,7 +9,7 @@ class SetSelfExclusion(Base):
 
     name = "set_self_exclusion"
 
-    def __call__(self, exclude_until=None, max_30day_losses=None, max_30day_turnover=None, max_7day_losses=None, max_7day_turnover=None, max_balance=None, max_deposit=None, max_deposit_end_date=None, max_losses=None, max_open_bets=None, max_turnover=None, session_duration_limit=None, timeout_until=None, passthrough=None, req_id: int=None):
+    def __call__(self, exclude_until=None, max_30day_losses=None, max_30day_turnover=None, max_7day_losses=None, max_7day_turnover=None, max_balance=None, max_deposit=None, max_deposit_end_date=None, max_losses=None, max_open_bets=None, max_turnover=None, session_duration_limit=None, timeout_until=None, passthrough=None, req_id: int = None):
         """Method to send message to set_self_exclusion websocket chanel.
         Set Self-Exclusion (request)
         Set Self-Exclusion (this call should be used in conjunction with `get_self_exclusion`)

@@ -9,7 +9,7 @@ class StatesList(Base):
 
     name = "states_list"
 
-    def __call__(self, states_list: str, passthrough=None, req_id: int=None):
+    def __call__(self, states_list: str, passthrough=None, req_id: int = None):
         """Method to send message to states_list websocket chanel.
         States List (request)
         For a given country, returns a list of States of that country. This is useful to populate the account opening form.

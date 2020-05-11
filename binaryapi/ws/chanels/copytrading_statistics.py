@@ -9,7 +9,7 @@ class CopytradingStatistics(Base):
 
     name = "copytrading_statistics"
 
-    def __call__(self, trader_id: str, passthrough=None, req_id: int=None):
+    def __call__(self, trader_id: str, passthrough=None, req_id: int = None):
         """Method to send message to copytrading_statistics websocket chanel.
         Copy Trading: Statistics (request)
         Retrieve performance, trading, risk and copiers statistics of trader.

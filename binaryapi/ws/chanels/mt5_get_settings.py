@@ -9,7 +9,7 @@ class Mt5GetSettings(Base):
 
     name = "mt5_get_settings"
 
-    def __call__(self, login: str, passthrough=None, req_id: int=None):
+    def __call__(self, login: str, passthrough=None, req_id: int = None):
         """Method to send message to mt5_get_settings websocket chanel.
         MT5: Get Setting (request)
         Get MT5 user account settings

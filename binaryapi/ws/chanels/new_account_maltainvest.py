@@ -9,7 +9,7 @@ class NewAccountMaltainvest(Base):
 
     name = "new_account_maltainvest"
 
-    def __call__(self, accept_risk: int, address_city: str, address_line_1: str, date_of_birth: str, education_level: str, employment_industry: str, estimated_worth: str, first_name: str, income_source: str, last_name: str, net_income: str, occupation: str, residence: str, salutation: str, tax_identification_number: str, tax_residence: str, account_opening_reason: str=None, account_turnover: str=None, address_line_2: str=None, address_postcode: str=None, address_state: str=None, affiliate_token: str=None, binary_options_trading_experience: str=None, binary_options_trading_frequency: str=None, cfd_trading_experience: str=None, cfd_trading_frequency: str=None, citizen: str=None, client_type: str=None, employment_status: str=None, forex_trading_experience: str=None, forex_trading_frequency: str=None, non_pep_declaration: int=None, other_instruments_trading_experience: str=None, other_instruments_trading_frequency: str=None, phone: str=None, place_of_birth: str=None, secret_answer: str=None, secret_question: str=None, source_of_wealth: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, accept_risk: int, address_city: str, address_line_1: str, date_of_birth: str, education_level: str, employment_industry: str, estimated_worth: str, first_name: str, income_source: str, last_name: str, net_income: str, occupation: str, residence: str, salutation: str, tax_identification_number: str, tax_residence: str, account_opening_reason: str = None, account_turnover: str = None, address_line_2: str = None, address_postcode: str = None, address_state: str = None, affiliate_token: str = None, binary_options_trading_experience: str = None, binary_options_trading_frequency: str = None, cfd_trading_experience: str = None, cfd_trading_frequency: str = None, citizen: str = None, client_type: str = None, employment_status: str = None, forex_trading_experience: str = None, forex_trading_frequency: str = None, non_pep_declaration: int = None, other_instruments_trading_experience: str = None, other_instruments_trading_frequency: str = None, phone: str = None, place_of_birth: str = None, secret_answer: str = None, secret_question: str = None, source_of_wealth: str = None, passthrough=None, req_id: int = None):
         """Method to send message to new_account_maltainvest websocket chanel.
         New Real-Money Account: Binary Investment (Europe) Ltd. (request)
         This call opens a new real-money account with the `maltainvest` Landing Company. This call can be made from a virtual-money account or real-money account at Binary (Europe) Ltd. If it is the latter, client information fields in this call will be ignored and data from your existing real-money account will be used.
@@ -118,72 +118,72 @@ class NewAccountMaltainvest(Base):
         }
 
         if account_opening_reason:
-            data['account_opening_reason'] = account_opening_reason
+            data['account_opening_reason'] = str(account_opening_reason)
 
         if account_turnover:
-            data['account_turnover'] = account_turnover
+            data['account_turnover'] = str(account_turnover)
 
         if address_line_2:
-            data['address_line_2'] = address_line_2
+            data['address_line_2'] = str(address_line_2)
 
         if address_postcode:
-            data['address_postcode'] = address_postcode
+            data['address_postcode'] = str(address_postcode)
 
         if address_state:
-            data['address_state'] = address_state
+            data['address_state'] = str(address_state)
 
         if affiliate_token:
-            data['affiliate_token'] = affiliate_token
+            data['affiliate_token'] = str(affiliate_token)
 
         if binary_options_trading_experience:
-            data['binary_options_trading_experience'] = binary_options_trading_experience
+            data['binary_options_trading_experience'] = str(binary_options_trading_experience)
 
         if binary_options_trading_frequency:
-            data['binary_options_trading_frequency'] = binary_options_trading_frequency
+            data['binary_options_trading_frequency'] = str(binary_options_trading_frequency)
 
         if cfd_trading_experience:
-            data['cfd_trading_experience'] = cfd_trading_experience
+            data['cfd_trading_experience'] = str(cfd_trading_experience)
 
         if cfd_trading_frequency:
-            data['cfd_trading_frequency'] = cfd_trading_frequency
+            data['cfd_trading_frequency'] = str(cfd_trading_frequency)
 
         if citizen:
-            data['citizen'] = citizen
+            data['citizen'] = str(citizen)
 
         if client_type:
-            data['client_type'] = client_type
+            data['client_type'] = str(client_type)
 
         if employment_status:
-            data['employment_status'] = employment_status
+            data['employment_status'] = str(employment_status)
 
         if forex_trading_experience:
-            data['forex_trading_experience'] = forex_trading_experience
+            data['forex_trading_experience'] = str(forex_trading_experience)
 
         if forex_trading_frequency:
-            data['forex_trading_frequency'] = forex_trading_frequency
+            data['forex_trading_frequency'] = str(forex_trading_frequency)
 
         if non_pep_declaration:
-            data['non_pep_declaration'] = non_pep_declaration
+            data['non_pep_declaration'] = int(non_pep_declaration)
 
         if other_instruments_trading_experience:
-            data['other_instruments_trading_experience'] = other_instruments_trading_experience
+            data['other_instruments_trading_experience'] = str(other_instruments_trading_experience)
 
         if other_instruments_trading_frequency:
-            data['other_instruments_trading_frequency'] = other_instruments_trading_frequency
+            data['other_instruments_trading_frequency'] = str(other_instruments_trading_frequency)
 
         if phone:
-            data['phone'] = phone
+            data['phone'] = str(phone)
 
         if place_of_birth:
-            data['place_of_birth'] = place_of_birth
+            data['place_of_birth'] = str(place_of_birth)
 
         if secret_answer:
-            data['secret_answer'] = secret_answer
+            data['secret_answer'] = str(secret_answer)
 
         if secret_question:
-            data['secret_question'] = secret_question
+            data['secret_question'] = str(secret_question)
 
         if source_of_wealth:
-            data['source_of_wealth'] = source_of_wealth
+            data['source_of_wealth'] = str(source_of_wealth)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

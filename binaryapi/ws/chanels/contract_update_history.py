@@ -9,7 +9,7 @@ class ContractUpdateHistory(Base):
 
     name = "contract_update_history"
 
-    def __call__(self, contract_id: int, passthrough=None, req_id: int=None):
+    def __call__(self, contract_id: int, passthrough=None, req_id: int = None):
         """Method to send message to contract_update_history websocket chanel.
         Update Contract History (request)
         Request for contract update history.

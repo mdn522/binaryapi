@@ -9,7 +9,7 @@ class AppMarkupDetails(Base):
 
     name = "app_markup_details"
 
-    def __call__(self, date_from: str, date_to: str, app_id: int=None, client_loginid: str=None, description: int=None, limit=None, offset=None, sort: str=None, sort_fields=None, passthrough=None, req_id: int=None):
+    def __call__(self, date_from: str, date_to: str, app_id: int = None, client_loginid: str = None, description: int = None, limit=None, offset=None, sort: str = None, sort_fields=None, passthrough=None, req_id: int = None):
         """Method to send message to app_markup_details websocket chanel.
         Application: Markup Details (request)
         Retrieve details of `app_markup` according to criteria specified.
@@ -44,13 +44,13 @@ class AppMarkupDetails(Base):
         }
 
         if app_id:
-            data['app_id'] = app_id
+            data['app_id'] = int(app_id)
 
         if client_loginid:
-            data['client_loginid'] = client_loginid
+            data['client_loginid'] = str(client_loginid)
 
         if description:
-            data['description'] = description
+            data['description'] = int(description)
 
         if limit:
             data['limit'] = limit
@@ -59,7 +59,7 @@ class AppMarkupDetails(Base):
             data['offset'] = offset
 
         if sort:
-            data['sort'] = sort
+            data['sort'] = str(sort)
 
         if sort_fields:
             data['sort_fields'] = sort_fields

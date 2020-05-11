@@ -9,7 +9,7 @@ class PayoutCurrencies(Base):
 
     name = "payout_currencies"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to payout_currencies websocket chanel.
         Payout Currencies (request)
         Retrieve a list of available option payout currencies. If a user is logged in, only the currencies available for the account will be returned.

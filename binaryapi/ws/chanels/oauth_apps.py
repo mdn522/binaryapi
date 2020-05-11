@@ -9,7 +9,7 @@ class OauthApps(Base):
 
     name = "oauth_apps"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to oauth_apps websocket chanel.
         OAuth Applications (request)
         List all my used OAuth applications.

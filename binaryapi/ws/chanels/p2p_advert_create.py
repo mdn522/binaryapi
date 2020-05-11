@@ -9,7 +9,7 @@ class P2PAdvertCreate(Base):
 
     name = "p2p_advert_create"
 
-    def __call__(self, amount, max_order_amount, min_order_amount, payment_method: str, rate, type: str, contact_info: str=None, description: str=None, local_currency: str=None, payment_info: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, amount, max_order_amount, min_order_amount, payment_method: str, rate, type: str, contact_info: str = None, description: str = None, local_currency: str = None, payment_info: str = None, passthrough=None, req_id: int = None):
         """Method to send message to p2p_advert_create websocket chanel.
         P2P Advert Create (request)
         Creates a P2P (Peer to Peer) advert. Can only be used by an approved P2P advertiser. **This API call is still in Beta.**
@@ -50,15 +50,15 @@ class P2PAdvertCreate(Base):
         }
 
         if contact_info:
-            data['contact_info'] = contact_info
+            data['contact_info'] = str(contact_info)
 
         if description:
-            data['description'] = description
+            data['description'] = str(description)
 
         if local_currency:
-            data['local_currency'] = local_currency
+            data['local_currency'] = str(local_currency)
 
         if payment_info:
-            data['payment_info'] = payment_info
+            data['payment_info'] = str(payment_info)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

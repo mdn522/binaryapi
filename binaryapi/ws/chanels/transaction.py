@@ -9,7 +9,7 @@ class Transaction(Base):
 
     name = "transaction"
 
-    def __call__(self, subscribe: bool, passthrough=None, req_id: int=None):
+    def __call__(self, subscribe: bool, passthrough=None, req_id: int = None):
         """Method to send message to transaction websocket chanel.
         Transactions Stream (request)
         Subscribe to transaction notifications

@@ -9,7 +9,7 @@ class Mt5NewAccount(Base):
 
     name = "mt5_new_account"
 
-    def __call__(self, account_type: str, email: str, leverage, mainPassword: str, name: str, address: str=None, city: str=None, company: str=None, country: str=None, dry_run: int=None, investPassword: str=None, mt5_account_type: str=None, phone: str=None, phonePassword: str=None, state: str=None, zipCode: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, account_type: str, email: str, leverage, mainPassword: str, name: str, address: str = None, city: str = None, company: str = None, country: str = None, dry_run: int = None, investPassword: str = None, mt5_account_type: str = None, phone: str = None, phonePassword: str = None, state: str = None, zipCode: str = None, passthrough=None, req_id: int = None):
         """Method to send message to mt5_new_account websocket chanel.
         MT5: New Account (request)
         This call creates new MT5 user, either demo or real money user.
@@ -61,36 +61,36 @@ class Mt5NewAccount(Base):
         }
 
         if address:
-            data['address'] = address
+            data['address'] = str(address)
 
         if city:
-            data['city'] = city
+            data['city'] = str(city)
 
         if company:
-            data['company'] = company
+            data['company'] = str(company)
 
         if country:
-            data['country'] = country
+            data['country'] = str(country)
 
         if dry_run:
-            data['dry_run'] = dry_run
+            data['dry_run'] = int(dry_run)
 
         if investPassword:
-            data['investPassword'] = investPassword
+            data['investPassword'] = str(investPassword)
 
         if mt5_account_type:
-            data['mt5_account_type'] = mt5_account_type
+            data['mt5_account_type'] = str(mt5_account_type)
 
         if phone:
-            data['phone'] = phone
+            data['phone'] = str(phone)
 
         if phonePassword:
-            data['phonePassword'] = phonePassword
+            data['phonePassword'] = str(phonePassword)
 
         if state:
-            data['state'] = state
+            data['state'] = str(state)
 
         if zipCode:
-            data['zipCode'] = zipCode
+            data['zipCode'] = str(zipCode)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

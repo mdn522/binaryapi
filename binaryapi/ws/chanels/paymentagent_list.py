@@ -9,7 +9,7 @@ class PaymentagentList(Base):
 
     name = "paymentagent_list"
 
-    def __call__(self, paymentagent_list: str, currency: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, paymentagent_list: str, currency: str = None, passthrough=None, req_id: int = None):
         """Method to send message to paymentagent_list websocket chanel.
         Payment Agent: List (request)
         Will return a list of Payment Agents for a given country for a given currency. Payment agents allow users to deposit and withdraw funds using local payment methods that might not be available via the main website's cashier system.
@@ -28,6 +28,6 @@ class PaymentagentList(Base):
         }
 
         if currency:
-            data['currency'] = currency
+            data['currency'] = str(currency)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

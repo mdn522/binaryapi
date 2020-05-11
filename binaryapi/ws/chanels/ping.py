@@ -9,7 +9,7 @@ class Ping(Base):
 
     name = "ping"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to ping websocket chanel.
         Ping (request)
         To send the ping request to the server. Mostly used to test the connection or to keep it alive.

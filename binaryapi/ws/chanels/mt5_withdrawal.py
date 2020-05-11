@@ -9,7 +9,7 @@ class Mt5Withdrawal(Base):
 
     name = "mt5_withdrawal"
 
-    def __call__(self, amount, from_mt5: str, to_binary: str, passthrough=None, req_id: int=None):
+    def __call__(self, amount, from_mt5: str, to_binary: str, passthrough=None, req_id: int = None):
         """Method to send message to mt5_withdrawal websocket chanel.
         MT5: Withdrawal (request)
         This call allows withdrawal from MT5 account to Binary account.

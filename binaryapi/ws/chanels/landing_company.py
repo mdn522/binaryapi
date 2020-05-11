@@ -9,7 +9,7 @@ class LandingCompany(Base):
 
     name = "landing_company"
 
-    def __call__(self, landing_company: str, passthrough=None, req_id: int=None):
+    def __call__(self, landing_company: str, passthrough=None, req_id: int = None):
         """Method to send message to landing_company websocket chanel.
         Landing Company (request)
         The company has a number of licensed subsidiaries in various jurisdictions, which are called Landing Companies. This call will return the appropriate Landing Company for clients of a given country. The landing company may differ for Gaming contracts (Synthetic Indices) and Financial contracts (Forex, Stock Indices, Commodities).

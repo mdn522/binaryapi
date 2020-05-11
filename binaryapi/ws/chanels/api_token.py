@@ -9,7 +9,7 @@ class ApiToken(Base):
 
     name = "api_token"
 
-    def __call__(self, delete_token: str=None, new_token: str=None, new_token_scopes=None, valid_for_current_ip_only: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, delete_token: str = None, new_token: str = None, new_token_scopes=None, valid_for_current_ip_only: int = None, passthrough=None, req_id: int = None):
         """Method to send message to api_token websocket chanel.
         API Token (request)
         This call manages API tokens
@@ -32,15 +32,15 @@ class ApiToken(Base):
         }
 
         if delete_token:
-            data['delete_token'] = delete_token
+            data['delete_token'] = str(delete_token)
 
         if new_token:
-            data['new_token'] = new_token
+            data['new_token'] = str(new_token)
 
         if new_token_scopes:
             data['new_token_scopes'] = new_token_scopes
 
         if valid_for_current_ip_only:
-            data['valid_for_current_ip_only'] = valid_for_current_ip_only
+            data['valid_for_current_ip_only'] = int(valid_for_current_ip_only)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

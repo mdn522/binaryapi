@@ -9,7 +9,7 @@ class ProposalOpenContract(Base):
 
     name = "proposal_open_contract"
 
-    def __call__(self, contract_id: int=None, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, contract_id: int = None, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to proposal_open_contract websocket chanel.
         Price Proposal: Open Contracts (request)
         Get latest price (and other information) for a contract in the user's portfolio
@@ -28,7 +28,7 @@ class ProposalOpenContract(Base):
         }
 
         if contract_id:
-            data['contract_id'] = contract_id
+            data['contract_id'] = int(contract_id)
 
         if subscribe:
             data['subscribe'] = int(subscribe)

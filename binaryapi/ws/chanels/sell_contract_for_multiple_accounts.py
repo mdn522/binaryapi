@@ -9,7 +9,7 @@ class SellContractForMultipleAccounts(Base):
 
     name = "sell_contract_for_multiple_accounts"
 
-    def __call__(self, price, shortcode: str, tokens, passthrough=None, req_id: int=None):
+    def __call__(self, price, shortcode: str, tokens, passthrough=None, req_id: int = None):
         """Method to send message to sell_contract_for_multiple_accounts websocket chanel.
         Sell Contracts: Multiple Accounts (request)
         Sell contracts for multiple accounts simultaneously. Uses the shortcode response from `buy_contract_for_multiple_accounts` to identify the contract, and authorisation tokens to select which accounts to sell those contracts on. Note that only the accounts identified by the tokens will be affected. This will not sell the contract on the currently-authorised account unless you include the token for the current account.

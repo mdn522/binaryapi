@@ -9,7 +9,7 @@ class ForgetAll(Base):
 
     name = "forget_all"
 
-    def __call__(self, forget_all, passthrough=None, req_id: int=None):
+    def __call__(self, forget_all, passthrough=None, req_id: int = None):
         """Method to send message to forget_all websocket chanel.
         Forget All (request)
         Immediately cancel the real-time streams of messages of given type.

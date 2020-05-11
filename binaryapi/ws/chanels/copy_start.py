@@ -9,7 +9,7 @@ class CopyStart(Base):
 
     name = "copy_start"
 
-    def __call__(self, copy_start: str, assets=None, max_trade_stake=None, min_trade_stake=None, trade_types=None, passthrough=None, req_id: int=None):
+    def __call__(self, copy_start: str, assets=None, max_trade_stake=None, min_trade_stake=None, trade_types=None, passthrough=None, req_id: int = None):
         """Method to send message to copy_start websocket chanel.
         Copy Trading: Start (request)
         Start copy trader bets

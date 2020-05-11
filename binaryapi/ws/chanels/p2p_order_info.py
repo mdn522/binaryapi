@@ -9,7 +9,7 @@ class P2POrderInfo(Base):
 
     name = "p2p_order_info"
 
-    def __call__(self, id: str, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, id: str, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to p2p_order_info websocket chanel.
         P2P Order Information (request)
         Retrieves the information about a P2P order. **This API call is still in Beta.**

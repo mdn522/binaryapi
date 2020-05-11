@@ -9,7 +9,7 @@ class P2PChatCreate(Base):
 
     name = "p2p_chat_create"
 
-    def __call__(self, order_id: str, passthrough=None, req_id: int=None):
+    def __call__(self, order_id: str, passthrough=None, req_id: int = None):
         """Method to send message to p2p_chat_create websocket chanel.
         P2P Chat Create (request)
         Creates a P2P chat for the specified order. **This API call is still in Beta.**

@@ -9,7 +9,7 @@ class Authorize(Base):
 
     name = "authorize"
 
-    def __call__(self, authorize: str, add_to_login_history: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, authorize: str, add_to_login_history: int = None, passthrough=None, req_id: int = None):
         """Method to send message to authorize websocket chanel.
         Authorize (request)
         Authorize current WebSocket session to act on behalf of the owner of a given token. Must precede requests that need to access client account, for example purchasing and selling contracts or viewing portfolio.
@@ -28,6 +28,6 @@ class Authorize(Base):
         }
 
         if add_to_login_history:
-            data['add_to_login_history'] = add_to_login_history
+            data['add_to_login_history'] = int(add_to_login_history)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

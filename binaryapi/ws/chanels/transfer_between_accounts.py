@@ -9,7 +9,7 @@ class TransferBetweenAccounts(Base):
 
     name = "transfer_between_accounts"
 
-    def __call__(self, account_from: str=None, account_to: str=None, accounts: str=None, amount=None, currency: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, account_from: str = None, account_to: str = None, accounts: str = None, amount=None, currency: str = None, passthrough=None, req_id: int = None):
         """Method to send message to transfer_between_accounts websocket chanel.
         Transfer Between Accounts (request)
         This call allows transfers between accounts held by a given user. Transfer funds between your fiat and cryptocurrency accounts (for a fee). Please note that account_from should be same as current authorized account.
@@ -34,18 +34,18 @@ class TransferBetweenAccounts(Base):
         }
 
         if account_from:
-            data['account_from'] = account_from
+            data['account_from'] = str(account_from)
 
         if account_to:
-            data['account_to'] = account_to
+            data['account_to'] = str(account_to)
 
         if accounts:
-            data['accounts'] = accounts
+            data['accounts'] = str(accounts)
 
         if amount:
             data['amount'] = amount
 
         if currency:
-            data['currency'] = currency
+            data['currency'] = str(currency)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

@@ -9,7 +9,7 @@ class ResidenceList(Base):
 
     name = "residence_list"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to residence_list websocket chanel.
         Countries List (request)
         This call returns a list of countries and 2-letter country codes, suitable for populating the account opening form.

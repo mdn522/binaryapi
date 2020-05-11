@@ -9,7 +9,7 @@ class ProposalArray(Base):
 
     name = "proposal_array"
 
-    def __call__(self, barriers, contract_type, currency: str, symbol: str, amount=None, basis: str=None, date_expiry: int=None, date_start: int=None, duration: int=None, duration_unit: str=None, multiplier=None, product_type: str=None, subscribe: bool=None, trading_period_start: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, barriers, contract_type, currency: str, symbol: str, amount=None, basis: str = None, date_expiry: int = None, date_start: int = None, duration: int = None, duration_unit: str = None, multiplier=None, product_type: str = None, subscribe: bool = None, trading_period_start: int = None, passthrough=None, req_id: int = None):
         """Method to send message to proposal_array websocket chanel.
         Price Proposal: Multiple Contracts (request)
         Get latest prices for a specific contract with different barriers. **This API call is deprecated.**
@@ -59,30 +59,30 @@ class ProposalArray(Base):
             data['amount'] = amount
 
         if basis:
-            data['basis'] = basis
+            data['basis'] = str(basis)
 
         if date_expiry:
-            data['date_expiry'] = date_expiry
+            data['date_expiry'] = int(date_expiry)
 
         if date_start:
-            data['date_start'] = date_start
+            data['date_start'] = int(date_start)
 
         if duration:
-            data['duration'] = duration
+            data['duration'] = int(duration)
 
         if duration_unit:
-            data['duration_unit'] = duration_unit
+            data['duration_unit'] = str(duration_unit)
 
         if multiplier:
             data['multiplier'] = multiplier
 
         if product_type:
-            data['product_type'] = product_type
+            data['product_type'] = str(product_type)
 
         if subscribe:
             data['subscribe'] = int(subscribe)
 
         if trading_period_start:
-            data['trading_period_start'] = trading_period_start
+            data['trading_period_start'] = int(trading_period_start)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

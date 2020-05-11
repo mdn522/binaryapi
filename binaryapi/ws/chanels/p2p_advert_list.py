@@ -9,7 +9,7 @@ class P2PAdvertList(Base):
 
     name = "p2p_advert_list"
 
-    def __call__(self, advertiser_id: str=None, amount=None, counterparty_type: str=None, limit: int=None, local_currency: str=None, offset: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, advertiser_id: str = None, amount=None, counterparty_type: str = None, limit: int = None, local_currency: str = None, offset: int = None, passthrough=None, req_id: int = None):
         """Method to send message to p2p_advert_list websocket chanel.
         P2P Advert List (request)
         Returns available adverts for use with `p2p_order_create`. **This API call is still in Beta.**
@@ -36,21 +36,21 @@ class P2PAdvertList(Base):
         }
 
         if advertiser_id:
-            data['advertiser_id'] = advertiser_id
+            data['advertiser_id'] = str(advertiser_id)
 
         if amount:
             data['amount'] = amount
 
         if counterparty_type:
-            data['counterparty_type'] = counterparty_type
+            data['counterparty_type'] = str(counterparty_type)
 
         if limit:
-            data['limit'] = limit
+            data['limit'] = int(limit)
 
         if local_currency:
-            data['local_currency'] = local_currency
+            data['local_currency'] = str(local_currency)
 
         if offset:
-            data['offset'] = offset
+            data['offset'] = int(offset)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

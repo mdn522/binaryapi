@@ -9,7 +9,7 @@ class PaymentagentWithdraw(Base):
 
     name = "paymentagent_withdraw"
 
-    def __call__(self, amount, currency: str, paymentagent_loginid: str, verification_code: str, description: str=None, dry_run: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, amount, currency: str, paymentagent_loginid: str, verification_code: str, description: str = None, dry_run: int = None, passthrough=None, req_id: int = None):
         """Method to send message to paymentagent_withdraw websocket chanel.
         Payment Agent: Withdraw (request)
         Initiate a withdrawal to an approved Payment Agent.
@@ -40,9 +40,9 @@ class PaymentagentWithdraw(Base):
         }
 
         if description:
-            data['description'] = description
+            data['description'] = str(description)
 
         if dry_run:
-            data['dry_run'] = dry_run
+            data['dry_run'] = int(dry_run)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

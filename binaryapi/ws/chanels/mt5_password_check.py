@@ -9,7 +9,7 @@ class Mt5PasswordCheck(Base):
 
     name = "mt5_password_check"
 
-    def __call__(self, login: str, password: str, password_type: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, login: str, password: str, password_type: str = None, passthrough=None, req_id: int = None):
         """Method to send message to mt5_password_check websocket chanel.
         MT5: Password Check (request)
         This call validates the main password for the MT5 user
@@ -32,6 +32,6 @@ class Mt5PasswordCheck(Base):
         }
 
         if password_type:
-            data['password_type'] = password_type
+            data['password_type'] = str(password_type)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

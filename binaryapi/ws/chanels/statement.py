@@ -9,7 +9,7 @@ class Statement(Base):
 
     name = "statement"
 
-    def __call__(self, action_type: str=None, date_from: int=None, date_to: int=None, description: int=None, limit=None, offset=None, passthrough=None, req_id: int=None):
+    def __call__(self, action_type: str = None, date_from: int = None, date_to: int = None, description: int = None, limit=None, offset=None, passthrough=None, req_id: int = None):
         """Method to send message to statement websocket chanel.
         Statement (request)
         Retrieve a summary of account transactions, according to given search criteria
@@ -36,16 +36,16 @@ class Statement(Base):
         }
 
         if action_type:
-            data['action_type'] = action_type
+            data['action_type'] = str(action_type)
 
         if date_from:
-            data['date_from'] = date_from
+            data['date_from'] = int(date_from)
 
         if date_to:
-            data['date_to'] = date_to
+            data['date_to'] = int(date_to)
 
         if description:
-            data['description'] = description
+            data['description'] = int(description)
 
         if limit:
             data['limit'] = limit

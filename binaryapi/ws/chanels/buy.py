@@ -9,7 +9,7 @@ class Buy(Base):
 
     name = "buy"
 
-    def __call__(self, buy: str, price, parameters=None, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, buy: str, price, parameters=None, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to buy websocket chanel.
         Buy Contract (request)
         Buy a Contract

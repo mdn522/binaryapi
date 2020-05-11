@@ -9,7 +9,7 @@ class SetFinancialAssessment(Base):
 
     name = "set_financial_assessment"
 
-    def __call__(self, education_level: str, employment_industry: str, estimated_worth: str, income_source: str, net_income: str, occupation: str, account_turnover: str=None, binary_options_trading_experience: str=None, binary_options_trading_frequency: str=None, cfd_trading_experience: str=None, cfd_trading_frequency: str=None, employment_status: str=None, forex_trading_experience: str=None, forex_trading_frequency: str=None, other_instruments_trading_experience: str=None, other_instruments_trading_frequency: str=None, source_of_wealth: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, education_level: str, employment_industry: str, estimated_worth: str, income_source: str, net_income: str, occupation: str, account_turnover: str = None, binary_options_trading_experience: str = None, binary_options_trading_frequency: str = None, cfd_trading_experience: str = None, cfd_trading_frequency: str = None, employment_status: str = None, forex_trading_experience: str = None, forex_trading_frequency: str = None, other_instruments_trading_experience: str = None, other_instruments_trading_frequency: str = None, source_of_wealth: str = None, passthrough=None, req_id: int = None):
         """Method to send message to set_financial_assessment websocket chanel.
         Set Financial Assessment (request)
         This call sets the financial assessment details based on the client's answers to analyze whether they possess the experience and knowledge to understand the risks involved with binary options trading.
@@ -64,36 +64,36 @@ class SetFinancialAssessment(Base):
         }
 
         if account_turnover:
-            data['account_turnover'] = account_turnover
+            data['account_turnover'] = str(account_turnover)
 
         if binary_options_trading_experience:
-            data['binary_options_trading_experience'] = binary_options_trading_experience
+            data['binary_options_trading_experience'] = str(binary_options_trading_experience)
 
         if binary_options_trading_frequency:
-            data['binary_options_trading_frequency'] = binary_options_trading_frequency
+            data['binary_options_trading_frequency'] = str(binary_options_trading_frequency)
 
         if cfd_trading_experience:
-            data['cfd_trading_experience'] = cfd_trading_experience
+            data['cfd_trading_experience'] = str(cfd_trading_experience)
 
         if cfd_trading_frequency:
-            data['cfd_trading_frequency'] = cfd_trading_frequency
+            data['cfd_trading_frequency'] = str(cfd_trading_frequency)
 
         if employment_status:
-            data['employment_status'] = employment_status
+            data['employment_status'] = str(employment_status)
 
         if forex_trading_experience:
-            data['forex_trading_experience'] = forex_trading_experience
+            data['forex_trading_experience'] = str(forex_trading_experience)
 
         if forex_trading_frequency:
-            data['forex_trading_frequency'] = forex_trading_frequency
+            data['forex_trading_frequency'] = str(forex_trading_frequency)
 
         if other_instruments_trading_experience:
-            data['other_instruments_trading_experience'] = other_instruments_trading_experience
+            data['other_instruments_trading_experience'] = str(other_instruments_trading_experience)
 
         if other_instruments_trading_frequency:
-            data['other_instruments_trading_frequency'] = other_instruments_trading_frequency
+            data['other_instruments_trading_frequency'] = str(other_instruments_trading_frequency)
 
         if source_of_wealth:
-            data['source_of_wealth'] = source_of_wealth
+            data['source_of_wealth'] = str(source_of_wealth)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

@@ -9,7 +9,7 @@ class ContractUpdate(Base):
 
     name = "contract_update"
 
-    def __call__(self, contract_id: int, limit_order, passthrough=None, req_id: int=None):
+    def __call__(self, contract_id: int, limit_order, passthrough=None, req_id: int = None):
         """Method to send message to contract_update websocket chanel.
         Update Contract (request)
         Update a contract condition.

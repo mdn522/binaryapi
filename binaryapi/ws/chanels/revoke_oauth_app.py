@@ -9,7 +9,7 @@ class RevokeOauthApp(Base):
 
     name = "revoke_oauth_app"
 
-    def __call__(self, revoke_oauth_app: int, passthrough=None, req_id: int=None):
+    def __call__(self, revoke_oauth_app: int, passthrough=None, req_id: int = None):
         """Method to send message to revoke_oauth_app websocket chanel.
         Revoke Oauth Application (request)
         Used for revoking access of particular app.

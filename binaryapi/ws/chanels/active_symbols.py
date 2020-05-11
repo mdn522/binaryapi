@@ -9,7 +9,7 @@ class ActiveSymbols(Base):
 
     name = "active_symbols"
 
-    def __call__(self, active_symbols: str, landing_company: str=None, product_type: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, active_symbols: str, landing_company: str = None, product_type: str = None, passthrough=None, req_id: int = None):
         """Method to send message to active_symbols websocket chanel.
         Active Symbols (request)
         Retrieve a list of all currently active symbols (underlying markets upon which contracts are available for trading).
@@ -30,9 +30,9 @@ class ActiveSymbols(Base):
         }
 
         if landing_company:
-            data['landing_company'] = landing_company
+            data['landing_company'] = str(landing_company)
 
         if product_type:
-            data['product_type'] = product_type
+            data['product_type'] = str(product_type)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

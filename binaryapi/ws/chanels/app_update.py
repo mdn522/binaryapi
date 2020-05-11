@@ -9,7 +9,7 @@ class AppUpdate(Base):
 
     name = "app_update"
 
-    def __call__(self, app_update: int, name: str, redirect_uri: str, scopes, app_markup_percentage=None, appstore: str=None, github: str=None, googleplay: str=None, homepage: str=None, verification_uri: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, app_update: int, name: str, redirect_uri: str, scopes, app_markup_percentage=None, appstore: str = None, github: str = None, googleplay: str = None, homepage: str = None, verification_uri: str = None, passthrough=None, req_id: int = None):
         """Method to send message to app_update websocket chanel.
         Application: Update (request)
         Update a new OAuth application
@@ -50,18 +50,18 @@ class AppUpdate(Base):
             data['app_markup_percentage'] = app_markup_percentage
 
         if appstore:
-            data['appstore'] = appstore
+            data['appstore'] = str(appstore)
 
         if github:
-            data['github'] = github
+            data['github'] = str(github)
 
         if googleplay:
-            data['googleplay'] = googleplay
+            data['googleplay'] = str(googleplay)
 
         if homepage:
-            data['homepage'] = homepage
+            data['homepage'] = str(homepage)
 
         if verification_uri:
-            data['verification_uri'] = verification_uri
+            data['verification_uri'] = str(verification_uri)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

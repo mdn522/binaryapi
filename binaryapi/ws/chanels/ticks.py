@@ -9,7 +9,7 @@ class Ticks(Base):
 
     name = "ticks"
 
-    def __call__(self, ticks, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, ticks, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to ticks websocket chanel.
         Ticks Stream (request)
         Initiate a continuous stream of spot price updates for a given symbol.

@@ -9,7 +9,7 @@ class GetSelfExclusion(Base):
 
     name = "get_self_exclusion"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to get_self_exclusion websocket chanel.
         Get Self-Exclusion (request)
         Allows users to exclude themselves from the website for certain periods of time, or to set limits on their trading activities. This facility is a regulatory requirement for certain Landing Companies.

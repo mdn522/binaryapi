@@ -9,7 +9,7 @@ class SellExpired(Base):
 
     name = "sell_expired"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to sell_expired websocket chanel.
         Sell Expired Contracts (request)
         This call will try to sell any expired contracts and return the number of sold contracts.

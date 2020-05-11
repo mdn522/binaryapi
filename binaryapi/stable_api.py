@@ -68,12 +68,12 @@ class Binary:
             prop_req_id = self.api.proposal(contract_type=contract_type, symbol=symbol, duration_unit=duration_unit,
                                             duration=duration, amount=amount)
             start_t = time.time()
-            while self.api.msg_by_request_id.get(prop_req_id) is None:
+            while self.api.msg_by_req_id.get(prop_req_id) is None:
                 if time.time() - start_t >= 30:
                     logging.error('**warning** proposal late 30 sec')
                     return False, None, prop_req_id
 
-            proposal_res = self.api.msg_by_request_id[prop_req_id]
+            proposal_res = self.api.msg_by_req_id[prop_req_id]
             if 'error' in proposal_res:
                 return False, None, prop_req_id
             # min_payout
@@ -90,12 +90,12 @@ class Binary:
             return True, None, req_id
         else:
             start_t = time.time()
-            while self.api.msg_by_name['buy'].get(req_id) is None:
+            while self.api.msg_by_type['buy'].get(req_id) is None:
                 if time.time() - start_t >= 30:
                     logging.error('**warning** buy late 30 sec')
                     return False, None, req_id
 
-            res = self.api.msg_by_name['buy'][req_id]
+            res = self.api.msg_by_type['buy'][req_id]
             if 'error' in res:
                 return False, None, req_id
 

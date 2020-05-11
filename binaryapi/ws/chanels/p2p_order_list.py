@@ -9,7 +9,7 @@ class P2POrderList(Base):
 
     name = "p2p_order_list"
 
-    def __call__(self, active=None, advert_id: str=None, limit: int=None, offset: int=None, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, active=None, advert_id: str = None, limit: int = None, offset: int = None, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to p2p_order_list websocket chanel.
         P2P Order List (request)
         List active orders. **This API call is still in Beta.**
@@ -37,13 +37,13 @@ class P2POrderList(Base):
             data['active'] = active
 
         if advert_id:
-            data['advert_id'] = advert_id
+            data['advert_id'] = str(advert_id)
 
         if limit:
-            data['limit'] = limit
+            data['limit'] = int(limit)
 
         if offset:
-            data['offset'] = offset
+            data['offset'] = int(offset)
 
         if subscribe:
             data['subscribe'] = int(subscribe)

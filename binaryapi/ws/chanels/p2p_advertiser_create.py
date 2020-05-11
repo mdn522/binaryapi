@@ -9,7 +9,7 @@ class P2PAdvertiserCreate(Base):
 
     name = "p2p_advertiser_create"
 
-    def __call__(self, name: str, contact_info: str=None, default_advert_description: str=None, payment_info: str=None, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, name: str, contact_info: str = None, default_advert_description: str = None, payment_info: str = None, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to p2p_advertiser_create websocket chanel.
         P2P Advertiser Create (request)
         Registers the client as a P2P advertiser. **This API call is still in Beta.**
@@ -35,13 +35,13 @@ class P2PAdvertiserCreate(Base):
         }
 
         if contact_info:
-            data['contact_info'] = contact_info
+            data['contact_info'] = str(contact_info)
 
         if default_advert_description:
-            data['default_advert_description'] = default_advert_description
+            data['default_advert_description'] = str(default_advert_description)
 
         if payment_info:
-            data['payment_info'] = payment_info
+            data['payment_info'] = str(payment_info)
 
         if subscribe:
             data['subscribe'] = int(subscribe)

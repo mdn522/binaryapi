@@ -9,7 +9,7 @@ class P2POrderConfirm(Base):
 
     name = "p2p_order_confirm"
 
-    def __call__(self, id: str, passthrough=None, req_id: int=None):
+    def __call__(self, id: str, passthrough=None, req_id: int = None):
         """Method to send message to p2p_order_confirm websocket chanel.
         P2P Order Confirm (request)
         Confirm a P2P order. **This API call is still in Beta.**

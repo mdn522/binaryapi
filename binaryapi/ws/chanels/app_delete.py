@@ -9,7 +9,7 @@ class AppDelete(Base):
 
     name = "app_delete"
 
-    def __call__(self, app_delete: int, passthrough=None, req_id: int=None):
+    def __call__(self, app_delete: int, passthrough=None, req_id: int = None):
         """Method to send message to app_delete websocket chanel.
         Application: Delete (request)
         The request for deleting an application.

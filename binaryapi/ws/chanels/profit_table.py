@@ -9,7 +9,7 @@ class ProfitTable(Base):
 
     name = "profit_table"
 
-    def __call__(self, date_from: str=None, date_to: str=None, description: int=None, limit=None, offset=None, sort: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, date_from: str = None, date_to: str = None, description: int = None, limit=None, offset=None, sort: str = None, passthrough=None, req_id: int = None):
         """Method to send message to profit_table websocket chanel.
         Profit Table (request)
         Retrieve a summary of account Profit Table, according to given search criteria
@@ -36,13 +36,13 @@ class ProfitTable(Base):
         }
 
         if date_from:
-            data['date_from'] = date_from
+            data['date_from'] = str(date_from)
 
         if date_to:
-            data['date_to'] = date_to
+            data['date_to'] = str(date_to)
 
         if description:
-            data['description'] = description
+            data['description'] = int(description)
 
         if limit:
             data['limit'] = limit
@@ -51,6 +51,6 @@ class ProfitTable(Base):
             data['offset'] = offset
 
         if sort:
-            data['sort'] = sort
+            data['sort'] = str(sort)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

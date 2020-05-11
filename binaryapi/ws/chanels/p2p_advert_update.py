@@ -9,7 +9,7 @@ class P2PAdvertUpdate(Base):
 
     name = "p2p_advert_update"
 
-    def __call__(self, id: str, delete: int=None, is_active: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, id: str, delete: int = None, is_active: int = None, passthrough=None, req_id: int = None):
         """Method to send message to p2p_advert_update websocket chanel.
         P2P Advert Update (request)
         Updates a P2P advert. Can only be used by the advertiser. **This API call is still in Beta.**
@@ -31,9 +31,9 @@ class P2PAdvertUpdate(Base):
         }
 
         if delete:
-            data['delete'] = delete
+            data['delete'] = int(delete)
 
         if is_active:
-            data['is_active'] = is_active
+            data['is_active'] = int(is_active)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

@@ -9,7 +9,7 @@ class ContractsFor(Base):
 
     name = "contracts_for"
 
-    def __call__(self, contracts_for: str, currency: str=None, landing_company: str=None, product_type: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, contracts_for: str, currency: str = None, landing_company: str = None, product_type: str = None, passthrough=None, req_id: int = None):
         """Method to send message to contracts_for websocket chanel.
         Contracts For Symbol (request)
         For a given symbol, get the list of currently available contracts, and the latest barrier and duration limits for each contract.
@@ -32,12 +32,12 @@ class ContractsFor(Base):
         }
 
         if currency:
-            data['currency'] = currency
+            data['currency'] = str(currency)
 
         if landing_company:
-            data['landing_company'] = landing_company
+            data['landing_company'] = str(landing_company)
 
         if product_type:
-            data['product_type'] = product_type
+            data['product_type'] = str(product_type)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

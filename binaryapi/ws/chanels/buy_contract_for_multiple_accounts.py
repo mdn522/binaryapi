@@ -9,7 +9,7 @@ class BuyContractForMultipleAccounts(Base):
 
     name = "buy_contract_for_multiple_accounts"
 
-    def __call__(self, buy_contract_for_multiple_accounts: str, price, tokens, parameters=None, passthrough=None, req_id: int=None):
+    def __call__(self, buy_contract_for_multiple_accounts: str, price, tokens, parameters=None, passthrough=None, req_id: int = None):
         """Method to send message to buy_contract_for_multiple_accounts websocket chanel.
         Buy Contract for Multiple Accounts (request)
         Buy a Contract for multiple Accounts specified by the `tokens` parameter. Note, although this is an authorized call, the contract is not bought for the authorized account.

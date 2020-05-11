@@ -9,7 +9,7 @@ class CopytradingList(Base):
 
     name = "copytrading_list"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to copytrading_list websocket chanel.
         Copy Trading: List (request)
         Retrieves a list of active copiers and/or traders for Copy Trading

@@ -9,7 +9,7 @@ class Mt5Deposit(Base):
 
     name = "mt5_deposit"
 
-    def __call__(self, to_mt5: str, amount=None, from_binary: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, to_mt5: str, amount=None, from_binary: str = None, passthrough=None, req_id: int = None):
         """Method to send message to mt5_deposit websocket chanel.
         MT5: Deposit (request)
         This call allows deposit into MT5 account from Binary account.
@@ -34,6 +34,6 @@ class Mt5Deposit(Base):
             data['amount'] = amount
 
         if from_binary:
-            data['from_binary'] = from_binary
+            data['from_binary'] = str(from_binary)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

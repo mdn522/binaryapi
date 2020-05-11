@@ -9,7 +9,7 @@ class LandingCompanyDetails(Base):
 
     name = "landing_company_details"
 
-    def __call__(self, landing_company_details: str, passthrough=None, req_id: int=None):
+    def __call__(self, landing_company_details: str, passthrough=None, req_id: int = None):
         """Method to send message to landing_company_details websocket chanel.
         Landing Company Details (request)
         The company has a number of licensed subsidiaries in various jurisdictions, which are called Landing Companies (and which are wholly owned subsidiaries of the Binary Group). This call provides information about each Landing Company.

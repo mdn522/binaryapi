@@ -9,7 +9,7 @@ class TncApproval(Base):
 
     name = "tnc_approval"
 
-    def __call__(self, ukgc_funds_protection: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, ukgc_funds_protection: int = None, passthrough=None, req_id: int = None):
         """Method to send message to tnc_approval websocket chanel.
         Terms and Conditions Approval (request)
         To approve the latest version of terms and conditions.
@@ -26,6 +26,6 @@ class TncApproval(Base):
         }
 
         if ukgc_funds_protection:
-            data['ukgc_funds_protection'] = ukgc_funds_protection
+            data['ukgc_funds_protection'] = int(ukgc_funds_protection)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

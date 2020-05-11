@@ -9,7 +9,7 @@ class Cancel(Base):
 
     name = "cancel"
 
-    def __call__(self, cancel: int, passthrough=None, req_id: int=None):
+    def __call__(self, cancel: int, passthrough=None, req_id: int = None):
         """Method to send message to cancel websocket chanel.
         Cancel a Contract (request)
         Cancel contract with contract id

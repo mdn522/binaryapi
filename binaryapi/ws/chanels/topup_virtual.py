@@ -9,7 +9,7 @@ class TopupVirtual(Base):
 
     name = "topup_virtual"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to topup_virtual websocket chanel.
         Top Up Virtual-Money Account (request)
         When a virtual-money's account balance becomes low, it can be topped up using this call.

@@ -9,7 +9,7 @@ class SetSettings(Base):
 
     name = "set_settings"
 
-    def __call__(self, account_opening_reason: str=None, address_city: str=None, address_line_1: str=None, address_line_2=None, address_postcode: str=None, address_state: str=None, allow_copiers: int=None, citizen=None, date_of_birth: str=None, email_consent: int=None, first_name: str=None, last_name: str=None, phone: str=None, place_of_birth: str=None, request_professional_status: int=None, residence=None, salutation: str=None, secret_answer: str=None, secret_question: str=None, tax_identification_number: str=None, tax_residence: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, account_opening_reason: str = None, address_city: str = None, address_line_1: str = None, address_line_2=None, address_postcode: str = None, address_state: str = None, allow_copiers: int = None, citizen=None, date_of_birth: str = None, email_consent: int = None, first_name: str = None, last_name: str = None, phone: str = None, place_of_birth: str = None, request_professional_status: int = None, residence=None, salutation: str = None, secret_answer: str = None, secret_question: str = None, tax_identification_number: str = None, tax_residence: str = None, passthrough=None, req_id: int = None):
         """Method to send message to set_settings websocket chanel.
         Set Account Settings (request)
         Set User Settings (this call should be used in conjunction with `get_settings`)
@@ -66,66 +66,66 @@ class SetSettings(Base):
         }
 
         if account_opening_reason:
-            data['account_opening_reason'] = account_opening_reason
+            data['account_opening_reason'] = str(account_opening_reason)
 
         if address_city:
-            data['address_city'] = address_city
+            data['address_city'] = str(address_city)
 
         if address_line_1:
-            data['address_line_1'] = address_line_1
+            data['address_line_1'] = str(address_line_1)
 
         if address_line_2:
             data['address_line_2'] = address_line_2
 
         if address_postcode:
-            data['address_postcode'] = address_postcode
+            data['address_postcode'] = str(address_postcode)
 
         if address_state:
-            data['address_state'] = address_state
+            data['address_state'] = str(address_state)
 
         if allow_copiers:
-            data['allow_copiers'] = allow_copiers
+            data['allow_copiers'] = int(allow_copiers)
 
         if citizen:
             data['citizen'] = citizen
 
         if date_of_birth:
-            data['date_of_birth'] = date_of_birth
+            data['date_of_birth'] = str(date_of_birth)
 
         if email_consent:
-            data['email_consent'] = email_consent
+            data['email_consent'] = int(email_consent)
 
         if first_name:
-            data['first_name'] = first_name
+            data['first_name'] = str(first_name)
 
         if last_name:
-            data['last_name'] = last_name
+            data['last_name'] = str(last_name)
 
         if phone:
-            data['phone'] = phone
+            data['phone'] = str(phone)
 
         if place_of_birth:
-            data['place_of_birth'] = place_of_birth
+            data['place_of_birth'] = str(place_of_birth)
 
         if request_professional_status:
-            data['request_professional_status'] = request_professional_status
+            data['request_professional_status'] = int(request_professional_status)
 
         if residence:
             data['residence'] = residence
 
         if salutation:
-            data['salutation'] = salutation
+            data['salutation'] = str(salutation)
 
         if secret_answer:
-            data['secret_answer'] = secret_answer
+            data['secret_answer'] = str(secret_answer)
 
         if secret_question:
-            data['secret_question'] = secret_question
+            data['secret_question'] = str(secret_question)
 
         if tax_identification_number:
-            data['tax_identification_number'] = tax_identification_number
+            data['tax_identification_number'] = str(tax_identification_number)
 
         if tax_residence:
-            data['tax_residence'] = tax_residence
+            data['tax_residence'] = str(tax_residence)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

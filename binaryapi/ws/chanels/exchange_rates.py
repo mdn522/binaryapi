@@ -9,7 +9,7 @@ class ExchangeRates(Base):
 
     name = "exchange_rates"
 
-    def __call__(self, base_currency: str, passthrough=None, req_id: int=None):
+    def __call__(self, base_currency: str, passthrough=None, req_id: int = None):
         """Method to send message to exchange_rates websocket chanel.
         Exchange Rates (request)
         Retrieves the exchange rates from a base currency to all currencies supported by the system.

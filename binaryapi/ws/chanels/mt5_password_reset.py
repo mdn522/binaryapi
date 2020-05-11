@@ -9,7 +9,7 @@ class Mt5PasswordReset(Base):
 
     name = "mt5_password_reset"
 
-    def __call__(self, login: str, new_password: str, verification_code: str, password_type: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, login: str, new_password: str, verification_code: str, password_type: str = None, passthrough=None, req_id: int = None):
         """Method to send message to mt5_password_reset websocket chanel.
         MT5: Password Reset (request)
         To reset the password of MT5 account.
@@ -35,6 +35,6 @@ class Mt5PasswordReset(Base):
         }
 
         if password_type:
-            data['password_type'] = password_type
+            data['password_type'] = str(password_type)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

@@ -9,7 +9,7 @@ class Cashier(Base):
 
     name = "cashier"
 
-    def __call__(self, cashier: str, provider: str=None, type: str=None, verification_code: str=None, passthrough=None, req_id: int=None):
+    def __call__(self, cashier: str, provider: str = None, type: str = None, verification_code: str = None, passthrough=None, req_id: int = None):
         """Method to send message to cashier websocket chanel.
         Cashier Information (request)
         Request the cashier info for the specified type.
@@ -32,12 +32,12 @@ class Cashier(Base):
         }
 
         if provider:
-            data['provider'] = provider
+            data['provider'] = str(provider)
 
         if type:
-            data['type'] = type
+            data['type'] = str(type)
 
         if verification_code:
-            data['verification_code'] = verification_code
+            data['verification_code'] = str(verification_code)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

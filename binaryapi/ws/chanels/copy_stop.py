@@ -9,7 +9,7 @@ class CopyStop(Base):
 
     name = "copy_stop"
 
-    def __call__(self, copy_stop: str, passthrough=None, req_id: int=None):
+    def __call__(self, copy_stop: str, passthrough=None, req_id: int = None):
         """Method to send message to copy_stop websocket chanel.
         Copy Trading: Stop (request)
         Stop copy trader bets

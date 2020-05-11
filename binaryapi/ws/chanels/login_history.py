@@ -9,7 +9,7 @@ class LoginHistory(Base):
 
     name = "login_history"
 
-    def __call__(self, limit: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, limit: int = None, passthrough=None, req_id: int = None):
         """Method to send message to login_history websocket chanel.
         Login History (request)
         Retrieve a summary of login history for user.
@@ -26,6 +26,6 @@ class LoginHistory(Base):
         }
 
         if limit:
-            data['limit'] = limit
+            data['limit'] = int(limit)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

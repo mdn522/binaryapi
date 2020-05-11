@@ -9,7 +9,7 @@ class AppList(Base):
 
     name = "app_list"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to app_list websocket chanel.
         Application: List (request)
         List all of the account's OAuth applications

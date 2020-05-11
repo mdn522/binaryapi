@@ -9,7 +9,7 @@ class Time(Base):
 
     name = "time"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to time websocket chanel.
         Server Time (request)
         Request back-end server epoch time.

@@ -9,7 +9,7 @@ class TicksHistory(Base):
 
     name = "ticks_history"
 
-    def __call__(self, ticks_history: str, end: str, adjust_start_time: int=None, count: int=None, granularity: int=None, start: int=None, style: str=None, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, ticks_history: str, end: str, adjust_start_time: int = None, count: int = None, granularity: int = None, start: int = None, style: str = None, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to ticks_history websocket chanel.
         Ticks History (request)
         Get historic tick data for a given symbol.
@@ -43,19 +43,19 @@ class TicksHistory(Base):
         }
 
         if adjust_start_time:
-            data['adjust_start_time'] = adjust_start_time
+            data['adjust_start_time'] = int(adjust_start_time)
 
         if count:
-            data['count'] = count
+            data['count'] = int(count)
 
         if granularity:
-            data['granularity'] = granularity
+            data['granularity'] = int(granularity)
 
         if start:
-            data['start'] = start
+            data['start'] = int(start)
 
         if style:
-            data['style'] = style
+            data['style'] = str(style)
 
         if subscribe:
             data['subscribe'] = int(subscribe)

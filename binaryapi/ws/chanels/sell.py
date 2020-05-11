@@ -9,7 +9,7 @@ class Sell(Base):
 
     name = "sell"
 
-    def __call__(self, sell: int, price, passthrough=None, req_id: int=None):
+    def __call__(self, sell: int, price, passthrough=None, req_id: int = None):
         """Method to send message to sell websocket chanel.
         Sell Contract (request)
         Sell a Contract as identified from a previous `portfolio` call.

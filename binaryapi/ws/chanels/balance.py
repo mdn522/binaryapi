@@ -9,7 +9,7 @@ class Balance(Base):
 
     name = "balance"
 
-    def __call__(self, account: str=None, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, account: str = None, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to balance websocket chanel.
         Balance (request)
         Get user account balance
@@ -28,7 +28,7 @@ class Balance(Base):
         }
 
         if account:
-            data['account'] = account
+            data['account'] = str(account)
 
         if subscribe:
             data['subscribe'] = int(subscribe)

@@ -9,7 +9,7 @@ class P2PAdvertiserAdverts(Base):
 
     name = "p2p_advertiser_adverts"
 
-    def __call__(self, limit: int=None, offset: int=None, passthrough=None, req_id: int=None):
+    def __call__(self, limit: int = None, offset: int = None, passthrough=None, req_id: int = None):
         """Method to send message to p2p_advertiser_adverts websocket chanel.
         P2P Advertiser Adverts (request)
         Returns all P2P adverts created by the authorized client. Can only be used by a registered P2P advertiser. **This API call is still in Beta.**
@@ -28,9 +28,9 @@ class P2PAdvertiserAdverts(Base):
         }
 
         if limit:
-            data['limit'] = limit
+            data['limit'] = int(limit)
 
         if offset:
-            data['offset'] = offset
+            data['offset'] = int(offset)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

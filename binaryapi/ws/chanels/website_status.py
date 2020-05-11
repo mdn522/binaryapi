@@ -9,7 +9,7 @@ class WebsiteStatus(Base):
 
     name = "website_status"
 
-    def __call__(self, subscribe: bool=None, passthrough=None, req_id: int=None):
+    def __call__(self, subscribe: bool = None, passthrough=None, req_id: int = None):
         """Method to send message to website_status websocket chanel.
         Server Status (request)
         Request server status.

@@ -9,7 +9,7 @@ class Portfolio(Base):
 
     name = "portfolio"
 
-    def __call__(self, passthrough=None, req_id: int=None):
+    def __call__(self, passthrough=None, req_id: int = None):
         """Method to send message to portfolio websocket chanel.
         Portfolio (request)
         Receive information about my current portfolio of outstanding options
