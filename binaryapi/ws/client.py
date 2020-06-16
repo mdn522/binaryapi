@@ -28,8 +28,8 @@ class WebsocketClient:
         msg_type = message.get('msg_type')
 
         if msg_type not in [""] and message.get("req_id"):
-            self.api.msg_by_request_id[message.get("req_id")] = message
-            self.api.msg_by_name[msg_type][message.get("req_id")] = message
+            self.api.msg_by_req_id[message.get("req_id")] = message
+            self.api.msg_by_type[msg_type][message.get("req_id")] = message
         # TODO callback
 
         # TODO error key

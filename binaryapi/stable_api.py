@@ -5,6 +5,8 @@ import logging
 
 from collections import defaultdict
 
+# TODO support tick stream
+
 
 # noinspection PyShadowingBuiltins
 def nested_dict(n, type):
@@ -17,7 +19,7 @@ def nested_dict(n, type):
 class Binary:
     api: BinaryAPI
 
-    def __init__(self, app_id, token, message_callback=None):
+    def __init__(self, token, app_id=22259, message_callback=None):
         self.app_id = app_id
         self.token = token
 
@@ -54,14 +56,15 @@ class Binary:
                 logging.error(
                     '**error** reconnect() too many time please look log file')
 
+
     # buy_call_put
     # TODO buy_higher_lower
     def buy_call_put(self, contract_type, amount, symbol, duration, duration_unit, min_payout=0, passthrough=None,
-                     req_id=None, instant=False, is_async=False):
+                     req_id=None, no_proposal=False, confirm_request=True):
 
         buy_id = None
         parameters = None
-        if instant:
+        if no_proposal:
             parameters = dict(symbol=symbol, duration=duration, duration_unit=duration_unit,
                               basis=OP_code.PROPOSAL_BASIS.STAKE, amount=amount, currency=self.api.profile.currency, )
         else:
@@ -86,7 +89,7 @@ class Binary:
 
         req_id = self.api.buy(buy_id=buy_id, max_price=amount, parameters=parameters, passthrough=passthrough, req_id=req_id)
 
-        if is_async:
+        if not confirm_request:
             return True, None, req_id
         else:
             start_t = time.time()

@@ -199,3 +199,5 @@ dmypy.json
 local_utils/
 robot/
 binaryapi/ws/chanels/backup/
+codealike.json
+.vs/
