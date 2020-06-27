@@ -6,7 +6,7 @@ import logging
 
 import pause
 import threading
-import orjson as json
+import simplejson as json
 from threading import Thread
 from collections import defaultdict, OrderedDict
 
@@ -87,7 +87,7 @@ class BinaryAPI(AbstractAPI):
                 logging.error('**error** authorize late 30 sec')
                 return False
 
-            pause.seconds(0.0001)
+            pause.seconds(0.01)
 
         return True
 

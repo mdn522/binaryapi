@@ -22,11 +22,11 @@ pip3 install -U git+git://github.com/mdn522/binaryapi.git
 ## Getting Started
 ```python
 import time
-from binaryapi.stable_api import BinaryAPI
+from binaryapi.stable_api import Binary
 
 binary_token = "YOUR-API-TOKEN-GOES-HERE"
 
-binary = IQ_Option(token=binary_token)
+binary = Binary(token=binary_token)
 
 symbol = "frxEURUSD"
 print("Buy a CALL contract")

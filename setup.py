@@ -5,7 +5,7 @@ setup(
     name="binaryapi",
     version="0.1.1",
     packages=find_packages(),
-    install_requires=["requests", "websocket-client==0.56", "orjson", "pause"],
+    install_requires=["requests", "websocket-client", "simplejson", "pause"],
     include_package_data=True,
     description="Binary.com API for python",
     long_description="Binary.com API for python",

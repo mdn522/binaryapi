@@ -1,4 +1,4 @@
 requests
-websocket-client==0.56
-orjson
+websocket-client
+simplejson
 pause

@@ -1,10 +1,11 @@
 """Module for Binary websocket."""
 
-import orjson as json
+import simplejson as json
 import logging
 
 import websocket
 import binaryapi.global_value as global_value
+import traceback
 
 
 class WebsocketClient:
@@ -26,10 +27,11 @@ class WebsocketClient:
 
         message = json.loads(str(message))
         msg_type = message.get('msg_type')
+        req_id = message.get("req_id")
 
-        if msg_type not in [""] and message.get("req_id"):
-            self.api.msg_by_req_id[message.get("req_id")] = message
-            self.api.msg_by_type[msg_type][message.get("req_id")] = message
+        if msg_type not in [""] and req_id:
+            self.api.msg_by_req_id[req_id] = message
+            self.api.msg_by_type[msg_type][req_id] = message
         # TODO callback
 
         # TODO error key
@@ -41,11 +43,16 @@ class WebsocketClient:
             except Exception as e:
                 pass
         elif msg_type == 'balance':
-            self.api.profile.balance = message["balance"]["balance"]
-            pass
+            try:
+                self.api.profile.balance = message["balance"]["balance"]
+            except KeyError:
+                pass
 
         if self.api.message_callback is not None:
-            self.api.message_callback(message)
+            try:
+                self.api.message_callback(message)
+            except:
+                pass
 
     @staticmethod
     def on_error(wss, error):  # pylint: disable=unused-argument
