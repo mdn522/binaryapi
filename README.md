@@ -49,10 +49,29 @@ import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 ```
 ---
-### Login
+### Authorize/Login
 
 ```python
 binary = Binary(token="YOUR-API-TOKEN-GOES-HERE")
 ```
 
 ---
+I tried to add every API function available in Binary.com API documentation to this library, which you can call by accessing api variable
+
+Examples:
+```python
+binary = Binary(token="YOUR-API-TOKEN-GOES-HERE")
+
+# Buy API - https://developers.binary.com/api/#buy
+binary.api.buy(buy, price, parameters=None, subscribe=None, passthrough=None, req_id=None)
+# You must pass values for buy and price parameters
+
+# Proposal API - https://developers.binary.com/api/#proposal
+binary.api.proposal(contract_type, currency, symbol, amount=None, barrier=None, barrier2=None, basis=None, cancellation=None, date_expiry=None, date_start=None, duration=None, duration_unit=None, limit_order=None, multiplier=None, product_type=None, selected_tick=None, subscribe=None, trading_period_start=None, passthrough=None, req_id=None)
+# You must pass values for contract_type, currency and symbol parameters
+
+# Ticks API - https://developers.binary.com/api/#ticks
+binary.api.ticks(ticks="frxEURUSD", subscribe=None, passthrough=None, req_id=None)
+
+# For More API functions please refer to https://developers.binary.com/api/
+```
