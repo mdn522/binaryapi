@@ -68,7 +68,7 @@ class Binary:
             parameters = dict(symbol=symbol, duration=duration, duration_unit=duration_unit,
                               basis=OP_code.PROPOSAL_BASIS.STAKE, amount=amount, currency=self.api.profile.currency, )
         else:
-            prop_req_id = self.api.proposal(contract_type=contract_type, symbol=symbol, duration_unit=duration_unit,
+            prop_req_id = self.api.proposal(contract_type=contract_type, currency=self.api.profile.currency, symbol=symbol, duration_unit=duration_unit,
                                             duration=duration, amount=amount)
             start_t = time.time()
             while self.api.msg_by_req_id.get(prop_req_id) is None:
