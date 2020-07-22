@@ -3,12 +3,12 @@ from setuptools import (setup, find_packages)
 
 setup(
     name="binaryapi",
-    version="0.1.1",
+    version="0.1.3",
     packages=find_packages(),
     install_requires=["requests", "websocket-client", "simplejson", "pause"],
     include_package_data=True,
-    description="Binary.com API for python",
-    long_description="Binary.com API for python",
+    description="Binary.com API for Python",
+    long_description="Binary.com API for Python",
     url="https://github.com/mdn522/binaryapi",
     author="Abdullah Mallik",
     author_email="mdn522@gmail.com",

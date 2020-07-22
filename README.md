@@ -56,7 +56,7 @@ binary = Binary(token="YOUR-API-TOKEN-GOES-HERE")
 ```
 
 ---
-I tried to add every API function available in Binary.com API documentation to this library, which you can call by accessing api variable
+I tried to add every API function available in Binary.com API documentation to this library, which you can call by accessing `api` variable of stable API
 
 Examples:
 ```python
