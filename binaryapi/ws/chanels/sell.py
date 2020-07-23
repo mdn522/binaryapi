@@ -24,7 +24,7 @@ class Sell(Base):
         """
 
         data = {
-            "sell": sell,
+            "sell": int(sell),
             "price": price
         }
 

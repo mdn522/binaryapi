@@ -24,8 +24,8 @@ class ContractUpdate(Base):
         """
 
         data = {
-            "contract_update": 1,
-            "contract_id": contract_id,
+            "contract_update": int(1),
+            "contract_id": int(contract_id),
             "limit_order": limit_order
         }
 

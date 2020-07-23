@@ -20,7 +20,7 @@ class Mt5LoginList(Base):
         """
 
         data = {
-            "mt5_login_list": 1
+            "mt5_login_list": int(1)
         }
 
 

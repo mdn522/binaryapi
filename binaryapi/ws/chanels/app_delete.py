@@ -22,7 +22,7 @@ class AppDelete(Base):
         """
 
         data = {
-            "app_delete": app_delete
+            "app_delete": int(app_delete)
         }
 
 

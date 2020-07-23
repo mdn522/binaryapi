@@ -24,7 +24,7 @@ class P2PAdvertiserAdverts(Base):
         """
 
         data = {
-            "p2p_advertiser_adverts": 1
+            "p2p_advertiser_adverts": int(1)
         }
 
         if limit:

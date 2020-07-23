@@ -38,7 +38,7 @@ class AppMarkupDetails(Base):
         """
 
         data = {
-            "app_markup_details": 1,
+            "app_markup_details": int(1),
             "date_from": date_from,
             "date_to": date_to
         }

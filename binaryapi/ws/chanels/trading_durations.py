@@ -22,7 +22,7 @@ class TradingDurations(Base):
         """
 
         data = {
-            "trading_durations": 1
+            "trading_durations": int(1)
         }
 
         if landing_company:

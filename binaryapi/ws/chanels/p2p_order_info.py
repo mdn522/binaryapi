@@ -24,7 +24,7 @@ class P2POrderInfo(Base):
         """
 
         data = {
-            "p2p_order_info": 1,
+            "p2p_order_info": int(1),
             "id": id
         }
 

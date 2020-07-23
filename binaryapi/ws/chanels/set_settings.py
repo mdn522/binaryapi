@@ -9,7 +9,7 @@ class SetSettings(Base):
 
     name = "set_settings"
 
-    def __call__(self, account_opening_reason: str = None, address_city: str = None, address_line_1: str = None, address_line_2=None, address_postcode: str = None, address_state: str = None, allow_copiers: int = None, citizen=None, date_of_birth: str = None, email_consent: int = None, first_name: str = None, last_name: str = None, phone: str = None, place_of_birth: str = None, request_professional_status: int = None, residence=None, salutation: str = None, secret_answer: str = None, secret_question: str = None, tax_identification_number: str = None, tax_residence: str = None, passthrough=None, req_id: int = None):
+    def __call__(self, account_opening_reason: str = None, address_city: str = None, address_line_1: str = None, address_line_2=None, address_postcode: str = None, address_state: str = None, allow_copiers: int = None, citizen=None, date_of_birth: str = None, email_consent: int = None, first_name: str = None, last_name: str = None, non_pep_declaration: int = None, phone: str = None, place_of_birth: str = None, request_professional_status: int = None, residence=None, salutation: str = None, secret_answer: str = None, secret_question: str = None, tax_identification_number: str = None, tax_residence: str = None, passthrough=None, req_id: int = None):
         """Method to send message to set_settings websocket chanel.
         Set Account Settings (request)
         Set User Settings (this call should be used in conjunction with `get_settings`)
@@ -37,6 +37,8 @@ class SetSettings(Base):
         :type first_name: str
         :param last_name: [Optional] Within 2-50 characters, use only letters, spaces, hyphens, full-stops or apostrophes (can only be changed on unauthenticated svg accounts).
         :type last_name: str
+        :param non_pep_declaration: [Optional] Indicates client's self-declaration of not being a PEP/RCA (Politically Exposed Person/Relatives and Close Associates). Effective for real accounts only.
+        :type non_pep_declaration: int
         :param phone: [Optional] Note: not applicable for virtual account. Required field for real money account. Starting with `+` followed by 8-35 digits, allowing hyphens or space.
         :type phone: str
         :param place_of_birth: [Optional] Place of birth, 2-letter country code.
@@ -62,7 +64,7 @@ class SetSettings(Base):
         """
 
         data = {
-            "set_settings": 1
+            "set_settings": int(1)
         }
 
         if account_opening_reason:
@@ -100,6 +102,9 @@ class SetSettings(Base):
 
         if last_name:
             data['last_name'] = str(last_name)
+
+        if non_pep_declaration:
+            data['non_pep_declaration'] = int(non_pep_declaration)
 
         if phone:
             data['phone'] = str(phone)

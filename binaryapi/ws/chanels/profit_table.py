@@ -32,7 +32,7 @@ class ProfitTable(Base):
         """
 
         data = {
-            "profit_table": 1
+            "profit_table": int(1)
         }
 
         if date_from:

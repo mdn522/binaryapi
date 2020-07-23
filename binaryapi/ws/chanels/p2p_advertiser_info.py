@@ -24,7 +24,7 @@ class P2PAdvertiserInfo(Base):
         """
 
         data = {
-            "p2p_advertiser_info": 1
+            "p2p_advertiser_info": int(1)
         }
 
         if id:

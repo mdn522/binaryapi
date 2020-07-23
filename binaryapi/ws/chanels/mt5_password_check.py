@@ -26,7 +26,7 @@ class Mt5PasswordCheck(Base):
         """
 
         data = {
-            "mt5_password_check": 1,
+            "mt5_password_check": int(1),
             "login": login,
             "password": password
         }

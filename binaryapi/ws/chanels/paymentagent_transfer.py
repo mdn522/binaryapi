@@ -30,7 +30,7 @@ class PaymentagentTransfer(Base):
         """
 
         data = {
-            "paymentagent_transfer": 1,
+            "paymentagent_transfer": int(1),
             "amount": amount,
             "currency": currency,
             "transfer_to": transfer_to

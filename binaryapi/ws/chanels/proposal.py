@@ -56,7 +56,7 @@ class Proposal(Base):
         """
 
         data = {
-            "proposal": 1,
+            "proposal": int(1),
             "contract_type": contract_type,
             "currency": currency,
             "symbol": symbol

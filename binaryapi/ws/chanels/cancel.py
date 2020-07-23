@@ -22,7 +22,7 @@ class Cancel(Base):
         """
 
         data = {
-            "cancel": cancel
+            "cancel": int(cancel)
         }
 
 

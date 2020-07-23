@@ -20,7 +20,7 @@ class ResidenceList(Base):
         """
 
         data = {
-            "residence_list": 1
+            "residence_list": int(1)
         }
 
 

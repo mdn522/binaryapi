@@ -20,7 +20,7 @@ class Time(Base):
         """
 
         data = {
-            "time": 1
+            "time": int(1)
         }
 
 

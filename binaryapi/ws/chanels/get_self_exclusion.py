@@ -20,7 +20,7 @@ class GetSelfExclusion(Base):
         """
 
         data = {
-            "get_self_exclusion": 1
+            "get_self_exclusion": int(1)
         }
 
 

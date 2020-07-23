@@ -17,7 +17,7 @@ class TransferBetweenAccounts(Base):
         :type account_from: str
         :param account_to: [Optional] The loginid of the account to transfer funds to.
         :type account_to: str
-        :param accounts: [Optional] To control the list of accounts returned when `account_from` or `account_to` is not provided. `brief` will only include standard trading accounts and can be faster.
+        :param accounts: [Optional] To control the list of accounts returned when `account_from` or `account_to` is not provided. `brief` will only include financial trading accounts with account_type equal to `binary` and can be faster. `all` will include accounts with both `mt5` and `binary` account_type
         :type accounts: str
         :param amount: [Optional] The amount to transfer.
         :type amount: 
@@ -30,7 +30,7 @@ class TransferBetweenAccounts(Base):
         """
 
         data = {
-            "transfer_between_accounts": 1
+            "transfer_between_accounts": int(1)
         }
 
         if account_from:

@@ -28,7 +28,7 @@ class Mt5PasswordChange(Base):
         """
 
         data = {
-            "mt5_password_change": 1,
+            "mt5_password_change": int(1),
             "login": login,
             "new_password": new_password,
             "old_password": old_password

@@ -30,7 +30,7 @@ class P2PAdvertiserCreate(Base):
         """
 
         data = {
-            "p2p_advertiser_create": 1,
+            "p2p_advertiser_create": int(1),
             "name": name
         }
 

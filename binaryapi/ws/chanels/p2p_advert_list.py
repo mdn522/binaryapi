@@ -32,7 +32,7 @@ class P2PAdvertList(Base):
         """
 
         data = {
-            "p2p_advert_list": 1
+            "p2p_advert_list": int(1)
         }
 
         if advertiser_id:

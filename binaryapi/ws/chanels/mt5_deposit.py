@@ -26,7 +26,7 @@ class Mt5Deposit(Base):
         """
 
         data = {
-            "mt5_deposit": 1,
+            "mt5_deposit": int(1),
             "to_mt5": to_mt5
         }
 

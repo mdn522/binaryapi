@@ -9,12 +9,14 @@ class ContractUpdateHistory(Base):
 
     name = "contract_update_history"
 
-    def __call__(self, contract_id: int, passthrough=None, req_id: int = None):
+    def __call__(self, contract_id: int, limit=None, passthrough=None, req_id: int = None):
         """Method to send message to contract_update_history websocket chanel.
         Update Contract History (request)
         Request for contract update history.
         :param contract_id: Internal unique contract identifier.
         :type contract_id: int
+        :param limit: [Optional] Maximum number of historical updates to receive.
+        :type limit: 
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: 
         :param req_id: [Optional] Used to map request to response.
@@ -22,10 +24,11 @@ class ContractUpdateHistory(Base):
         """
 
         data = {
-            "contract_update_history": 1,
-            "contract_id": contract_id
+            "contract_update_history": int(1),
+            "contract_id": int(contract_id)
         }
 
-
+        if limit:
+            data['limit'] = limit
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)

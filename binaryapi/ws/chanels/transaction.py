@@ -22,8 +22,8 @@ class Transaction(Base):
         """
 
         data = {
-            "transaction": 1,
-            "subscribe": subscribe
+            "transaction": int(1),
+            "subscribe": int(subscribe)
         }
 
 

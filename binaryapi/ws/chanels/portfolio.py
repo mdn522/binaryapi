@@ -20,7 +20,7 @@ class Portfolio(Base):
         """
 
         data = {
-            "portfolio": 1
+            "portfolio": int(1)
         }
 
 

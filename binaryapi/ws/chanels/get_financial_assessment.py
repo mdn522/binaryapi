@@ -20,7 +20,7 @@ class GetFinancialAssessment(Base):
         """
 
         data = {
-            "get_financial_assessment": 1
+            "get_financial_assessment": int(1)
         }
 
 

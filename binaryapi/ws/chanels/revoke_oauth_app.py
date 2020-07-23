@@ -22,7 +22,7 @@ class RevokeOauthApp(Base):
         """
 
         data = {
-            "revoke_oauth_app": revoke_oauth_app
+            "revoke_oauth_app": int(revoke_oauth_app)
         }
 
 

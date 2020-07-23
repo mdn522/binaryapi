@@ -35,7 +35,7 @@ class Mt5NewAccount(Base):
         :type dry_run: int
         :param investPassword: [Optional] The investor password of the account. For validation (length within 8-25 chars, accepts at least 2 out of the following 3 types of characters: uppercase letters, lowercase letters, and numbers).
         :type investPassword: str
-        :param mt5_account_type: [Optional] Standard: Variable spreads, High leverage. Advanced: Variable spreads, Medium Leverage, more products.
+        :param mt5_account_type: [Optional] Financial: Variable spreads, High leverage. Financial STP: Variable spreads, Medium Leverage, more products.
         :type mt5_account_type: str
         :param phone: [Optional] User's phone number.
         :type phone: str
@@ -52,7 +52,7 @@ class Mt5NewAccount(Base):
         """
 
         data = {
-            "mt5_new_account": 1,
+            "mt5_new_account": int(1),
             "account_type": account_type,
             "email": email,
             "leverage": leverage,

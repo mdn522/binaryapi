@@ -32,7 +32,7 @@ class PaymentagentWithdraw(Base):
         """
 
         data = {
-            "paymentagent_withdraw": 1,
+            "paymentagent_withdraw": int(1),
             "amount": amount,
             "currency": currency,
             "paymentagent_loginid": paymentagent_loginid,

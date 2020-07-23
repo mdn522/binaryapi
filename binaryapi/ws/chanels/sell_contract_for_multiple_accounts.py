@@ -26,7 +26,7 @@ class SellContractForMultipleAccounts(Base):
         """
 
         data = {
-            "sell_contract_for_multiple_accounts": 1,
+            "sell_contract_for_multiple_accounts": int(1),
             "price": price,
             "shortcode": shortcode,
             "tokens": tokens

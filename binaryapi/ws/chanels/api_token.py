@@ -28,7 +28,7 @@ class ApiToken(Base):
         """
 
         data = {
-            "api_token": 1
+            "api_token": int(1)
         }
 
         if delete_token:

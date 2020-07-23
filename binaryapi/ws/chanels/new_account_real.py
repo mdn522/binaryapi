@@ -43,7 +43,7 @@ class NewAccountReal(Base):
         :type client_type: str
         :param currency: [Optional] To set currency of the account. List of supported currencies can be acquired with `payout_currencies` call.
         :type currency: str
-        :param non_pep_declaration: [Optional] Indicates client's self-declaration of not being a PEP/RCA.
+        :param non_pep_declaration: [Optional] Indicates client's self-declaration of not being a PEP/RCA (Politically Exposed Person/Relatives and Close Associates).
         :type non_pep_declaration: int
         :param phone: [Optional] Starting with `+` followed by 8-35 digits, allowing hyphens or space.
         :type phone: str
@@ -66,7 +66,7 @@ class NewAccountReal(Base):
         """
 
         data = {
-            "new_account_real": 1,
+            "new_account_real": int(1),
             "date_of_birth": date_of_birth,
             "first_name": first_name,
             "last_name": last_name,

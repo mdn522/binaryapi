@@ -20,7 +20,7 @@ class AppList(Base):
         """
 
         data = {
-            "app_list": 1
+            "app_list": int(1)
         }
 
 

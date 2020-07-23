@@ -22,7 +22,7 @@ class P2POrderCancel(Base):
         """
 
         data = {
-            "p2p_order_cancel": 1,
+            "p2p_order_cancel": int(1),
             "id": id
         }
 

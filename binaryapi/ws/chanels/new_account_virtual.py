@@ -40,7 +40,7 @@ class NewAccountVirtual(Base):
         """
 
         data = {
-            "new_account_virtual": 1,
+            "new_account_virtual": int(1),
             "client_password": client_password,
             "residence": residence,
             "verification_code": verification_code

@@ -22,7 +22,7 @@ class AssetIndex(Base):
         """
 
         data = {
-            "asset_index": 1
+            "asset_index": int(1)
         }
 
         if landing_company:

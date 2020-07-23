@@ -26,7 +26,7 @@ class P2PAdvertUpdate(Base):
         """
 
         data = {
-            "p2p_advert_update": 1,
+            "p2p_advert_update": int(1),
             "id": id
         }
 

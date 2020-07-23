@@ -22,7 +22,7 @@ class Mt5GetSettings(Base):
         """
 
         data = {
-            "mt5_get_settings": 1,
+            "mt5_get_settings": int(1),
             "login": login
         }
 

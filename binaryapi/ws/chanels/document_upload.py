@@ -34,11 +34,11 @@ class DocumentUpload(Base):
         """
 
         data = {
-            "document_upload": 1,
+            "document_upload": int(1),
             "document_format": document_format,
             "document_type": document_type,
             "expected_checksum": expected_checksum,
-            "file_size": file_size
+            "file_size": int(file_size)
         }
 
         if document_id:

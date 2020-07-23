@@ -54,7 +54,7 @@ class SetFinancialAssessment(Base):
         """
 
         data = {
-            "set_financial_assessment": 1,
+            "set_financial_assessment": int(1),
             "education_level": education_level,
             "employment_industry": employment_industry,
             "estimated_worth": estimated_worth,

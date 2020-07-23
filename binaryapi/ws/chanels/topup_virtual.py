@@ -20,7 +20,7 @@ class TopupVirtual(Base):
         """
 
         data = {
-            "topup_virtual": 1
+            "topup_virtual": int(1)
         }
 
 

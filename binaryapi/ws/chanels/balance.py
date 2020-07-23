@@ -24,7 +24,7 @@ class Balance(Base):
         """
 
         data = {
-            "balance": 1
+            "balance": int(1)
         }
 
         if account:

@@ -40,7 +40,7 @@ class P2PAdvertCreate(Base):
         """
 
         data = {
-            "p2p_advert_create": 1,
+            "p2p_advert_create": int(1),
             "amount": amount,
             "max_order_amount": max_order_amount,
             "min_order_amount": min_order_amount,

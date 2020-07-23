@@ -22,7 +22,7 @@ class LoginHistory(Base):
         """
 
         data = {
-            "login_history": 1
+            "login_history": int(1)
         }
 
         if limit:

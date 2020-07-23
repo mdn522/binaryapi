@@ -38,7 +38,7 @@ class AppRegister(Base):
         """
 
         data = {
-            "app_register": 1,
+            "app_register": int(1),
             "name": name,
             "redirect_uri": redirect_uri,
             "scopes": scopes

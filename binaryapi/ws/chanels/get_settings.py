@@ -20,7 +20,7 @@ class GetSettings(Base):
         """
 
         data = {
-            "get_settings": 1
+            "get_settings": int(1)
         }
 
 

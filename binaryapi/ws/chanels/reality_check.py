@@ -20,7 +20,7 @@ class RealityCheck(Base):
         """
 
         data = {
-            "reality_check": 1
+            "reality_check": int(1)
         }
 
 

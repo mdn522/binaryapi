@@ -26,7 +26,7 @@ class Mt5Withdrawal(Base):
         """
 
         data = {
-            "mt5_withdrawal": 1,
+            "mt5_withdrawal": int(1),
             "amount": amount,
             "from_mt5": from_mt5,
             "to_binary": to_binary

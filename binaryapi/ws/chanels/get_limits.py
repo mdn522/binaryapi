@@ -20,7 +20,7 @@ class GetLimits(Base):
         """
 
         data = {
-            "get_limits": 1
+            "get_limits": int(1)
         }
 
 

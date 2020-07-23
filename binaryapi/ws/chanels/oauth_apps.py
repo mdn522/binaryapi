@@ -20,7 +20,7 @@ class OauthApps(Base):
         """
 
         data = {
-            "oauth_apps": 1
+            "oauth_apps": int(1)
         }
 
 

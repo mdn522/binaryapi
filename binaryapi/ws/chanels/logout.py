@@ -20,7 +20,7 @@ class Logout(Base):
         """
 
         data = {
-            "logout": 1
+            "logout": int(1)
         }
 
 

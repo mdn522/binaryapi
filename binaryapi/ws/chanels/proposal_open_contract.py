@@ -24,7 +24,7 @@ class ProposalOpenContract(Base):
         """
 
         data = {
-            "proposal_open_contract": 1
+            "proposal_open_contract": int(1)
         }
 
         if contract_id:

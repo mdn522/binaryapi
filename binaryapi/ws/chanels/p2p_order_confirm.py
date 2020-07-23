@@ -22,7 +22,7 @@ class P2POrderConfirm(Base):
         """
 
         data = {
-            "p2p_order_confirm": 1,
+            "p2p_order_confirm": int(1),
             "id": id
         }
 

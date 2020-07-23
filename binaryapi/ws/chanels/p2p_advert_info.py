@@ -22,7 +22,7 @@ class P2PAdvertInfo(Base):
         """
 
         data = {
-            "p2p_advert_info": 1,
+            "p2p_advert_info": int(1),
             "id": id
         }
 

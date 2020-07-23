@@ -32,7 +32,7 @@ class Statement(Base):
         """
 
         data = {
-            "statement": 1
+            "statement": int(1)
         }
 
         if action_type:

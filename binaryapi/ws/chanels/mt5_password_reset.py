@@ -28,7 +28,7 @@ class Mt5PasswordReset(Base):
         """
 
         data = {
-            "mt5_password_reset": 1,
+            "mt5_password_reset": int(1),
             "login": login,
             "new_password": new_password,
             "verification_code": verification_code

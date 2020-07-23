@@ -20,7 +20,7 @@ class PayoutCurrencies(Base):
         """
 
         data = {
-            "payout_currencies": 1
+            "payout_currencies": int(1)
         }
 
 

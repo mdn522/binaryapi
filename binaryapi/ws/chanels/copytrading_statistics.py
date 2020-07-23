@@ -22,7 +22,7 @@ class CopytradingStatistics(Base):
         """
 
         data = {
-            "copytrading_statistics": 1,
+            "copytrading_statistics": int(1),
             "trader_id": trader_id
         }
 

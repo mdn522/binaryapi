@@ -20,7 +20,7 @@ class CopytradingList(Base):
         """
 
         data = {
-            "copytrading_list": 1
+            "copytrading_list": int(1)
         }
 
 

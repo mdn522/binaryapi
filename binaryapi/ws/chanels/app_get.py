@@ -22,7 +22,7 @@ class AppGet(Base):
         """
 
         data = {
-            "app_get": app_get
+            "app_get": int(app_get)
         }
 
 

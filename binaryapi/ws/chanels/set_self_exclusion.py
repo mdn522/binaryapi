@@ -46,7 +46,7 @@ class SetSelfExclusion(Base):
         """
 
         data = {
-            "set_self_exclusion": 1
+            "set_self_exclusion": int(1)
         }
 
         if exclude_until:

@@ -22,7 +22,7 @@ class WebsiteStatus(Base):
         """
 
         data = {
-            "website_status": 1
+            "website_status": int(1)
         }
 
         if subscribe:

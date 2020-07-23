@@ -30,7 +30,7 @@ class P2POrderList(Base):
         """
 
         data = {
-            "p2p_order_list": 1
+            "p2p_order_list": int(1)
         }
 
         if active:

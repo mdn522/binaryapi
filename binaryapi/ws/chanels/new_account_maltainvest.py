@@ -98,8 +98,8 @@ class NewAccountMaltainvest(Base):
         """
 
         data = {
-            "new_account_maltainvest": 1,
-            "accept_risk": accept_risk,
+            "new_account_maltainvest": int(1),
+            "accept_risk": int(accept_risk),
             "address_city": address_city,
             "address_line_1": address_line_1,
             "date_of_birth": date_of_birth,

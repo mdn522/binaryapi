@@ -20,7 +20,7 @@ class SellExpired(Base):
         """
 
         data = {
-            "sell_expired": 1
+            "sell_expired": int(1)
         }
 
 

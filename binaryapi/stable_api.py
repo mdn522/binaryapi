@@ -59,7 +59,7 @@ class Binary:
 
     # buy_call_put
     # TODO buy_higher_lower
-    def buy_call_put(self, contract_type, amount, symbol, duration, duration_unit, min_payout=0, passthrough=None,
+    def buy_call_put(self, contract_type, amount, symbol, duration, duration_unit, min_payout=0, basis=OP_code.PROPOSAL_BASIS.STAKE, passthrough=None,
                      req_id=None, no_proposal=False, confirm_request=True):
 
         buy_id = None
@@ -69,7 +69,7 @@ class Binary:
                               basis=OP_code.PROPOSAL_BASIS.STAKE, amount=amount, currency=self.api.profile.currency, )
         else:
             prop_req_id = self.api.proposal(contract_type=contract_type, currency=self.api.profile.currency, symbol=symbol, duration_unit=duration_unit,
-                                            duration=duration, amount=amount)
+                                            duration=duration, amount=amount, basis=basis)
             start_t = time.time()
             while self.api.msg_by_req_id.get(prop_req_id) is None:
                 if time.time() - start_t >= 30:
@@ -87,7 +87,7 @@ class Binary:
             else:
                 return False, None, prop_req_id
 
-        req_id = self.api.buy(buy_id=buy_id, max_price=amount, parameters=parameters, passthrough=passthrough, req_id=req_id)
+        req_id = self.api.buy(buy=buy_id, price=amount, parameters=parameters, passthrough=passthrough, req_id=req_id)
 
         if not confirm_request:
             return True, None, req_id

@@ -40,7 +40,7 @@ class AppUpdate(Base):
         """
 
         data = {
-            "app_update": app_update,
+            "app_update": int(app_update),
             "name": name,
             "redirect_uri": redirect_uri,
             "scopes": scopes

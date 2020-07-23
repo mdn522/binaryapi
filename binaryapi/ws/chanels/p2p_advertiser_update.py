@@ -9,7 +9,7 @@ class P2PAdvertiserUpdate(Base):
 
     name = "p2p_advertiser_update"
 
-    def __call__(self, contact_info: str = None, default_advert_description: str = None, is_listed: int = None, name: str = None, payment_info: str = None, passthrough=None, req_id: int = None):
+    def __call__(self, contact_info: str = None, default_advert_description: str = None, is_listed: int = None, payment_info: str = None, passthrough=None, req_id: int = None):
         """Method to send message to p2p_advertiser_update websocket chanel.
         P2P Advertiser Update (request)
         Update the information of the P2P advertiser for the current account. Can only be used by an approved P2P advertiser. **This API call is still in Beta.**
@@ -19,8 +19,6 @@ class P2PAdvertiserUpdate(Base):
         :type default_advert_description: str
         :param is_listed: [Optional] Used to set if the advertiser's adverts could be listed. When `0`, adverts won't be listed regardless of they are active or not. This doesn't change the `is_active` of each individual advert.
         :type is_listed: int
-        :param name: [Optional] The advertiser's displayed name.
-        :type name: str
         :param payment_info: [Optional] Advertiser's payment information, to be used as a default for new sell adverts.
         :type payment_info: str
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
@@ -30,7 +28,7 @@ class P2PAdvertiserUpdate(Base):
         """
 
         data = {
-            "p2p_advertiser_update": 1
+            "p2p_advertiser_update": int(1)
         }
 
         if contact_info:
@@ -41,9 +39,6 @@ class P2PAdvertiserUpdate(Base):
 
         if is_listed:
             data['is_listed'] = int(is_listed)
-
-        if name:
-            data['name'] = str(name)
 
         if payment_info:
             data['payment_info'] = str(payment_info)

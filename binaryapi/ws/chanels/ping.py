@@ -20,7 +20,7 @@ class Ping(Base):
         """
 
         data = {
-            "ping": 1
+            "ping": int(1)
         }
 
 

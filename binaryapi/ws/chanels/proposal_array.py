@@ -48,7 +48,7 @@ class ProposalArray(Base):
         """
 
         data = {
-            "proposal_array": 1,
+            "proposal_array": int(1),
             "barriers": barriers,
             "contract_type": contract_type,
             "currency": currency,

@@ -30,7 +30,7 @@ class P2POrderCreate(Base):
         """
 
         data = {
-            "p2p_order_create": 1,
+            "p2p_order_create": int(1),
             "advert_id": advert_id,
             "amount": amount
         }

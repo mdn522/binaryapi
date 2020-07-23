@@ -22,7 +22,7 @@ class P2PChatCreate(Base):
         """
 
         data = {
-            "p2p_chat_create": 1,
+            "p2p_chat_create": int(1),
             "order_id": order_id
         }
 

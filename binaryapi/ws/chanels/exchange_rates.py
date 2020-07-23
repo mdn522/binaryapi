@@ -22,7 +22,7 @@ class ExchangeRates(Base):
         """
 
         data = {
-            "exchange_rates": 1,
+            "exchange_rates": int(1),
             "base_currency": base_currency
         }
 

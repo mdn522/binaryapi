@@ -20,7 +20,7 @@ class GetAccountStatus(Base):
         """
 
         data = {
-            "get_account_status": 1
+            "get_account_status": int(1)
         }
 
 
