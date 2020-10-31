@@ -1,22 +1,23 @@
-"""Module for Binary reality_check websocket chanel."""
+"""Module for Binary reality_check websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#reality_check
 
 class RealityCheck(Base):
-    """Class for Binary reality_check websocket chanel."""
+    """Class for Binary reality_check websocket channel."""
 
     name = "reality_check"
 
-    def __call__(self, passthrough=None, req_id: int = None):
-        """Method to send message to reality_check websocket chanel.
+    def __call__(self, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to reality_check websocket channel.
         Reality Check (request)
         Retrieve summary of client's trades and account for the Reality Check facility. A 'reality check' means a display of time elapsed since the session began, and associated client profit/loss. The Reality Check facility is a regulatory requirement for certain landing companies.
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

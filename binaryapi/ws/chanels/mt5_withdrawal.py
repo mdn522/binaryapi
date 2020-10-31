@@ -1,28 +1,30 @@
-"""Module for Binary mt5_withdrawal websocket chanel."""
+"""Module for Binary mt5_withdrawal websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from decimal import Decimal
+from typing import Union, Optional, Any
 
 
 # https://developers.binary.com/api/#mt5_withdrawal
 
 class Mt5Withdrawal(Base):
-    """Class for Binary mt5_withdrawal websocket chanel."""
+    """Class for Binary mt5_withdrawal websocket channel."""
 
     name = "mt5_withdrawal"
 
-    def __call__(self, amount, from_mt5: str, to_binary: str, passthrough=None, req_id: int = None):
-        """Method to send message to mt5_withdrawal websocket chanel.
+    def __call__(self, amount: Union[int, float, Decimal], from_mt5: str, to_binary: str, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to mt5_withdrawal websocket channel.
         MT5: Withdrawal (request)
         This call allows withdrawal from MT5 account to Binary account.
         :param amount: Amount to withdraw (in the currency of the MT5 account); min = $1 or an equivalent amount, max = $20000 or an equivalent amount.
-        :type amount: 
+        :type amount: Union[int, float, Decimal]
         :param from_mt5: MT5 account login to withdraw money from
         :type from_mt5: str
         :param to_binary: Binary account loginid to transfer money to
         :type to_binary: str
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

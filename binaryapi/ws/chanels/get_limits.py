@@ -1,22 +1,23 @@
-"""Module for Binary get_limits websocket chanel."""
+"""Module for Binary get_limits websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#get_limits
 
 class GetLimits(Base):
-    """Class for Binary get_limits websocket chanel."""
+    """Class for Binary get_limits websocket channel."""
 
     name = "get_limits"
 
-    def __call__(self, passthrough=None, req_id: int = None):
-        """Method to send message to get_limits websocket chanel.
+    def __call__(self, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to get_limits websocket channel.
         Account Limits (request)
         Trading and Withdrawal Limits for a given user
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

@@ -1,66 +1,67 @@
-"""Module for Binary set_settings websocket chanel."""
+"""Module for Binary set_settings websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#set_settings
 
 class SetSettings(Base):
-    """Class for Binary set_settings websocket chanel."""
+    """Class for Binary set_settings websocket channel."""
 
     name = "set_settings"
 
-    def __call__(self, account_opening_reason: str = None, address_city: str = None, address_line_1: str = None, address_line_2=None, address_postcode: str = None, address_state: str = None, allow_copiers: int = None, citizen=None, date_of_birth: str = None, email_consent: int = None, first_name: str = None, last_name: str = None, non_pep_declaration: int = None, phone: str = None, place_of_birth: str = None, request_professional_status: int = None, residence=None, salutation: str = None, secret_answer: str = None, secret_question: str = None, tax_identification_number: str = None, tax_residence: str = None, passthrough=None, req_id: int = None):
-        """Method to send message to set_settings websocket chanel.
+    def __call__(self, account_opening_reason: Optional[str] = None, address_city: Optional[str] = None, address_line_1: Optional[str] = None, address_line_2=None, address_postcode: Optional[str] = None, address_state: Optional[str] = None, allow_copiers: Optional[int] = None, citizen=None, date_of_birth: Optional[str] = None, email_consent: Optional[int] = None, first_name: Optional[str] = None, last_name: Optional[str] = None, non_pep_declaration: Optional[int] = None, phone: Optional[str] = None, place_of_birth: Optional[str] = None, request_professional_status: Optional[int] = None, residence=None, salutation: Optional[str] = None, secret_answer: Optional[str] = None, secret_question: Optional[str] = None, tax_identification_number: Optional[str] = None, tax_residence: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to set_settings websocket channel.
         Set Account Settings (request)
         Set User Settings (this call should be used in conjunction with `get_settings`)
         :param account_opening_reason: [Optional] Purpose and reason for requesting the account opening. Only applicable for real money account. Required for clients that have not set it yet. Can only be set once.
-        :type account_opening_reason: str
+        :type account_opening_reason: Optional[str]
         :param address_city: [Optional] Note: not applicable for virtual account. Required field for real money account.
-        :type address_city: str
+        :type address_city: Optional[str]
         :param address_line_1: [Optional] Note: not applicable for virtual account. Required field for real money account.
-        :type address_line_1: str
+        :type address_line_1: Optional[str]
         :param address_line_2: [Optional] Note: not applicable for virtual account. Optional field for real money account.
         :type address_line_2: 
         :param address_postcode: [Optional] Note: not applicable for virtual account. Optional field for real money account.
-        :type address_postcode: str
+        :type address_postcode: Optional[str]
         :param address_state: [Optional] Note: not applicable for virtual account. Optional field for real money account.
-        :type address_state: str
+        :type address_state: Optional[str]
         :param allow_copiers: [Optional] Boolean value 1 or 0, indicating permission to allow others to follow your trades. Note: not applicable for Virtual account. Only allow for real money account.
-        :type allow_copiers: int
+        :type allow_copiers: Optional[int]
         :param citizen: [Optional] Country of legal citizenship, 2-letter country code.
         :type citizen: 
         :param date_of_birth: [Optional] Date of birth format: yyyy-mm-dd (can only be changed on unauthenticated svg accounts).
-        :type date_of_birth: str
+        :type date_of_birth: Optional[str]
         :param email_consent: [Optional] Boolean value 1 or 0, indicating permission to use email address for any contact which may include marketing
-        :type email_consent: int
+        :type email_consent: Optional[int]
         :param first_name: [Optional] Within 2-50 characters, use only letters, spaces, hyphens, full-stops or apostrophes (can only be changed on unauthenticated svg accounts).
-        :type first_name: str
+        :type first_name: Optional[str]
         :param last_name: [Optional] Within 2-50 characters, use only letters, spaces, hyphens, full-stops or apostrophes (can only be changed on unauthenticated svg accounts).
-        :type last_name: str
+        :type last_name: Optional[str]
         :param non_pep_declaration: [Optional] Indicates client's self-declaration of not being a PEP/RCA (Politically Exposed Person/Relatives and Close Associates). Effective for real accounts only.
-        :type non_pep_declaration: int
+        :type non_pep_declaration: Optional[int]
         :param phone: [Optional] Note: not applicable for virtual account. Required field for real money account. Starting with `+` followed by 8-35 digits, allowing hyphens or space.
-        :type phone: str
+        :type phone: Optional[str]
         :param place_of_birth: [Optional] Place of birth, 2-letter country code.
-        :type place_of_birth: str
+        :type place_of_birth: Optional[str]
         :param request_professional_status: [Optional] Required when client wants to be treated as professional. Applicable for financial accounts only.
-        :type request_professional_status: int
+        :type request_professional_status: Optional[int]
         :param residence: [Optional] 2-letter country code. Note: not applicable for real money account. Only allow for Virtual account without residence set.
         :type residence: 
         :param salutation: [Optional] Accept any value in enum list (can only be changed on unauthenticated svg accounts).
-        :type salutation: str
+        :type salutation: Optional[str]
         :param secret_answer: [Optional] Answer to secret question, within 4-50 characters. Required for new account and existing client details will be used if client opens another account.
-        :type secret_answer: str
+        :type secret_answer: Optional[str]
         :param secret_question: [Optional] Accept any value in enum list. Required for new account and existing client details will be used if client opens another account.
-        :type secret_question: str
+        :type secret_question: Optional[str]
         :param tax_identification_number: [Optional] Tax identification number. Only applicable for real money account. Required for maltainvest landing company.
-        :type tax_identification_number: str
+        :type tax_identification_number: Optional[str]
         :param tax_residence: [Optional] Residence for tax purpose. Comma separated iso country code if multiple jurisdictions. Only applicable for real money account. Required for maltainvest landing company.
-        :type tax_residence: str
+        :type tax_residence: Optional[str]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

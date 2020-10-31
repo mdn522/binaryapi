@@ -1,32 +1,34 @@
-"""Module for Binary p2p_order_list websocket chanel."""
+"""Module for Binary p2p_order_list websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from decimal import Decimal
+from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#p2p_order_list
 
 class P2POrderList(Base):
-    """Class for Binary p2p_order_list websocket chanel."""
+    """Class for Binary p2p_order_list websocket channel."""
 
     name = "p2p_order_list"
 
-    def __call__(self, active=None, advert_id: str = None, limit: int = None, offset: int = None, subscribe: bool = None, passthrough=None, req_id: int = None):
-        """Method to send message to p2p_order_list websocket chanel.
+    def __call__(self, active: Optional[Union[int, float, Decimal]] = None, advert_id: Optional[str] = None, limit: Optional[int] = None, offset: Optional[int] = None, subscribe: Optional[bool] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to p2p_order_list websocket channel.
         P2P Order List (request)
         List active orders. **This API call is still in Beta.**
         :param active: [Optional] Should be 1 to list active, 0 to list inactive (historical).
-        :type active: 
+        :type active: Optional[Union[int, float, Decimal]]
         :param advert_id: [Optional] If present, lists orders applying to a specific advert.
-        :type advert_id: str
+        :type advert_id: Optional[str]
         :param limit: [Optional] Used for paging.
-        :type limit: int
+        :type limit: Optional[int]
         :param offset: [Optional] Used for paging.
-        :type offset: int
+        :type offset: Optional[int]
         :param subscribe: [Optional] If set to 1, will send updates whenever there is a change to any order belonging to you.
-        :type subscribe: bool
+        :type subscribe: Optional[bool]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

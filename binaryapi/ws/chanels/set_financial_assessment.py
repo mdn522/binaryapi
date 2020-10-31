@@ -1,16 +1,17 @@
-"""Module for Binary set_financial_assessment websocket chanel."""
+"""Module for Binary set_financial_assessment websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#set_financial_assessment
 
 class SetFinancialAssessment(Base):
-    """Class for Binary set_financial_assessment websocket chanel."""
+    """Class for Binary set_financial_assessment websocket channel."""
 
     name = "set_financial_assessment"
 
-    def __call__(self, education_level: str, employment_industry: str, estimated_worth: str, income_source: str, net_income: str, occupation: str, account_turnover: str = None, binary_options_trading_experience: str = None, binary_options_trading_frequency: str = None, cfd_trading_experience: str = None, cfd_trading_frequency: str = None, employment_status: str = None, forex_trading_experience: str = None, forex_trading_frequency: str = None, other_instruments_trading_experience: str = None, other_instruments_trading_frequency: str = None, source_of_wealth: str = None, passthrough=None, req_id: int = None):
-        """Method to send message to set_financial_assessment websocket chanel.
+    def __call__(self, education_level: str, employment_industry: str, estimated_worth: str, income_source: str, net_income: str, occupation: str, account_turnover: Optional[str] = None, binary_options_trading_experience: Optional[str] = None, binary_options_trading_frequency: Optional[str] = None, cfd_trading_experience: Optional[str] = None, cfd_trading_frequency: Optional[str] = None, employment_status: Optional[str] = None, forex_trading_experience: Optional[str] = None, forex_trading_frequency: Optional[str] = None, other_instruments_trading_experience: Optional[str] = None, other_instruments_trading_frequency: Optional[str] = None, source_of_wealth: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to set_financial_assessment websocket channel.
         Set Financial Assessment (request)
         This call sets the financial assessment details based on the client's answers to analyze whether they possess the experience and knowledge to understand the risks involved with binary options trading.
         :param education_level: Level of Education.
@@ -26,31 +27,31 @@ class SetFinancialAssessment(Base):
         :param occupation: Occupation.
         :type occupation: str
         :param account_turnover: [Optional] The anticipated account turnover.
-        :type account_turnover: str
+        :type account_turnover: Optional[str]
         :param binary_options_trading_experience: [Optional] Binary options trading experience.
-        :type binary_options_trading_experience: str
+        :type binary_options_trading_experience: Optional[str]
         :param binary_options_trading_frequency: [Optional] Binary options trading frequency.
-        :type binary_options_trading_frequency: str
+        :type binary_options_trading_frequency: Optional[str]
         :param cfd_trading_experience: [Optional] CFDs trading experience.
-        :type cfd_trading_experience: str
+        :type cfd_trading_experience: Optional[str]
         :param cfd_trading_frequency: [Optional] CFDs trading frequency.
-        :type cfd_trading_frequency: str
+        :type cfd_trading_frequency: Optional[str]
         :param employment_status: [Optional] Employment Status.
-        :type employment_status: str
+        :type employment_status: Optional[str]
         :param forex_trading_experience: [Optional] Forex trading experience.
-        :type forex_trading_experience: str
+        :type forex_trading_experience: Optional[str]
         :param forex_trading_frequency: [Optional] Forex trading frequency.
-        :type forex_trading_frequency: str
+        :type forex_trading_frequency: Optional[str]
         :param other_instruments_trading_experience: [Optional] Trading experience in other financial instruments.
-        :type other_instruments_trading_experience: str
+        :type other_instruments_trading_experience: Optional[str]
         :param other_instruments_trading_frequency: [Optional] Trading frequency in other financial instruments.
-        :type other_instruments_trading_frequency: str
+        :type other_instruments_trading_frequency: Optional[str]
         :param source_of_wealth: [Optional] Source of wealth.
-        :type source_of_wealth: str
+        :type source_of_wealth: Optional[str]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

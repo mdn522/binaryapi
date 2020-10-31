@@ -1,4 +1,4 @@
-## This code is auto-generated.
+## This file is auto-generated.
 from binaryapi.ws.chanels.active_symbols import ActiveSymbols
 from binaryapi.ws.chanels.api_token import ApiToken
 from binaryapi.ws.chanels.app_delete import AppDelete
@@ -22,6 +22,7 @@ from binaryapi.ws.chanels.copytrading_statistics import CopytradingStatistics
 from binaryapi.ws.chanels.copy_start import CopyStart
 from binaryapi.ws.chanels.copy_stop import CopyStop
 from binaryapi.ws.chanels.document_upload import DocumentUpload
+from binaryapi.ws.chanels.economic_calendar import EconomicCalendar
 from binaryapi.ws.chanels.exchange_rates import ExchangeRates
 from binaryapi.ws.chanels.forget import Forget
 from binaryapi.ws.chanels.forget_all import ForgetAll
@@ -49,6 +50,7 @@ from binaryapi.ws.chanels.oauth_apps import OauthApps
 from binaryapi.ws.chanels.p2p_advertiser_adverts import P2PAdvertiserAdverts
 from binaryapi.ws.chanels.p2p_advertiser_create import P2PAdvertiserCreate
 from binaryapi.ws.chanels.p2p_advertiser_info import P2PAdvertiserInfo
+from binaryapi.ws.chanels.p2p_advertiser_stats import P2PAdvertiserStats
 from binaryapi.ws.chanels.p2p_advertiser_update import P2PAdvertiserUpdate
 from binaryapi.ws.chanels.p2p_advert_create import P2PAdvertCreate
 from binaryapi.ws.chanels.p2p_advert_info import P2PAdvertInfo
@@ -68,7 +70,6 @@ from binaryapi.ws.chanels.ping import Ping
 from binaryapi.ws.chanels.portfolio import Portfolio
 from binaryapi.ws.chanels.profit_table import ProfitTable
 from binaryapi.ws.chanels.proposal import Proposal
-from binaryapi.ws.chanels.proposal_array import ProposalArray
 from binaryapi.ws.chanels.proposal_open_contract import ProposalOpenContract
 from binaryapi.ws.chanels.reality_check import RealityCheck
 from binaryapi.ws.chanels.residence_list import ResidenceList
@@ -279,6 +280,14 @@ class AbstractAPI:
         :returns: The instance of :class:`DocumentUpload<binaryapi.ws.chanels.document_upload.DocumentUpload>`.
         """
         return DocumentUpload(self)
+
+    @property
+    def economic_calendar(self) -> EconomicCalendar:
+        """Property for get Binary ws economic_calendar resource.
+
+        :returns: The instance of :class:`EconomicCalendar<binaryapi.ws.chanels.economic_calendar.EconomicCalendar>`.
+        """
+        return EconomicCalendar(self)
 
     @property
     def exchange_rates(self) -> ExchangeRates:
@@ -497,6 +506,14 @@ class AbstractAPI:
         return P2PAdvertiserInfo(self)
 
     @property
+    def p2p_advertiser_stats(self) -> P2PAdvertiserStats:
+        """Property for get Binary ws p2p_advertiser_stats resource.
+
+        :returns: The instance of :class:`P2PAdvertiserStats<binaryapi.ws.chanels.p2p_advertiser_stats.P2PAdvertiserStats>`.
+        """
+        return P2PAdvertiserStats(self)
+
+    @property
     def p2p_advertiser_update(self) -> P2PAdvertiserUpdate:
         """Property for get Binary ws p2p_advertiser_update resource.
 
@@ -647,14 +664,6 @@ class AbstractAPI:
         :returns: The instance of :class:`Proposal<binaryapi.ws.chanels.proposal.Proposal>`.
         """
         return Proposal(self)
-
-    @property
-    def proposal_array(self) -> ProposalArray:
-        """Property for get Binary ws proposal_array resource.
-
-        :returns: The instance of :class:`ProposalArray<binaryapi.ws.chanels.proposal_array.ProposalArray>`.
-        """
-        return ProposalArray(self)
 
     @property
     def proposal_open_contract(self) -> ProposalOpenContract:

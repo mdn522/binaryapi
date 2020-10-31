@@ -8,6 +8,7 @@
 ```python
 # High Level API, This API is based on "binaryapi.api" for easy usage
 from binaryapi.stable_api import Binary
+
 # Low Level API
 from binaryapi.api import BinaryAPI
 ```
@@ -21,7 +22,6 @@ pip3 install -U git+git://github.com/mdn522/binaryapi.git
 ---
 ## Getting Started
 ```python
-import time
 from binaryapi.stable_api import Binary
 
 binary_token = "YOUR-API-TOKEN-GOES-HERE"
@@ -30,7 +30,7 @@ binary = Binary(token=binary_token)
 
 symbol = "frxEURUSD"
 print("Buy a CALL contract")
-print(binary.buy_call_put('CALL', amount=1, symbol=symbol, duration=5, duration_unit='t'))
+print(binary.buy('CALL', amount=1, symbol=symbol, duration=5, duration_unit='t'))
 ```
 
 ---
@@ -70,7 +70,7 @@ binary.api.buy(buy, price, parameters=None, subscribe=None, passthrough=None, re
 binary.api.proposal(contract_type, currency, symbol, amount=None, barrier=None, barrier2=None, basis=None, cancellation=None, date_expiry=None, date_start=None, duration=None, duration_unit=None, limit_order=None, multiplier=None, product_type=None, selected_tick=None, subscribe=None, trading_period_start=None, passthrough=None, req_id=None)
 # You must pass values for contract_type, currency and symbol parameters
 
-# Ticks API - https://developers.binary.com/api/#ticks
+# Subscribe to Ticks API - https://developers.binary.com/api/#ticks
 binary.api.ticks(ticks="frxEURUSD", subscribe=None, passthrough=None, req_id=None)
 
 # For More API functions please refer to https://developers.binary.com/api/

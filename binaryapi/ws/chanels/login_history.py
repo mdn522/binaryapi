@@ -1,24 +1,25 @@
-"""Module for Binary login_history websocket chanel."""
+"""Module for Binary login_history websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#login_history
 
 class LoginHistory(Base):
-    """Class for Binary login_history websocket chanel."""
+    """Class for Binary login_history websocket channel."""
 
     name = "login_history"
 
-    def __call__(self, limit: int = None, passthrough=None, req_id: int = None):
-        """Method to send message to login_history websocket chanel.
+    def __call__(self, limit: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to login_history websocket channel.
         Login History (request)
         Retrieve a summary of login history for user.
         :param limit: [Optional] Apply limit to count of login history records.
-        :type limit: int
+        :type limit: Optional[int]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

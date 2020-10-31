@@ -1,32 +1,34 @@
-"""Module for Binary transfer_between_accounts websocket chanel."""
+"""Module for Binary transfer_between_accounts websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from decimal import Decimal
+from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#transfer_between_accounts
 
 class TransferBetweenAccounts(Base):
-    """Class for Binary transfer_between_accounts websocket chanel."""
+    """Class for Binary transfer_between_accounts websocket channel."""
 
     name = "transfer_between_accounts"
 
-    def __call__(self, account_from: str = None, account_to: str = None, accounts: str = None, amount=None, currency: str = None, passthrough=None, req_id: int = None):
-        """Method to send message to transfer_between_accounts websocket chanel.
+    def __call__(self, account_from: Optional[str] = None, account_to: Optional[str] = None, accounts: Optional[str] = None, amount: Optional[Union[int, float, Decimal]] = None, currency: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to transfer_between_accounts websocket channel.
         Transfer Between Accounts (request)
         This call allows transfers between accounts held by a given user. Transfer funds between your fiat and cryptocurrency accounts (for a fee). Please note that account_from should be same as current authorized account.
         :param account_from: [Optional] The loginid of the account to transfer funds from.
-        :type account_from: str
+        :type account_from: Optional[str]
         :param account_to: [Optional] The loginid of the account to transfer funds to.
-        :type account_to: str
+        :type account_to: Optional[str]
         :param accounts: [Optional] To control the list of accounts returned when `account_from` or `account_to` is not provided. `brief` will only include financial trading accounts with account_type equal to `binary` and can be faster. `all` will include accounts with both `mt5` and `binary` account_type
-        :type accounts: str
+        :type accounts: Optional[str]
         :param amount: [Optional] The amount to transfer.
-        :type amount: 
+        :type amount: Optional[Union[int, float, Decimal]]
         :param currency: [Optional] Currency code.
-        :type currency: str
+        :type currency: Optional[str]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

@@ -1,22 +1,23 @@
-"""Module for Binary get_self_exclusion websocket chanel."""
+"""Module for Binary get_self_exclusion websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#get_self_exclusion
 
 class GetSelfExclusion(Base):
-    """Class for Binary get_self_exclusion websocket chanel."""
+    """Class for Binary get_self_exclusion websocket channel."""
 
     name = "get_self_exclusion"
 
-    def __call__(self, passthrough=None, req_id: int = None):
-        """Method to send message to get_self_exclusion websocket chanel.
+    def __call__(self, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to get_self_exclusion websocket channel.
         Get Self-Exclusion (request)
         Allows users to exclude themselves from the website for certain periods of time, or to set limits on their trading activities. This facility is a regulatory requirement for certain Landing Companies.
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

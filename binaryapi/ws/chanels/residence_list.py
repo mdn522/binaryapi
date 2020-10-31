@@ -1,22 +1,23 @@
-"""Module for Binary residence_list websocket chanel."""
+"""Module for Binary residence_list websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#residence_list
 
 class ResidenceList(Base):
-    """Class for Binary residence_list websocket chanel."""
+    """Class for Binary residence_list websocket channel."""
 
     name = "residence_list"
 
-    def __call__(self, passthrough=None, req_id: int = None):
-        """Method to send message to residence_list websocket chanel.
+    def __call__(self, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to residence_list websocket channel.
         Countries List (request)
         This call returns a list of countries and 2-letter country codes, suitable for populating the account opening form.
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

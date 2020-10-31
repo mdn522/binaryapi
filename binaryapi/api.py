@@ -48,7 +48,7 @@ class BinaryAPI(AbstractAPI):
     msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=300))
     _request_id = 1
 
-    def __init__(self, app_id, token):
+    def __init__(self, app_id=22259, token=None):
         self.app_id = app_id
         self.token = token
 
@@ -79,7 +79,8 @@ class BinaryAPI(AbstractAPI):
 
             pass
 
-        self.authorize(authorize=self.token)
+        if self.token:
+            self.authorize(authorize=self.token)
 
         start_t = time.time()
         while self.profile.msg is None:
@@ -97,9 +98,6 @@ class BinaryAPI(AbstractAPI):
         :returns: The instance of :class:`WebSocket <websocket.WebSocket>`.
         """
         return self.websocket_client.wss
-
-    # def authorize(self):
-    #     self.websocket.send(json.dumps({"authorize": self.token}))
 
     def close(self):
         self.websocket.close()

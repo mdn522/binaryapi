@@ -1,26 +1,27 @@
-"""Module for Binary p2p_advertiser_adverts websocket chanel."""
+"""Module for Binary p2p_advertiser_adverts websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#p2p_advertiser_adverts
 
 class P2PAdvertiserAdverts(Base):
-    """Class for Binary p2p_advertiser_adverts websocket chanel."""
+    """Class for Binary p2p_advertiser_adverts websocket channel."""
 
     name = "p2p_advertiser_adverts"
 
-    def __call__(self, limit: int = None, offset: int = None, passthrough=None, req_id: int = None):
-        """Method to send message to p2p_advertiser_adverts websocket chanel.
+    def __call__(self, limit: Optional[int] = None, offset: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to p2p_advertiser_adverts websocket channel.
         P2P Advertiser Adverts (request)
         Returns all P2P adverts created by the authorized client. Can only be used by a registered P2P advertiser. **This API call is still in Beta.**
         :param limit: [Optional] Used for paging.
-        :type limit: int
+        :type limit: Optional[int]
         :param offset: [Optional] Used for paging.
-        :type offset: int
+        :type offset: Optional[int]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

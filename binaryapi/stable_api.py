@@ -1,9 +1,11 @@
 from binaryapi.api import BinaryAPI
-import binaryapi.constants as OP_code
+# noinspection PyPep8Naming
+import binaryapi.constants as CONSTANTS
 import time
 import logging
 
 from collections import defaultdict
+
 
 # TODO support tick stream
 
@@ -19,7 +21,7 @@ def nested_dict(n, type):
 class Binary:
     api: BinaryAPI
 
-    def __init__(self, token, app_id=22259, message_callback=None):
+    def __init__(self, token=None, app_id=22259, message_callback=None):
         self.app_id = app_id
         self.token = token
 
@@ -33,6 +35,7 @@ class Binary:
 
     def connect(self):
         while True:
+            # noinspection PyBroadException
             try:
                 self.api.close()
             except Exception:
@@ -41,7 +44,6 @@ class Binary:
             if self.connect_count < self.max_reconnect or self.max_reconnect < 0:
                 self.api = BinaryAPI(self.app_id, self.token)
                 self.api.message_callback = self.message_callback
-                check = None
 
                 check = self.api.connect()
 
@@ -53,22 +55,22 @@ class Binary:
                 time.sleep(self.suspend * 2)
                 self.connect_count = self.connect_count + 1
             else:
-                logging.error(
-                    '**error** reconnect() too many time please look log file')
-
+                logging.error('**error** reconnect() too many time please look log file')
 
     # buy_call_put
     # TODO buy_higher_lower
-    def buy_call_put(self, contract_type, amount, symbol, duration, duration_unit, min_payout=0, basis=OP_code.PROPOSAL_BASIS.STAKE, passthrough=None,
-                     req_id=None, no_proposal=False, confirm_request=True):
+    def buy_call_put(self, contract_type, amount, symbol, duration, duration_unit, min_payout=0,
+                     basis=CONSTANTS.PROPOSAL_BASIS.STAKE, passthrough=None, req_id=None, no_proposal=False,
+                     confirm_request=True):
 
         buy_id = None
         parameters = None
         if no_proposal:
             parameters = dict(symbol=symbol, duration=duration, duration_unit=duration_unit,
-                              basis=OP_code.PROPOSAL_BASIS.STAKE, amount=amount, currency=self.api.profile.currency, )
+                              basis=CONSTANTS.PROPOSAL_BASIS.STAKE, amount=amount, currency=self.api.profile.currency, )
         else:
-            prop_req_id = self.api.proposal(contract_type=contract_type, currency=self.api.profile.currency, symbol=symbol, duration_unit=duration_unit,
+            prop_req_id = self.api.proposal(contract_type=contract_type, currency=self.api.profile.currency,
+                                            symbol=symbol, duration_unit=duration_unit,
                                             duration=duration, amount=amount, basis=basis)
             start_t = time.time()
             while self.api.msg_by_req_id.get(prop_req_id) is None:

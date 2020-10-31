@@ -1,32 +1,34 @@
-"""Module for Binary paymentagent_transfer websocket chanel."""
+"""Module for Binary paymentagent_transfer websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from decimal import Decimal
+from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#paymentagent_transfer
 
 class PaymentagentTransfer(Base):
-    """Class for Binary paymentagent_transfer websocket chanel."""
+    """Class for Binary paymentagent_transfer websocket channel."""
 
     name = "paymentagent_transfer"
 
-    def __call__(self, amount, currency: str, transfer_to: str, description: str = None, dry_run: int = None, passthrough=None, req_id: int = None):
-        """Method to send message to paymentagent_transfer websocket chanel.
+    def __call__(self, amount: Union[int, float, Decimal], currency: str, transfer_to: str, description: Optional[str] = None, dry_run: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to paymentagent_transfer websocket channel.
         Payment Agent: Transfer (request)
         Payment Agent Transfer - this call is available only to accounts that are approved Payment Agents.
         :param amount: The amount to transfer.
-        :type amount: 
+        :type amount: Union[int, float, Decimal]
         :param currency: Currency code.
         :type currency: str
         :param transfer_to: The loginid of the recipient account.
         :type transfer_to: str
         :param description: [Optional] Remarks about the transfer.
-        :type description: str
+        :type description: Optional[str]
         :param dry_run: [Optional] If set to `1`, just do validation.
-        :type dry_run: int
+        :type dry_run: Optional[int]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

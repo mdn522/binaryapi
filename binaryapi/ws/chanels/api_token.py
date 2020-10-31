@@ -1,30 +1,31 @@
-"""Module for Binary api_token websocket chanel."""
+"""Module for Binary api_token websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#api_token
 
 class ApiToken(Base):
-    """Class for Binary api_token websocket chanel."""
+    """Class for Binary api_token websocket channel."""
 
     name = "api_token"
 
-    def __call__(self, delete_token: str = None, new_token: str = None, new_token_scopes=None, valid_for_current_ip_only: int = None, passthrough=None, req_id: int = None):
-        """Method to send message to api_token websocket chanel.
+    def __call__(self, delete_token: Optional[str] = None, new_token: Optional[str] = None, new_token_scopes=None, valid_for_current_ip_only: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to api_token websocket channel.
         API Token (request)
         This call manages API tokens
         :param delete_token: [Optional] The token to remove.
-        :type delete_token: str
+        :type delete_token: Optional[str]
         :param new_token: [Optional] The name of the created token.
-        :type new_token: str
+        :type new_token: Optional[str]
         :param new_token_scopes: [Optional] List of permission scopes to provide with the token.
         :type new_token_scopes: 
         :param valid_for_current_ip_only: [Optional] If you set this parameter during token creation, then the token created will only work for the IP address that was used to create the token
-        :type valid_for_current_ip_only: int
+        :type valid_for_current_ip_only: Optional[int]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

@@ -1,16 +1,17 @@
-"""Module for Binary document_upload websocket chanel."""
+"""Module for Binary document_upload websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#document_upload
 
 class DocumentUpload(Base):
-    """Class for Binary document_upload websocket chanel."""
+    """Class for Binary document_upload websocket channel."""
 
     name = "document_upload"
 
-    def __call__(self, document_format: str, document_type: str, expected_checksum: str, file_size: int, document_id: str = None, expiration_date: str = None, page_type: str = None, passthrough=None, req_id: int = None):
-        """Method to send message to document_upload websocket chanel.
+    def __call__(self, document_format: str, document_type: str, expected_checksum: str, file_size: int, document_id: Optional[str] = None, expiration_date: Optional[str] = None, page_type: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to document_upload websocket channel.
         Document Upload (request)
         Request KYC information from client
         :param document_format: Document file format
@@ -22,15 +23,15 @@ class DocumentUpload(Base):
         :param file_size: Document size (should be less than 3MB)
         :type file_size: int
         :param document_id: [Optional] Document ID (required for Passport, Proof of ID and Driver's License)
-        :type document_id: str
+        :type document_id: Optional[str]
         :param expiration_date: [Optional] Document expiration date (required for Passport, Proof of ID and Driver's License)
-        :type expiration_date: str
+        :type expiration_date: Optional[str]
         :param page_type: [Optional] To determine document side
-        :type page_type: str
+        :type page_type: Optional[str]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

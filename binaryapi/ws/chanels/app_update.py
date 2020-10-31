@@ -1,16 +1,18 @@
-"""Module for Binary app_update websocket chanel."""
+"""Module for Binary app_update websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from decimal import Decimal
+from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#app_update
 
 class AppUpdate(Base):
-    """Class for Binary app_update websocket chanel."""
+    """Class for Binary app_update websocket channel."""
 
     name = "app_update"
 
-    def __call__(self, app_update: int, name: str, redirect_uri: str, scopes, app_markup_percentage=None, appstore: str = None, github: str = None, googleplay: str = None, homepage: str = None, verification_uri: str = None, passthrough=None, req_id: int = None):
-        """Method to send message to app_update websocket chanel.
+    def __call__(self, app_update: int, name: str, redirect_uri: str, scopes, app_markup_percentage: Optional[Union[int, float, Decimal]] = None, appstore: Optional[str] = None, github: Optional[str] = None, googleplay: Optional[str] = None, homepage: Optional[str] = None, verification_uri: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to app_update websocket channel.
         Application: Update (request)
         Update a new OAuth application
         :param app_update: Application app_id.
@@ -22,21 +24,21 @@ class AppUpdate(Base):
         :param scopes: Change scopes will revoke all user's grants and log them out.
         :type scopes: 
         :param app_markup_percentage: [Optional] Markup to be added to contract prices (as a percentage of contract payout).
-        :type app_markup_percentage: 
+        :type app_markup_percentage: Optional[Union[int, float, Decimal]]
         :param appstore: [Optional] Application's App Store URL (if applicable).
-        :type appstore: str
+        :type appstore: Optional[str]
         :param github: [Optional] Application's GitHub page (for open-source projects).
-        :type github: str
+        :type github: Optional[str]
         :param googleplay: [Optional] Application's Google Play URL (if applicable).
-        :type googleplay: str
+        :type googleplay: Optional[str]
         :param homepage: [Optional] Application's homepage URL.
-        :type homepage: str
+        :type homepage: Optional[str]
         :param verification_uri: [Optional] Used when `verify_email` called. If available, a URL containing the verification token will send to the client's email, otherwise only the token will be sent.
-        :type verification_uri: str
+        :type verification_uri: Optional[str]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

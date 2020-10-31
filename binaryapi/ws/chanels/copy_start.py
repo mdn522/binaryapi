@@ -1,16 +1,18 @@
-"""Module for Binary copy_start websocket chanel."""
+"""Module for Binary copy_start websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from decimal import Decimal
+from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#copy_start
 
 class CopyStart(Base):
-    """Class for Binary copy_start websocket chanel."""
+    """Class for Binary copy_start websocket channel."""
 
     name = "copy_start"
 
-    def __call__(self, copy_start: str, assets=None, max_trade_stake=None, min_trade_stake=None, trade_types=None, passthrough=None, req_id: int = None):
-        """Method to send message to copy_start websocket chanel.
+    def __call__(self, copy_start: str, assets=None, max_trade_stake: Optional[Union[int, float, Decimal]] = None, min_trade_stake: Optional[Union[int, float, Decimal]] = None, trade_types=None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to copy_start websocket channel.
         Copy Trading: Start (request)
         Start copy trader bets
         :param copy_start: API tokens identifying the accounts of trader which will be used to copy trades
@@ -18,15 +20,15 @@ class CopyStart(Base):
         :param assets: [Optional] Used to set assets to be copied. E.x ["frxUSDJPY", "R_50"]
         :type assets: 
         :param max_trade_stake: [Optional] Used to set maximum trade stake to be copied.
-        :type max_trade_stake: 
+        :type max_trade_stake: Optional[Union[int, float, Decimal]]
         :param min_trade_stake: [Optional] Used to set minimal trade stake to be copied.
-        :type min_trade_stake: 
+        :type min_trade_stake: Optional[Union[int, float, Decimal]]
         :param trade_types: [Optional] Used to set trade types to be copied. E.x ["CALL", "PUT"]
         :type trade_types: 
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

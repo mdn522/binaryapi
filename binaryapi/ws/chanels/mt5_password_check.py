@@ -1,16 +1,17 @@
-"""Module for Binary mt5_password_check websocket chanel."""
+"""Module for Binary mt5_password_check websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#mt5_password_check
 
 class Mt5PasswordCheck(Base):
-    """Class for Binary mt5_password_check websocket chanel."""
+    """Class for Binary mt5_password_check websocket channel."""
 
     name = "mt5_password_check"
 
-    def __call__(self, login: str, password: str, password_type: str = None, passthrough=None, req_id: int = None):
-        """Method to send message to mt5_password_check websocket chanel.
+    def __call__(self, login: str, password: str, password_type: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to mt5_password_check websocket channel.
         MT5: Password Check (request)
         This call validates the main password for the MT5 user
         :param login: MT5 user login
@@ -18,11 +19,11 @@ class Mt5PasswordCheck(Base):
         :param password: The password of the account.
         :type password: str
         :param password_type: [Optional] Type of the password to check.
-        :type password_type: str
+        :type password_type: Optional[str]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

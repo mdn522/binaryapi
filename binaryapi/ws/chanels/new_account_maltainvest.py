@@ -1,18 +1,19 @@
-"""Module for Binary new_account_maltainvest websocket chanel."""
+"""Module for Binary new_account_maltainvest websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#new_account_maltainvest
 
 class NewAccountMaltainvest(Base):
-    """Class for Binary new_account_maltainvest websocket chanel."""
+    """Class for Binary new_account_maltainvest websocket channel."""
 
     name = "new_account_maltainvest"
 
-    def __call__(self, accept_risk: int, address_city: str, address_line_1: str, date_of_birth: str, education_level: str, employment_industry: str, estimated_worth: str, first_name: str, income_source: str, last_name: str, net_income: str, occupation: str, residence: str, salutation: str, tax_identification_number: str, tax_residence: str, account_opening_reason: str = None, account_turnover: str = None, address_line_2: str = None, address_postcode: str = None, address_state: str = None, affiliate_token: str = None, binary_options_trading_experience: str = None, binary_options_trading_frequency: str = None, cfd_trading_experience: str = None, cfd_trading_frequency: str = None, citizen: str = None, client_type: str = None, employment_status: str = None, forex_trading_experience: str = None, forex_trading_frequency: str = None, non_pep_declaration: int = None, other_instruments_trading_experience: str = None, other_instruments_trading_frequency: str = None, phone: str = None, place_of_birth: str = None, secret_answer: str = None, secret_question: str = None, source_of_wealth: str = None, passthrough=None, req_id: int = None):
-        """Method to send message to new_account_maltainvest websocket chanel.
-        New Real-Money Account: Binary Investment (Europe) Ltd. (request)
-        This call opens a new real-money account with the `maltainvest` Landing Company. This call can be made from a virtual-money account or real-money account at Binary (Europe) Ltd. If it is the latter, client information fields in this call will be ignored and data from your existing real-money account will be used.
+    def __call__(self, accept_risk: int, address_city: str, address_line_1: str, date_of_birth: str, education_level: str, employment_industry: str, estimated_worth: str, first_name: str, income_source: str, last_name: str, net_income: str, occupation: str, residence: str, salutation: str, tax_identification_number: str, tax_residence: str, account_opening_reason: Optional[str] = None, account_turnover: Optional[str] = None, address_line_2: Optional[str] = None, address_postcode: Optional[str] = None, address_state: Optional[str] = None, affiliate_token: Optional[str] = None, binary_options_trading_experience: Optional[str] = None, binary_options_trading_frequency: Optional[str] = None, cfd_trading_experience: Optional[str] = None, cfd_trading_frequency: Optional[str] = None, citizen: Optional[str] = None, client_type: Optional[str] = None, employment_status: Optional[str] = None, forex_trading_experience: Optional[str] = None, forex_trading_frequency: Optional[str] = None, non_pep_declaration: Optional[int] = None, other_instruments_trading_experience: Optional[str] = None, other_instruments_trading_frequency: Optional[str] = None, phone: Optional[str] = None, place_of_birth: Optional[str] = None, secret_answer: Optional[str] = None, secret_question: Optional[str] = None, source_of_wealth: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to new_account_maltainvest websocket channel.
+        New Real-Money Account: Deriv Investment (Europe) Ltd (request)
+        This call opens a new real-money account with the `maltainvest` Landing Company. This call can be made from a virtual-money account or real-money account at Deriv (Europe) Limited. If it is the latter, client information fields in this call will be ignored and data from your existing real-money account will be used.
         :param accept_risk: Show whether client has accepted risk disclaimer.
         :type accept_risk: int
         :param address_city: Within 35 characters
@@ -46,55 +47,55 @@ class NewAccountMaltainvest(Base):
         :param tax_residence: Residence for tax purpose. Comma separated iso country code if multiple jurisdictions. Only applicable for real money account. Required for `maltainvest` landing company.
         :type tax_residence: str
         :param account_opening_reason: [Optional] Purpose and reason for requesting the account opening.
-        :type account_opening_reason: str
+        :type account_opening_reason: Optional[str]
         :param account_turnover: [Optional] The anticipated account turnover.
-        :type account_turnover: str
+        :type account_turnover: Optional[str]
         :param address_line_2: [Optional] Within 70 characters.
-        :type address_line_2: str
+        :type address_line_2: Optional[str]
         :param address_postcode: [Optional] Within 20 characters and may not contain '+'.
-        :type address_postcode: str
+        :type address_postcode: Optional[str]
         :param address_state: [Optional] Possible value receive from `states_list` call.
-        :type address_state: str
+        :type address_state: Optional[str]
         :param affiliate_token: [Optional] Affiliate token, within 32 characters.
-        :type affiliate_token: str
+        :type affiliate_token: Optional[str]
         :param binary_options_trading_experience: [Optional] Binary options trading experience.
-        :type binary_options_trading_experience: str
+        :type binary_options_trading_experience: Optional[str]
         :param binary_options_trading_frequency: [Optional] Binary options trading frequency.
-        :type binary_options_trading_frequency: str
+        :type binary_options_trading_frequency: Optional[str]
         :param cfd_trading_experience: [Optional] CFDs trading experience.
-        :type cfd_trading_experience: str
+        :type cfd_trading_experience: Optional[str]
         :param cfd_trading_frequency: [Optional] CFDs trading frequency.
-        :type cfd_trading_frequency: str
+        :type cfd_trading_frequency: Optional[str]
         :param citizen: [Optional] Country of legal citizenship, 2-letter country code. Possible value receive from `residence_list` call.
-        :type citizen: str
+        :type citizen: Optional[str]
         :param client_type: [Optional] Indicates whether this is for a client requesting an account with professional status.
-        :type client_type: str
+        :type client_type: Optional[str]
         :param employment_status: [Optional] Employment Status.
-        :type employment_status: str
+        :type employment_status: Optional[str]
         :param forex_trading_experience: [Optional] Forex trading experience.
-        :type forex_trading_experience: str
+        :type forex_trading_experience: Optional[str]
         :param forex_trading_frequency: [Optional] Forex trading frequency.
-        :type forex_trading_frequency: str
+        :type forex_trading_frequency: Optional[str]
         :param non_pep_declaration: [Optional] Indicates client's self-declaration of not being a PEP/RCA.
-        :type non_pep_declaration: int
+        :type non_pep_declaration: Optional[int]
         :param other_instruments_trading_experience: [Optional] Trading experience in other financial instruments.
-        :type other_instruments_trading_experience: str
+        :type other_instruments_trading_experience: Optional[str]
         :param other_instruments_trading_frequency: [Optional] Trading frequency in other financial instruments.
-        :type other_instruments_trading_frequency: str
+        :type other_instruments_trading_frequency: Optional[str]
         :param phone: [Optional] Starting with `+` followed by 8-35 digits, allowing hyphens or space.
-        :type phone: str
+        :type phone: Optional[str]
         :param place_of_birth: [Optional] Place of birth, 2-letter country code.
-        :type place_of_birth: str
+        :type place_of_birth: Optional[str]
         :param secret_answer: [Optional] Answer to secret question, within 4-50 characters.
-        :type secret_answer: str
+        :type secret_answer: Optional[str]
         :param secret_question: [Optional] Accept any value in enum list.
-        :type secret_question: str
+        :type secret_question: Optional[str]
         :param source_of_wealth: [Optional] Source of wealth.
-        :type source_of_wealth: str
+        :type source_of_wealth: Optional[str]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

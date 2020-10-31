@@ -1,22 +1,23 @@
-"""Module for Binary oauth_apps websocket chanel."""
+"""Module for Binary oauth_apps websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#oauth_apps
 
 class OauthApps(Base):
-    """Class for Binary oauth_apps websocket chanel."""
+    """Class for Binary oauth_apps websocket channel."""
 
     name = "oauth_apps"
 
-    def __call__(self, passthrough=None, req_id: int = None):
-        """Method to send message to oauth_apps websocket chanel.
+    def __call__(self, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to oauth_apps websocket channel.
         OAuth Applications (request)
         List all my used OAuth applications.
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

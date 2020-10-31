@@ -1,24 +1,25 @@
-"""Module for Binary revoke_oauth_app websocket chanel."""
+"""Module for Binary revoke_oauth_app websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#revoke_oauth_app
 
 class RevokeOauthApp(Base):
-    """Class for Binary revoke_oauth_app websocket chanel."""
+    """Class for Binary revoke_oauth_app websocket channel."""
 
     name = "revoke_oauth_app"
 
-    def __call__(self, revoke_oauth_app: int, passthrough=None, req_id: int = None):
-        """Method to send message to revoke_oauth_app websocket chanel.
+    def __call__(self, revoke_oauth_app: int, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to revoke_oauth_app websocket channel.
         Revoke Oauth Application (request)
         Used for revoking access of particular app.
         :param revoke_oauth_app: The application ID to revoke.
         :type revoke_oauth_app: int
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {

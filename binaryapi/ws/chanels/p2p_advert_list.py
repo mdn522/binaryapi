@@ -1,34 +1,38 @@
-"""Module for Binary p2p_advert_list websocket chanel."""
+"""Module for Binary p2p_advert_list websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from decimal import Decimal
+from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#p2p_advert_list
 
 class P2PAdvertList(Base):
-    """Class for Binary p2p_advert_list websocket chanel."""
+    """Class for Binary p2p_advert_list websocket channel."""
 
     name = "p2p_advert_list"
 
-    def __call__(self, advertiser_id: str = None, amount=None, counterparty_type: str = None, limit: int = None, local_currency: str = None, offset: int = None, passthrough=None, req_id: int = None):
-        """Method to send message to p2p_advert_list websocket chanel.
+    def __call__(self, advertiser_id: Optional[str] = None, amount: Optional[Union[int, float, Decimal]] = None, counterparty_type: Optional[str] = None, limit: Optional[int] = None, local_currency: Optional[str] = None, offset: Optional[int] = None, use_client_limits: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+        """Method to send message to p2p_advert_list websocket channel.
         P2P Advert List (request)
         Returns available adverts for use with `p2p_order_create`. **This API call is still in Beta.**
         :param advertiser_id: [Optional] Which advertiser to list adverts for.
-        :type advertiser_id: str
+        :type advertiser_id: Optional[str]
         :param amount: [Optional] How much to buy or sell, used to calculate prices.
-        :type amount: 
+        :type amount: Optional[Union[int, float, Decimal]]
         :param counterparty_type: [Optional] Filter the adverts by `counterparty_type`.
-        :type counterparty_type: str
+        :type counterparty_type: Optional[str]
         :param limit: [Optional] Used for paging.
-        :type limit: int
+        :type limit: Optional[int]
         :param local_currency: [Optional] Currency to conduct payment transaction in, defaults to the main currency for the client's country.
-        :type local_currency: str
+        :type local_currency: Optional[str]
         :param offset: [Optional] Used for paging.
-        :type offset: int
+        :type offset: Optional[int]
+        :param use_client_limits: [Optional] If set to 1, ads that exceed this account's balance or turnover limits will not be shown.
+        :type use_client_limits: Optional[int]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
-        :type passthrough: 
+        :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
-        :type req_id: int
+        :type req_id: Optional[int]
         """
 
         data = {
@@ -52,5 +56,8 @@ class P2PAdvertList(Base):
 
         if offset:
             data['offset'] = int(offset)
+
+        if use_client_limits:
+            data['use_client_limits'] = int(use_client_limits)
 
         return self.send_websocket_request(self.name, data, passthrough=passthrough, req_id=req_id)
