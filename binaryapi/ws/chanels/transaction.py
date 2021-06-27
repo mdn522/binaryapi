@@ -1,6 +1,6 @@
 """Module for Binary transaction websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Optional, Any
+from typing import Union, Any, Optional
 
 
 # https://developers.binary.com/api/#transaction
@@ -10,12 +10,12 @@ class Transaction(Base):
 
     name = "transaction"
 
-    def __call__(self, subscribe: bool, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, subscribe: Union[bool, int, None], passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to transaction websocket channel.
         Transactions Stream (request)
         Subscribe to transaction notifications
         :param subscribe: If set to 1, will send updates whenever there is an update to transactions. If not to 1 then it will not return any records.
-        :type subscribe: bool
+        :type subscribe: Union[bool, int, None]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.

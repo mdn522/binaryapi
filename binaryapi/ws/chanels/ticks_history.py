@@ -1,6 +1,6 @@
 """Module for Binary ticks_history websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional
+from typing import Union, Optional, Any
 
 
 # https://developers.binary.com/api/#ticks_history
@@ -10,7 +10,7 @@ class TicksHistory(Base):
 
     name = "ticks_history"
 
-    def __call__(self, ticks_history: str, end: str, adjust_start_time: Optional[int] = None, count: Optional[int] = None, granularity: Optional[int] = None, start: Optional[int] = None, style: Optional[str] = None, subscribe: Optional[bool] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, ticks_history: str, end: str, adjust_start_time: Optional[int] = None, count: Optional[int] = None, granularity: Optional[int] = None, start: Optional[int] = None, style: Optional[str] = None, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to ticks_history websocket channel.
         Ticks History (request)
         Get historic tick data for a given symbol.
@@ -31,7 +31,7 @@ class TicksHistory(Base):
         :param style: [Optional] The tick-output style.
         :type style: Optional[str]
         :param subscribe: [Optional] 1 - to send updates whenever a new tick is received.
-        :type subscribe: Optional[bool]
+        :type subscribe: Union[bool, int, None]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.

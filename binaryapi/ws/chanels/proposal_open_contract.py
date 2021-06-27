@@ -1,6 +1,6 @@
 """Module for Binary proposal_open_contract websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional
+from typing import Union, Optional, Any
 
 
 # https://developers.binary.com/api/#proposal_open_contract
@@ -10,14 +10,14 @@ class ProposalOpenContract(Base):
 
     name = "proposal_open_contract"
 
-    def __call__(self, contract_id: Optional[int] = None, subscribe: Optional[bool] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, contract_id: Optional[int] = None, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to proposal_open_contract websocket channel.
         Price Proposal: Open Contracts (request)
         Get latest price (and other information) for a contract in the user's portfolio
         :param contract_id: [Optional] Contract ID received from a `portfolio` request. If not set, you will receive stream of all open contracts.
         :type contract_id: Optional[int]
         :param subscribe: [Optional] `1` to stream.
-        :type subscribe: Optional[bool]
+        :type subscribe: Union[bool, int, None]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.

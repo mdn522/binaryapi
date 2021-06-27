@@ -1,7 +1,7 @@
 """Module for Binary buy_contract_for_multiple_accounts websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Union, Any, Optional
 from decimal import Decimal
-from typing import Union, Optional, Any
 
 
 # https://developers.binary.com/api/#buy_contract_for_multiple_accounts

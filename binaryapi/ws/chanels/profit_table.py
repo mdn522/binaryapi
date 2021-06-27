@@ -1,7 +1,7 @@
 """Module for Binary profit_table websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Union, Optional, Any
 from decimal import Decimal
-from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#profit_table
@@ -11,10 +11,12 @@ class ProfitTable(Base):
 
     name = "profit_table"
 
-    def __call__(self, date_from: Optional[str] = None, date_to: Optional[str] = None, description: Optional[int] = None, limit: Optional[Union[int, float, Decimal]] = None, offset: Optional[Union[int, float, Decimal]] = None, sort: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, contract_type=None, date_from: Optional[str] = None, date_to: Optional[str] = None, description: Optional[int] = None, limit: Optional[Union[int, float, Decimal]] = None, offset: Optional[Union[int, float, Decimal]] = None, sort: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to profit_table websocket channel.
         Profit Table (request)
         Retrieve a summary of account Profit Table, according to given search criteria
+        :param contract_type: Return only contracts of the specified types
+        :type contract_type: 
         :param date_from: [Optional] Start date (epoch or YYYY-MM-DD)
         :type date_from: Optional[str]
         :param date_to: [Optional] End date (epoch or YYYY-MM-DD)
@@ -36,6 +38,9 @@ class ProfitTable(Base):
         data = {
             "profit_table": int(1)
         }
+
+        if contract_type:
+            data['contract_type'] = contract_type
 
         if date_from:
             data['date_from'] = str(date_from)

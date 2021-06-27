@@ -1,7 +1,7 @@
 """Module for Binary proposal websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Union, Optional, Any
 from decimal import Decimal
-from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#proposal
@@ -11,7 +11,7 @@ class Proposal(Base):
 
     name = "proposal"
 
-    def __call__(self, contract_type: str, currency: str, symbol: str, amount: Optional[Union[int, float, Decimal]] = None, barrier: Optional[str] = None, barrier2: Optional[str] = None, basis: Optional[str] = None, cancellation: Optional[str] = None, date_expiry: Optional[int] = None, date_start: Optional[int] = None, duration: Optional[int] = None, duration_unit: Optional[str] = None, limit_order=None, multiplier: Optional[Union[int, float, Decimal]] = None, product_type: Optional[str] = None, selected_tick: Optional[int] = None, subscribe: Optional[bool] = None, trading_period_start: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, contract_type: str, currency: str, symbol: str, amount: Optional[Union[int, float, Decimal]] = None, barrier: Optional[str] = None, barrier2: Optional[str] = None, basis: Optional[str] = None, cancellation: Optional[str] = None, date_expiry: Optional[int] = None, date_start: Optional[int] = None, duration: Optional[int] = None, duration_unit: Optional[str] = None, limit_order=None, multiplier: Optional[Union[int, float, Decimal]] = None, product_type: Optional[str] = None, selected_tick: Optional[int] = None, subscribe: Union[bool, int, None] = None, trading_period_start: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to proposal websocket channel.
         Price Proposal (request)
         Gets latest price for a specific contract.
@@ -48,7 +48,7 @@ class Proposal(Base):
         :param selected_tick: [Optional] The tick that is predicted to have the highest/lowest value - for `TICKHIGH` and `TICKLOW` contracts.
         :type selected_tick: Optional[int]
         :param subscribe: [Optional] 1 - to initiate a realtime stream of prices. Note that tick trades (without a user-defined barrier), digit trades and less than 24 hours at-the-money contracts for the following underlying symbols are not streamed: `R_10`, `R_25`, `R_50`, `R_75`, `R_100`, `RDBULL`, `RDBEAR` (this is because their price is constant).
-        :type subscribe: Optional[bool]
+        :type subscribe: Union[bool, int, None]
         :param trading_period_start: [Optional] Required only for multi-barrier trading. Defines the epoch value of the trading period start time.
         :type trading_period_start: Optional[int]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.

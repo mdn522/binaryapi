@@ -1,7 +1,7 @@
 """Module for Binary mt5_withdrawal websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Union, Any, Optional
 from decimal import Decimal
-from typing import Union, Optional, Any
 
 
 # https://developers.binary.com/api/#mt5_withdrawal

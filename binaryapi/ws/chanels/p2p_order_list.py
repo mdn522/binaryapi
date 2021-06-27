@@ -1,7 +1,7 @@
 """Module for Binary p2p_order_list websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Union, Optional, Any
 from decimal import Decimal
-from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#p2p_order_list
@@ -11,7 +11,7 @@ class P2POrderList(Base):
 
     name = "p2p_order_list"
 
-    def __call__(self, active: Optional[Union[int, float, Decimal]] = None, advert_id: Optional[str] = None, limit: Optional[int] = None, offset: Optional[int] = None, subscribe: Optional[bool] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, active: Optional[Union[int, float, Decimal]] = None, advert_id: Optional[str] = None, limit: Optional[int] = None, offset: Optional[int] = None, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to p2p_order_list websocket channel.
         P2P Order List (request)
         List active orders. **This API call is still in Beta.**
@@ -24,7 +24,7 @@ class P2POrderList(Base):
         :param offset: [Optional] Used for paging.
         :type offset: Optional[int]
         :param subscribe: [Optional] If set to 1, will send updates whenever there is a change to any order belonging to you.
-        :type subscribe: Optional[bool]
+        :type subscribe: Union[bool, int, None]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.

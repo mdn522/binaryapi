@@ -1,7 +1,7 @@
 """Module for Binary buy websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Union, Any, Optional
 from decimal import Decimal
-from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#buy
@@ -11,7 +11,7 @@ class Buy(Base):
 
     name = "buy"
 
-    def __call__(self, buy: str, price: Union[int, float, Decimal], parameters=None, subscribe: Optional[bool] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, buy: str, price: Union[int, float, Decimal], parameters=None, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to buy websocket channel.
         Buy Contract (request)
         Buy a Contract
@@ -22,7 +22,7 @@ class Buy(Base):
         :param parameters: [Optional] Used to pass the parameters for contract buy.
         :type parameters: 
         :param subscribe: [Optional] `1` to stream.
-        :type subscribe: Optional[bool]
+        :type subscribe: Union[bool, int, None]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.

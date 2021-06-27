@@ -57,6 +57,8 @@ class Binary:
             else:
                 logging.error('**error** reconnect() too many time please look log file')
 
+            time.sleep(0.0005)
+
     # buy_call_put
     # TODO buy_higher_lower
     def buy_call_put(self, contract_type, amount, symbol, duration, duration_unit, min_payout=0,
@@ -77,6 +79,7 @@ class Binary:
                 if time.time() - start_t >= 30:
                     logging.error('**warning** proposal late 30 sec')
                     return False, None, prop_req_id
+                time.sleep(0.0005)
 
             proposal_res = self.api.msg_by_req_id[prop_req_id]
             if 'error' in proposal_res:
@@ -99,6 +102,7 @@ class Binary:
                 if time.time() - start_t >= 30:
                     logging.error('**warning** buy late 30 sec')
                     return False, None, req_id
+                time.sleep(0.0005)
 
             res = self.api.msg_by_type['buy'][req_id]
             if 'error' in res:

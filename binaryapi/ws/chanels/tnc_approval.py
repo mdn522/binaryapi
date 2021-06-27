@@ -1,7 +1,7 @@
 """Module for Binary tnc_approval websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Union, Optional, Any
 from decimal import Decimal
-from typing import Any, Union, Optional
 
 
 # https://developers.binary.com/api/#tnc_approval

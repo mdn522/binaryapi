@@ -48,7 +48,7 @@ class BinaryAPI(AbstractAPI):
     msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=300))
     _request_id = 1
 
-    def __init__(self, app_id=22259, token=None):
+    def __init__(self, app_id=28035, token=None):
         self.app_id = app_id
         self.token = token
 
