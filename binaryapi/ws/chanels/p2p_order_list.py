@@ -1,7 +1,7 @@
 """Module for Binary p2p_order_list websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Optional, Any
 from decimal import Decimal
+from typing import Optional, Union, Any
 
 
 # https://developers.binary.com/api/#p2p_order_list

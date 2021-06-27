@@ -1,7 +1,7 @@
 """Module for Binary p2p_order_create websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Optional, Any
 from decimal import Decimal
+from typing import Optional, Union, Any, List
 
 
 # https://developers.binary.com/api/#p2p_order_create
@@ -11,7 +11,7 @@ class P2POrderCreate(Base):
 
     name = "p2p_order_create"
 
-    def __call__(self, advert_id: str, amount: Union[int, float, Decimal], contact_info: Optional[str] = None, payment_info: Optional[str] = None, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, advert_id: str, amount: Union[int, float, Decimal], contact_info: Optional[str] = None, payment_info: Optional[str] = None, payment_method_ids: Optional[List] = None, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to p2p_order_create websocket channel.
         P2P Order Create (request)
         Creates a P2P order for the specified advert. **This API call is still in Beta.**
@@ -21,8 +21,10 @@ class P2POrderCreate(Base):
         :type amount: Union[int, float, Decimal]
         :param contact_info: [Optional] Seller contact information. Only applicable for 'sell orders'.
         :type contact_info: Optional[str]
-        :param payment_info: [Optional] Payment instructions. Only applicable for 'sell orders'.
+        :param payment_info: [Optional] Payment instructions, only applicable for sell orders.
         :type payment_info: Optional[str]
+        :param payment_method_ids: IDs of payment methods, only applicable for sell orders.
+        :type payment_method_ids: Optional[List]
         :param subscribe: [Optional] If set to 1, will send updates whenever there is an update to the order.
         :type subscribe: Union[bool, int, None]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
@@ -42,6 +44,9 @@ class P2POrderCreate(Base):
 
         if payment_info:
             data['payment_info'] = str(payment_info)
+
+        if payment_method_ids:
+            data['payment_method_ids'] = payment_method_ids
 
         if subscribe:
             data['subscribe'] = int(subscribe)

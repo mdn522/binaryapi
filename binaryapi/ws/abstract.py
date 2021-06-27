@@ -31,6 +31,7 @@ from binaryapi.ws.chanels.get_financial_assessment import GetFinancialAssessment
 from binaryapi.ws.chanels.get_limits import GetLimits
 from binaryapi.ws.chanels.get_self_exclusion import GetSelfExclusion
 from binaryapi.ws.chanels.get_settings import GetSettings
+from binaryapi.ws.chanels.identity_verification_document_add import IdentityVerificationDocumentAdd
 from binaryapi.ws.chanels.landing_company import LandingCompany
 from binaryapi.ws.chanels.landing_company_details import LandingCompanyDetails
 from binaryapi.ws.chanels.login_history import LoginHistory
@@ -50,7 +51,6 @@ from binaryapi.ws.chanels.oauth_apps import OauthApps
 from binaryapi.ws.chanels.p2p_advertiser_adverts import P2PAdvertiserAdverts
 from binaryapi.ws.chanels.p2p_advertiser_create import P2PAdvertiserCreate
 from binaryapi.ws.chanels.p2p_advertiser_info import P2PAdvertiserInfo
-from binaryapi.ws.chanels.p2p_advertiser_stats import P2PAdvertiserStats
 from binaryapi.ws.chanels.p2p_advertiser_update import P2PAdvertiserUpdate
 from binaryapi.ws.chanels.p2p_advert_create import P2PAdvertCreate
 from binaryapi.ws.chanels.p2p_advert_info import P2PAdvertInfo
@@ -62,9 +62,12 @@ from binaryapi.ws.chanels.p2p_order_confirm import P2POrderConfirm
 from binaryapi.ws.chanels.p2p_order_create import P2POrderCreate
 from binaryapi.ws.chanels.p2p_order_info import P2POrderInfo
 from binaryapi.ws.chanels.p2p_order_list import P2POrderList
+from binaryapi.ws.chanels.paymentagent_create import PaymentagentCreate
+from binaryapi.ws.chanels.paymentagent_details import PaymentagentDetails
 from binaryapi.ws.chanels.paymentagent_list import PaymentagentList
 from binaryapi.ws.chanels.paymentagent_transfer import PaymentagentTransfer
 from binaryapi.ws.chanels.paymentagent_withdraw import PaymentagentWithdraw
+from binaryapi.ws.chanels.payment_methods import PaymentMethods
 from binaryapi.ws.chanels.payout_currencies import PayoutCurrencies
 from binaryapi.ws.chanels.ping import Ping
 from binaryapi.ws.chanels.portfolio import Portfolio
@@ -89,6 +92,9 @@ from binaryapi.ws.chanels.time import Time
 from binaryapi.ws.chanels.tnc_approval import TncApproval
 from binaryapi.ws.chanels.topup_virtual import TopupVirtual
 from binaryapi.ws.chanels.trading_durations import TradingDurations
+from binaryapi.ws.chanels.trading_platform_investor_password_reset import TradingPlatformInvestorPasswordReset
+from binaryapi.ws.chanels.trading_platform_password_reset import TradingPlatformPasswordReset
+from binaryapi.ws.chanels.trading_servers import TradingServers
 from binaryapi.ws.chanels.trading_times import TradingTimes
 from binaryapi.ws.chanels.transaction import Transaction
 from binaryapi.ws.chanels.transfer_between_accounts import TransferBetweenAccounts
@@ -354,6 +360,14 @@ class AbstractAPI:
         return GetSettings(self)
 
     @property
+    def identity_verification_document_add(self) -> IdentityVerificationDocumentAdd:
+        """Property for get Binary ws identity_verification_document_add resource.
+
+        :returns: The instance of :class:`IdentityVerificationDocumentAdd<binaryapi.ws.chanels.identity_verification_document_add.IdentityVerificationDocumentAdd>`.
+        """
+        return IdentityVerificationDocumentAdd(self)
+
+    @property
     def landing_company(self) -> LandingCompany:
         """Property for get Binary ws landing_company resource.
 
@@ -506,14 +520,6 @@ class AbstractAPI:
         return P2PAdvertiserInfo(self)
 
     @property
-    def p2p_advertiser_stats(self) -> P2PAdvertiserStats:
-        """Property for get Binary ws p2p_advertiser_stats resource.
-
-        :returns: The instance of :class:`P2PAdvertiserStats<binaryapi.ws.chanels.p2p_advertiser_stats.P2PAdvertiserStats>`.
-        """
-        return P2PAdvertiserStats(self)
-
-    @property
     def p2p_advertiser_update(self) -> P2PAdvertiserUpdate:
         """Property for get Binary ws p2p_advertiser_update resource.
 
@@ -602,6 +608,22 @@ class AbstractAPI:
         return P2POrderList(self)
 
     @property
+    def paymentagent_create(self) -> PaymentagentCreate:
+        """Property for get Binary ws paymentagent_create resource.
+
+        :returns: The instance of :class:`PaymentagentCreate<binaryapi.ws.chanels.paymentagent_create.PaymentagentCreate>`.
+        """
+        return PaymentagentCreate(self)
+
+    @property
+    def paymentagent_details(self) -> PaymentagentDetails:
+        """Property for get Binary ws paymentagent_details resource.
+
+        :returns: The instance of :class:`PaymentagentDetails<binaryapi.ws.chanels.paymentagent_details.PaymentagentDetails>`.
+        """
+        return PaymentagentDetails(self)
+
+    @property
     def paymentagent_list(self) -> PaymentagentList:
         """Property for get Binary ws paymentagent_list resource.
 
@@ -624,6 +646,14 @@ class AbstractAPI:
         :returns: The instance of :class:`PaymentagentWithdraw<binaryapi.ws.chanels.paymentagent_withdraw.PaymentagentWithdraw>`.
         """
         return PaymentagentWithdraw(self)
+
+    @property
+    def payment_methods(self) -> PaymentMethods:
+        """Property for get Binary ws payment_methods resource.
+
+        :returns: The instance of :class:`PaymentMethods<binaryapi.ws.chanels.payment_methods.PaymentMethods>`.
+        """
+        return PaymentMethods(self)
 
     @property
     def payout_currencies(self) -> PayoutCurrencies:
@@ -816,6 +846,30 @@ class AbstractAPI:
         :returns: The instance of :class:`TradingDurations<binaryapi.ws.chanels.trading_durations.TradingDurations>`.
         """
         return TradingDurations(self)
+
+    @property
+    def trading_platform_investor_password_reset(self) -> TradingPlatformInvestorPasswordReset:
+        """Property for get Binary ws trading_platform_investor_password_reset resource.
+
+        :returns: The instance of :class:`TradingPlatformInvestorPasswordReset<binaryapi.ws.chanels.trading_platform_investor_password_reset.TradingPlatformInvestorPasswordReset>`.
+        """
+        return TradingPlatformInvestorPasswordReset(self)
+
+    @property
+    def trading_platform_password_reset(self) -> TradingPlatformPasswordReset:
+        """Property for get Binary ws trading_platform_password_reset resource.
+
+        :returns: The instance of :class:`TradingPlatformPasswordReset<binaryapi.ws.chanels.trading_platform_password_reset.TradingPlatformPasswordReset>`.
+        """
+        return TradingPlatformPasswordReset(self)
+
+    @property
+    def trading_servers(self) -> TradingServers:
+        """Property for get Binary ws trading_servers resource.
+
+        :returns: The instance of :class:`TradingServers<binaryapi.ws.chanels.trading_servers.TradingServers>`.
+        """
+        return TradingServers(self)
 
     @property
     def trading_times(self) -> TradingTimes:

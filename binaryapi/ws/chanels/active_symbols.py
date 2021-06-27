@@ -1,6 +1,6 @@
 """Module for Binary active_symbols websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#active_symbols

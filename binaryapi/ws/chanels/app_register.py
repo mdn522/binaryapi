@@ -1,7 +1,7 @@
 """Module for Binary app_register websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Optional, Any
 from decimal import Decimal
+from typing import Optional, Union, Any, List
 
 
 # https://developers.binary.com/api/#app_register
@@ -11,7 +11,7 @@ class AppRegister(Base):
 
     name = "app_register"
 
-    def __call__(self, name: str, redirect_uri: str, scopes, app_markup_percentage: Optional[Union[int, float, Decimal]] = None, appstore: Optional[str] = None, github: Optional[str] = None, googleplay: Optional[str] = None, homepage: Optional[str] = None, verification_uri: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, name: str, redirect_uri: str, scopes: List, app_markup_percentage: Optional[Union[int, float, Decimal]] = None, appstore: Optional[str] = None, github: Optional[str] = None, googleplay: Optional[str] = None, homepage: Optional[str] = None, verification_uri: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to app_register websocket channel.
         Application: Register (request)
         Register a new OAuth application
@@ -20,7 +20,7 @@ class AppRegister(Base):
         :param redirect_uri: The URL to redirect to after a successful login.
         :type redirect_uri: str
         :param scopes: List of permission scopes to grant the application.
-        :type scopes: 
+        :type scopes: List
         :param app_markup_percentage: [Optional] Markup to be added to contract prices (as a percentage of contract payout).
         :type app_markup_percentage: Optional[Union[int, float, Decimal]]
         :param appstore: [Optional] Application's App Store URL (if applicable).

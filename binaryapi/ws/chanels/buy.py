@@ -1,7 +1,7 @@
 """Module for Binary buy websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Any, Optional
 from decimal import Decimal
+from typing import Optional, Union, Any
 
 
 # https://developers.binary.com/api/#buy

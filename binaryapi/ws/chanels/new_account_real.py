@@ -1,6 +1,6 @@
 """Module for Binary new_account_real websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#new_account_real
@@ -10,19 +10,17 @@ class NewAccountReal(Base):
 
     name = "new_account_real"
 
-    def __call__(self, residence: str, account_opening_reason: Optional[str] = None, account_turnover: Optional[str] = None, address_city: Optional[str] = None, address_line_1: Optional[str] = None, address_line_2: Optional[str] = None, address_postcode: Optional[str] = None, address_state: Optional[str] = None, affiliate_token: Optional[str] = None, citizen=None, client_type: Optional[str] = None, currency: Optional[str] = None, date_of_birth: Optional[str] = None, first_name: Optional[str] = None, last_name: Optional[str] = None, non_pep_declaration: Optional[int] = None, phone: Optional[str] = None, place_of_birth: Optional[str] = None, salutation: Optional[str] = None, secret_answer: Optional[str] = None, secret_question: Optional[str] = None, tax_identification_number: Optional[str] = None, tax_residence: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, account_opening_reason: Optional[str] = None, account_turnover: Optional[str] = None, address_city: Optional[str] = None, address_line_1: Optional[str] = None, address_line_2: Optional[str] = None, address_postcode: Optional[str] = None, address_state: Optional[str] = None, affiliate_token: Optional[str] = None, citizen=None, client_type: Optional[str] = None, currency: Optional[str] = None, date_of_birth: Optional[str] = None, first_name: Optional[str] = None, last_name: Optional[str] = None, non_pep_declaration: Optional[int] = None, phone=None, place_of_birth: Optional[str] = None, residence: Optional[str] = None, salutation: Optional[str] = None, secret_answer: Optional[str] = None, secret_question: Optional[str] = None, tax_identification_number: Optional[str] = None, tax_residence: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to new_account_real websocket channel.
         New Real-Money Account: Default Landing Company (request)
         This call opens a new real-money account. This call can be made from a virtual-money or a real-money account. If it is the latter, client information fields in this call will be ignored and data from your existing real-money account will be used.
-        :param residence: 2-letter country code, possible value receive from `residence_list` call.
-        :type residence: str
         :param account_opening_reason: [Optional] Purpose and reason for requesting the account opening.
         :type account_opening_reason: Optional[str]
         :param account_turnover: [Optional] The anticipated account turnover.
         :type account_turnover: Optional[str]
-        :param address_city: [Optional] Within 35 characters.
+        :param address_city: [Optional] Within 100 characters.
         :type address_city: Optional[str]
-        :param address_line_1: [Optional] Mailing address.
+        :param address_line_1: Within 70 characters, with no leading whitespaces and may contain letters/numbers and/or any of following characters '.,:;()@#/-
         :type address_line_1: Optional[str]
         :param address_line_2: [Optional] Within 70 characters.
         :type address_line_2: Optional[str]
@@ -46,10 +44,12 @@ class NewAccountReal(Base):
         :type last_name: Optional[str]
         :param non_pep_declaration: [Optional] Indicates client's self-declaration of not being a PEP/RCA (Politically Exposed Person/Relatives and Close Associates).
         :type non_pep_declaration: Optional[int]
-        :param phone: [Optional] Starting with `+` followed by 8-35 digits, allowing hyphens or space.
-        :type phone: Optional[str]
+        :param phone: [Optional] Starting with `+` followed by 9-35 digits, hyphens or space.
+        :type phone: 
         :param place_of_birth: [Optional] Place of birth, 2-letter country code.
         :type place_of_birth: Optional[str]
+        :param residence: 2-letter country code, possible value receive from `residence_list` call.
+        :type residence: Optional[str]
         :param salutation: [Optional] Accept any value in enum list.
         :type salutation: Optional[str]
         :param secret_answer: [Optional] Answer to secret question, within 4-50 characters. Required for new account and existing client details will be used if client open another account.
@@ -67,8 +67,7 @@ class NewAccountReal(Base):
         """
 
         data = {
-            "new_account_real": int(1),
-            "residence": residence
+            "new_account_real": int(1)
         }
 
         if account_opening_reason:
@@ -117,10 +116,13 @@ class NewAccountReal(Base):
             data['non_pep_declaration'] = int(non_pep_declaration)
 
         if phone:
-            data['phone'] = str(phone)
+            data['phone'] = phone
 
         if place_of_birth:
             data['place_of_birth'] = str(place_of_birth)
+
+        if residence:
+            data['residence'] = str(residence)
 
         if salutation:
             data['salutation'] = str(salutation)

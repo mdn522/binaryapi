@@ -1,6 +1,6 @@
 """Module for Binary proposal_open_contract websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Optional, Any
+from typing import Optional, Union, Any
 
 
 # https://developers.binary.com/api/#proposal_open_contract

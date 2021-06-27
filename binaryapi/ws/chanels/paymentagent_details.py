@@ -1,19 +1,19 @@
-"""Module for Binary get_limits websocket channel."""
+"""Module for Binary paymentagent_details websocket channel."""
 from binaryapi.ws.chanels.base import Base
 from typing import Optional, Any
 
 
-# https://developers.binary.com/api/#get_limits
+# https://developers.binary.com/api/#paymentagent_details
 
-class GetLimits(Base):
-    """Class for Binary get_limits websocket channel."""
+class PaymentagentDetails(Base):
+    """Class for Binary paymentagent_details websocket channel."""
 
-    name = "get_limits"
+    name = "paymentagent_details"
 
     def __call__(self, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
-        """Method to send message to get_limits websocket channel.
-        Account Limits (request)
-        Trading and Withdrawal Limits for a given user
+        """Method to send message to paymentagent_details websocket channel.
+        Payment agent details (request)
+        Gets client's payment agent details.
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
@@ -21,7 +21,7 @@ class GetLimits(Base):
         """
 
         data = {
-            "get_limits": int(1)
+            "paymentagent_details": int(1)
         }
 
 

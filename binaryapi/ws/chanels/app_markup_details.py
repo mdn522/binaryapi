@@ -1,7 +1,7 @@
 """Module for Binary app_markup_details websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Optional, Any
 from decimal import Decimal
+from typing import Optional, Union, Any, List
 
 
 # https://developers.binary.com/api/#app_markup_details
@@ -11,7 +11,7 @@ class AppMarkupDetails(Base):
 
     name = "app_markup_details"
 
-    def __call__(self, date_from: str, date_to: str, app_id: Optional[int] = None, client_loginid: Optional[str] = None, description: Optional[int] = None, limit: Optional[Union[int, float, Decimal]] = None, offset: Optional[Union[int, float, Decimal]] = None, sort: Optional[str] = None, sort_fields=None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, date_from: str, date_to: str, app_id: Optional[int] = None, client_loginid: Optional[str] = None, description: Optional[int] = None, limit: Optional[Union[int, float, Decimal]] = None, offset: Optional[Union[int, float, Decimal]] = None, sort: Optional[str] = None, sort_fields: Optional[List] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to app_markup_details websocket channel.
         Application: Markup Details (request)
         Retrieve details of `app_markup` according to criteria specified.
@@ -32,7 +32,7 @@ class AppMarkupDetails(Base):
         :param sort: [Optional] Sort direction on `transaction_time`. Other fields sort order is ASC.
         :type sort: Optional[str]
         :param sort_fields: [Optional] One or more of the specified fields to sort on. Default sort field is by `transaction_time`.
-        :type sort_fields: 
+        :type sort_fields: Optional[List]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.

@@ -1,7 +1,7 @@
 """Module for Binary transfer_between_accounts websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Optional, Any
 from decimal import Decimal
+from typing import Optional, Union, Any
 
 
 # https://developers.binary.com/api/#transfer_between_accounts
@@ -19,7 +19,7 @@ class TransferBetweenAccounts(Base):
         :type account_from: Optional[str]
         :param account_to: [Optional] The loginid of the account to transfer funds to.
         :type account_to: Optional[str]
-        :param accounts: [Optional] To control the list of accounts returned when `account_from` or `account_to` is not provided. `brief` will only include financial trading accounts with account_type equal to `binary` and can be faster. `all` will include accounts with both `mt5` and `binary` account_type
+        :param accounts: [Optional] To control the list of accounts returned when `account_from` or `account_to` is not provided. `brief` (default value) means that accounts with `mt5` account_type will be excluded; it will run faster. `all` means that all accounts with any account_type (including `mt5`) will be returned.
         :type accounts: Optional[str]
         :param amount: [Optional] The amount to transfer.
         :type amount: Optional[Union[int, float, Decimal]]

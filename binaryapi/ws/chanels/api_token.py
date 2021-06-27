@@ -1,6 +1,6 @@
 """Module for Binary api_token websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional
+from typing import Optional, Any, List
 
 
 # https://developers.binary.com/api/#api_token
@@ -10,7 +10,7 @@ class ApiToken(Base):
 
     name = "api_token"
 
-    def __call__(self, delete_token: Optional[str] = None, new_token: Optional[str] = None, new_token_scopes=None, valid_for_current_ip_only: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, delete_token: Optional[str] = None, new_token: Optional[str] = None, new_token_scopes: Optional[List] = None, valid_for_current_ip_only: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to api_token websocket channel.
         API Token (request)
         This call manages API tokens
@@ -19,7 +19,7 @@ class ApiToken(Base):
         :param new_token: [Optional] The name of the created token.
         :type new_token: Optional[str]
         :param new_token_scopes: [Optional] List of permission scopes to provide with the token.
-        :type new_token_scopes: 
+        :type new_token_scopes: Optional[List]
         :param valid_for_current_ip_only: [Optional] If you set this parameter during token creation, then the token created will only work for the IP address that was used to create the token
         :type valid_for_current_ip_only: Optional[int]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.

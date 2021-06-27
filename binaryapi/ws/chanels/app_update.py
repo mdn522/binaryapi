@@ -1,7 +1,7 @@
 """Module for Binary app_update websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Optional, Any
 from decimal import Decimal
+from typing import Optional, Union, Any, List
 
 
 # https://developers.binary.com/api/#app_update
@@ -11,7 +11,7 @@ class AppUpdate(Base):
 
     name = "app_update"
 
-    def __call__(self, app_update: int, name: str, redirect_uri: str, scopes, app_markup_percentage: Optional[Union[int, float, Decimal]] = None, appstore: Optional[str] = None, github: Optional[str] = None, googleplay: Optional[str] = None, homepage: Optional[str] = None, verification_uri: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, app_update: int, name: str, redirect_uri: str, scopes: List, app_markup_percentage: Optional[Union[int, float, Decimal]] = None, appstore: Optional[str] = None, github: Optional[str] = None, googleplay: Optional[str] = None, homepage: Optional[str] = None, verification_uri: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to app_update websocket channel.
         Application: Update (request)
         Update a new OAuth application
@@ -22,7 +22,7 @@ class AppUpdate(Base):
         :param redirect_uri: The URL to redirect to after a successful login.
         :type redirect_uri: str
         :param scopes: Change scopes will revoke all user's grants and log them out.
-        :type scopes: 
+        :type scopes: List
         :param app_markup_percentage: [Optional] Markup to be added to contract prices (as a percentage of contract payout).
         :type app_markup_percentage: Optional[Union[int, float, Decimal]]
         :param appstore: [Optional] Application's App Store URL (if applicable).

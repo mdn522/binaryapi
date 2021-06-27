@@ -1,6 +1,6 @@
 """Module for Binary document_upload websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#document_upload
@@ -10,7 +10,7 @@ class DocumentUpload(Base):
 
     name = "document_upload"
 
-    def __call__(self, document_format: str, document_type: str, expected_checksum: str, file_size: int, document_id: Optional[str] = None, expiration_date: Optional[str] = None, page_type: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, document_format: str, document_type: str, expected_checksum: str, file_size: int, document_id: Optional[str] = None, expiration_date: Optional[str] = None, lifetime_valid: Optional[int] = None, page_type: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to document_upload websocket channel.
         Document Upload (request)
         Request KYC information from client
@@ -20,12 +20,14 @@ class DocumentUpload(Base):
         :type document_type: str
         :param expected_checksum: The checksum of the file to be uploaded
         :type expected_checksum: str
-        :param file_size: Document size (should be less than 3MB)
+        :param file_size: Document size (should be less than 10MB)
         :type file_size: int
         :param document_id: [Optional] Document ID (required for Passport, Proof of ID and Driver's License)
         :type document_id: Optional[str]
         :param expiration_date: [Optional] Document expiration date (required for Passport, Proof of ID and Driver's License)
         :type expiration_date: Optional[str]
+        :param lifetime_valid: [Optional] Boolean value that indicates whether this document is lifetime valid (only applies to POI document types, cancels out the expiration_date given if any)
+        :type lifetime_valid: Optional[int]
         :param page_type: [Optional] To determine document side
         :type page_type: Optional[str]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
@@ -47,6 +49,9 @@ class DocumentUpload(Base):
 
         if expiration_date:
             data['expiration_date'] = str(expiration_date)
+
+        if lifetime_valid:
+            data['lifetime_valid'] = int(lifetime_valid)
 
         if page_type:
             data['page_type'] = str(page_type)

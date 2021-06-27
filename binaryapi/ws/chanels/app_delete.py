@@ -1,6 +1,6 @@
 """Module for Binary app_delete websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#app_delete

@@ -1,6 +1,6 @@
 """Module for Binary set_settings websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional
+from typing import Optional, Any
 
 
 # https://developers.binary.com/api/#set_settings
@@ -10,7 +10,7 @@ class SetSettings(Base):
 
     name = "set_settings"
 
-    def __call__(self, account_opening_reason: Optional[str] = None, address_city: Optional[str] = None, address_line_1: Optional[str] = None, address_line_2=None, address_postcode: Optional[str] = None, address_state: Optional[str] = None, allow_copiers: Optional[int] = None, citizen=None, date_of_birth: Optional[str] = None, email_consent: Optional[int] = None, first_name: Optional[str] = None, last_name: Optional[str] = None, non_pep_declaration: Optional[int] = None, phone: Optional[str] = None, place_of_birth: Optional[str] = None, request_professional_status: Optional[int] = None, residence=None, salutation: Optional[str] = None, secret_answer: Optional[str] = None, secret_question: Optional[str] = None, tax_identification_number: Optional[str] = None, tax_residence: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, account_opening_reason: Optional[str] = None, address_city: Optional[str] = None, address_line_1: Optional[str] = None, address_line_2=None, address_postcode: Optional[str] = None, address_state: Optional[str] = None, allow_copiers: Optional[int] = None, citizen=None, date_of_birth: Optional[str] = None, email_consent: Optional[int] = None, feature_flag=None, first_name: Optional[str] = None, last_name: Optional[str] = None, non_pep_declaration: Optional[int] = None, phone=None, place_of_birth: Optional[str] = None, preferred_language=None, request_professional_status: Optional[int] = None, residence=None, salutation: Optional[str] = None, secret_answer: Optional[str] = None, secret_question: Optional[str] = None, tax_identification_number: Optional[str] = None, tax_residence: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to set_settings websocket channel.
         Set Account Settings (request)
         Set User Settings (this call should be used in conjunction with `get_settings`)
@@ -34,16 +34,20 @@ class SetSettings(Base):
         :type date_of_birth: Optional[str]
         :param email_consent: [Optional] Boolean value 1 or 0, indicating permission to use email address for any contact which may include marketing
         :type email_consent: Optional[int]
+        :param feature_flag: [Optional] Enable or disable one or multiple features.
+        :type feature_flag: 
         :param first_name: [Optional] Within 2-50 characters, use only letters, spaces, hyphens, full-stops or apostrophes (can only be changed on unauthenticated svg accounts).
         :type first_name: Optional[str]
         :param last_name: [Optional] Within 2-50 characters, use only letters, spaces, hyphens, full-stops or apostrophes (can only be changed on unauthenticated svg accounts).
         :type last_name: Optional[str]
         :param non_pep_declaration: [Optional] Indicates client's self-declaration of not being a PEP/RCA (Politically Exposed Person/Relatives and Close Associates). Effective for real accounts only.
         :type non_pep_declaration: Optional[int]
-        :param phone: [Optional] Note: not applicable for virtual account. Required field for real money account. Starting with `+` followed by 8-35 digits, allowing hyphens or space.
-        :type phone: Optional[str]
+        :param phone: [Optional] Note: not applicable for virtual account. Starting with `+` followed by 9-35 digits, hyphens or space.
+        :type phone: 
         :param place_of_birth: [Optional] Place of birth, 2-letter country code.
         :type place_of_birth: Optional[str]
+        :param preferred_language: [Optional] User's preferred language, ISO standard language code
+        :type preferred_language: 
         :param request_professional_status: [Optional] Required when client wants to be treated as professional. Applicable for financial accounts only.
         :type request_professional_status: Optional[int]
         :param residence: [Optional] 2-letter country code. Note: not applicable for real money account. Only allow for Virtual account without residence set.
@@ -98,6 +102,9 @@ class SetSettings(Base):
         if email_consent:
             data['email_consent'] = int(email_consent)
 
+        if feature_flag:
+            data['feature_flag'] = feature_flag
+
         if first_name:
             data['first_name'] = str(first_name)
 
@@ -108,10 +115,13 @@ class SetSettings(Base):
             data['non_pep_declaration'] = int(non_pep_declaration)
 
         if phone:
-            data['phone'] = str(phone)
+            data['phone'] = phone
 
         if place_of_birth:
             data['place_of_birth'] = str(place_of_birth)
+
+        if preferred_language:
+            data['preferred_language'] = preferred_language
 
         if request_professional_status:
             data['request_professional_status'] = int(request_professional_status)

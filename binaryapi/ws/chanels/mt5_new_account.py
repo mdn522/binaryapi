@@ -1,7 +1,7 @@
 """Module for Binary mt5_new_account websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Optional, Any
 from decimal import Decimal
+from typing import Optional, Union, Any
 
 
 # https://developers.binary.com/api/#mt5_new_account
@@ -11,7 +11,7 @@ class Mt5NewAccount(Base):
 
     name = "mt5_new_account"
 
-    def __call__(self, account_type: str, email: str, leverage: Union[int, float, Decimal], mainPassword: str, name: str, address: Optional[str] = None, city: Optional[str] = None, company: Optional[str] = None, country: Optional[str] = None, currency: Optional[str] = None, dry_run: Optional[int] = None, investPassword: Optional[str] = None, mt5_account_category: Optional[str] = None, mt5_account_type: Optional[str] = None, phone: Optional[str] = None, phonePassword: Optional[str] = None, state: Optional[str] = None, zipCode: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, account_type: str, email: str, leverage: Union[int, float, Decimal], mainPassword: str, name: str, address: Optional[str] = None, city: Optional[str] = None, company: Optional[str] = None, country: Optional[str] = None, currency: Optional[str] = None, dry_run: Optional[int] = None, investPassword: Optional[str] = None, mt5_account_category: Optional[str] = None, mt5_account_type: Optional[str] = None, phone: Optional[str] = None, phonePassword: Optional[str] = None, server=None, state: Optional[str] = None, zipCode: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to mt5_new_account websocket channel.
         MT5: New Account (request)
         This call creates new MT5 user, either demo or real money user.
@@ -47,6 +47,8 @@ class Mt5NewAccount(Base):
         :type phone: Optional[str]
         :param phonePassword: [Optional] The user's phone password.
         :type phonePassword: Optional[str]
+        :param server: [Optional] Trade server.
+        :type server: 
         :param state: [Optional] User's state (region) of residence.
         :type state: Optional[str]
         :param zipCode: [Optional] User's zip code.
@@ -98,6 +100,9 @@ class Mt5NewAccount(Base):
 
         if phonePassword:
             data['phonePassword'] = str(phonePassword)
+
+        if server:
+            data['server'] = server
 
         if state:
             data['state'] = str(state)

@@ -1,7 +1,7 @@
 """Module for Binary paymentagent_withdraw websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Optional, Any
 from decimal import Decimal
+from typing import Optional, Union, Any
 
 
 # https://developers.binary.com/api/#paymentagent_withdraw

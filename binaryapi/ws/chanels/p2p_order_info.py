@@ -1,6 +1,6 @@
 """Module for Binary p2p_order_info websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Any, Optional
+from typing import Optional, Union, Any
 
 
 # https://developers.binary.com/api/#p2p_order_info

@@ -1,7 +1,7 @@
 """Module for Binary buy_contract_for_multiple_accounts websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Union, Any, Optional
 from decimal import Decimal
+from typing import Optional, Union, Any, List
 
 
 # https://developers.binary.com/api/#buy_contract_for_multiple_accounts
@@ -11,7 +11,7 @@ class BuyContractForMultipleAccounts(Base):
 
     name = "buy_contract_for_multiple_accounts"
 
-    def __call__(self, buy_contract_for_multiple_accounts: str, price: Union[int, float, Decimal], tokens, parameters=None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(self, buy_contract_for_multiple_accounts: str, price: Union[int, float, Decimal], tokens: List, parameters=None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
         """Method to send message to buy_contract_for_multiple_accounts websocket channel.
         Buy Contract for Multiple Accounts (request)
         Buy a Contract for multiple Accounts specified by the `tokens` parameter. Note, although this is an authorized call, the contract is not bought for the authorized account.
@@ -20,7 +20,7 @@ class BuyContractForMultipleAccounts(Base):
         :param price: Maximum price at which to purchase the contract.
         :type price: Union[int, float, Decimal]
         :param tokens: List of API tokens identifying the accounts for which the contract is bought. Note: If the same token appears multiple times or if multiple tokens designate the same account, the contract is bought multiple times for this account.
-        :type tokens: 
+        :type tokens: List
         :param parameters: [Optional] Used to pass the parameters for contract buy.
         :type parameters: 
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
