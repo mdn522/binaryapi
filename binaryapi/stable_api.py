@@ -21,7 +21,7 @@ def nested_dict(n, type):
 class Binary:
     api: BinaryAPI
 
-    def __init__(self, token=None, app_id=22259, message_callback=None):
+    def __init__(self, token=None, app_id=28035, message_callback=None):
         self.app_id = app_id
         self.token = token
 
