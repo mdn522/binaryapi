@@ -1,7 +1,7 @@
 """Module for Binary app_markup_details websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional, Union, List
 from decimal import Decimal
-from typing import Optional, Union, Any, List
 
 
 # https://developers.binary.com/api/#app_markup_details

@@ -41,7 +41,8 @@ class FixSizeOrderedDict(OrderedDict):
 class BinaryAPI(AbstractAPI):
     websocket_thread: Thread
     profile = AuthorizeObject()
-    message_callback = None
+
+    # message_callback: Optional[Callable] = None
 
     results = FixSizeOrderedDict(max=300)
     msg_by_req_id = FixSizeOrderedDict(max=300)
@@ -51,6 +52,8 @@ class BinaryAPI(AbstractAPI):
     def __init__(self, app_id=28035, token=None):
         self.app_id = app_id
         self.token = token
+
+        self.message_callback = None
 
         self.wss_url = "wss://ws.binaryws.com/websockets/v3?app_id={0}".format(self.app_id)
 

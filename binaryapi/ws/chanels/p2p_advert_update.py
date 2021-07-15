@@ -1,6 +1,6 @@
 """Module for Binary p2p_advert_update websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Optional, Any, List
+from typing import Any, Optional, List
 
 
 # https://developers.binary.com/api/#p2p_advert_update

@@ -1,7 +1,7 @@
 """Module for Binary profit_table websocket channel."""
 from binaryapi.ws.chanels.base import Base
 from decimal import Decimal
-from typing import Optional, Union, Any, List
+from typing import Any, List, Union, Optional
 
 
 # https://developers.binary.com/api/#profit_table

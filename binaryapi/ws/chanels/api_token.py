@@ -1,6 +1,6 @@
 """Module for Binary api_token websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Optional, Any, List
+from typing import Any, Optional, List
 
 
 # https://developers.binary.com/api/#api_token

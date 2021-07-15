@@ -1,6 +1,6 @@
 """Module for Binary portfolio websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Optional, Any, List
+from typing import Any, List, Optional
 
 
 # https://developers.binary.com/api/#portfolio

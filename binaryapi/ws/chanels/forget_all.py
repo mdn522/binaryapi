@@ -1,6 +1,6 @@
 """Module for Binary forget_all websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Optional, Union, Any
+from typing import Any, List, Union, Optional
 
 
 # https://developers.binary.com/api/#forget_all

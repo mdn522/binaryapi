@@ -7,9 +7,7 @@ except ImportError:
 
 from binaryapi.stable_api import Binary
 
-token = os.environ.get('BINARY_TOKEN', 'YOU BINARY TOKEN GOES HERE')
-assert token != 'YOU BINARY TOKEN GOES HERE', "Please assign a token"
-
+token = os.environ.get('BINARY_TOKEN', '<YOU BINARY TOKEN GOES HERE>')
 
 if __name__ == '__main__':
     binary = Binary(token=token)

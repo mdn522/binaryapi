@@ -1,6 +1,6 @@
 """Module for Binary identity_verification_document_add websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Optional, Any
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#identity_verification_document_add

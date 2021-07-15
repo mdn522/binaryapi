@@ -1,6 +1,6 @@
 """Module for Binary set_financial_assessment websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Optional, Any
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#set_financial_assessment

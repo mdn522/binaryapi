@@ -1,6 +1,6 @@
 """Module for Binary set_self_exclusion websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Optional, Any
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#set_self_exclusion

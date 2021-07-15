@@ -1,7 +1,7 @@
 """Module for Binary transfer_between_accounts websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, Optional, Union
 from decimal import Decimal
-from typing import Optional, Union, Any
 
 
 # https://developers.binary.com/api/#transfer_between_accounts

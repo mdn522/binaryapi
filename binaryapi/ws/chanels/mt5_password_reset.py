@@ -1,6 +1,6 @@
 """Module for Binary mt5_password_reset websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Optional, Any
+from typing import Any, Optional
 
 
 # https://developers.binary.com/api/#mt5_password_reset

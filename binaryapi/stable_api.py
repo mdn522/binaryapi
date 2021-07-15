@@ -33,6 +33,18 @@ class Binary:
 
         self.connect()
 
+    @property
+    def message_callback(self):
+        return self._message_callback
+
+    @message_callback.setter
+    def message_callback(self, value):
+        self._message_callback = value
+        try:
+            self.api.message_callback = self._message_callback
+        except:
+            pass
+
     def connect(self):
         while True:
             # noinspection PyBroadException
@@ -43,6 +55,8 @@ class Binary:
                 # logging.error('**warning** self.api.close() fail')
             if self.connect_count < self.max_reconnect or self.max_reconnect < 0:
                 self.api = BinaryAPI(self.app_id, self.token)
+                # self.api.message_callback = self.message_callback
+
                 self.api.message_callback = self.message_callback
 
                 check = self.api.connect()
@@ -62,7 +76,7 @@ class Binary:
     # buy_call_put
     # TODO buy_higher_lower
     def buy_call_put(self, contract_type, amount, symbol, duration, duration_unit, min_payout=0,
-                     basis=CONSTANTS.PROPOSAL_BASIS.STAKE, passthrough=None, req_id=None, no_proposal=False,
+                     basis=CONSTANTS.PROPOSAL_BASIS.STAKE, subscribe=None, passthrough=None, req_id=None, no_proposal=False,
                      confirm_request=True):
 
         buy_id = None
@@ -92,7 +106,7 @@ class Binary:
             else:
                 return False, None, prop_req_id
 
-        req_id = self.api.buy(buy=buy_id, price=amount, parameters=parameters, passthrough=passthrough, req_id=req_id)
+        req_id = self.api.buy(buy=buy_id, price=amount, subscribe=subscribe, parameters=parameters, passthrough=passthrough, req_id=req_id)
 
         if not confirm_request:
             return True, None, req_id
