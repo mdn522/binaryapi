@@ -11,7 +11,7 @@ import simplejson as json
 from threading import Thread
 from collections import defaultdict, OrderedDict
 
-from binaryapi.exceptions import MessageByRequestIDNotFound
+from binaryapi.exceptions import MessageByReqIDNotFound
 from binaryapi.ws.abstract import AbstractAPI
 from binaryapi.ws.client import WebsocketClient
 import binaryapi.global_value as global_value
@@ -126,7 +126,7 @@ class BinaryAPI(AbstractAPI):
             if time.time() - start_time >= max_timeout:
                 logging.error('**warning** {}late {} sec(s)'.format(max_timeout, (type_name_repr + ' ') if type_name_repr else ''))
                 # return False, None, request_id
-                raise MessageByRequestIDNotFound
+                raise MessageByReqIDNotFound
             time.sleep(delay)
         return
 

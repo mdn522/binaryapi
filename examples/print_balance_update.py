@@ -4,7 +4,6 @@ import time
 from rich.console import Console
 from binaryapi.stable_api import Binary
 
-
 # Binary Token
 token = os.environ.get('BINARY_TOKEN', '<YOUR BINARY TOKEN GOES HERE>')
 

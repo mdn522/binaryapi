@@ -15,7 +15,7 @@ from collections import defaultdict
 
 # noinspection PyShadowingBuiltins
 from binaryapi.constants import PROPOSAL_BASIS
-from binaryapi.exceptions import MessageByRequestIDNotFound
+from binaryapi.exceptions import MessageByReqIDNotFound
 
 
 def nested_dict(n, type):
@@ -84,7 +84,7 @@ class Binary:
     # TODO buy_higher_lower
     def buy_call_put(self, contract_type: str, amount: Union[int, float, Decimal], symbol: str, duration, duration_unit, min_payout=0,
                      basis=PROPOSAL_BASIS.STAKE, subscribe: Optional[bool] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None, no_proposal=False,
-                     confirm_request=True) -> Tuple[bool, Optional[str], Optional[int]]:
+                     confirm_request: bool = True) -> Tuple[bool, Optional[str], Optional[int]]:
         """
         :rtype: Tuple[bool, Optional[str], Optional[int]]
         :desc: Tuple[success, contract_id (if success), req_id]
@@ -107,7 +107,7 @@ class Binary:
 
             try:
                 self.api.wait_for_response_by_req_id(req_id=prop_req_id, type_name='proposal')
-            except MessageByRequestIDNotFound:
+            except MessageByReqIDNotFound:
                 return False, None, prop_req_id
 
             proposal_res = self.api.msg_by_req_id[prop_req_id]
@@ -135,7 +135,7 @@ class Binary:
 
             try:
                 self.api.wait_for_response_by_req_id(req_id=req_id, type_='buy')
-            except MessageByRequestIDNotFound:
+            except MessageByReqIDNotFound:
                 return False, None, req_id
 
             res = self.api.msg_by_type['buy'][req_id]

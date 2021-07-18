@@ -4,6 +4,7 @@ from rich import print
 
 from binaryapi.stable_api import Binary
 
+# Binary Token
 token = os.environ.get('BINARY_TOKEN', '<YOUR BINARY TOKEN GOES HERE>')
 
 if __name__ == '__main__':

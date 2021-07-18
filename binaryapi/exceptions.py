@@ -3,5 +3,5 @@ class AuthRequired(Exception):
     pass
 
 
-class MessageByRequestIDNotFound(Exception):
+class MessageByReqIDNotFound(Exception):
     pass
