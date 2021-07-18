@@ -1,13 +1,10 @@
 import os
 import traceback
-try:
-    from rich import print
-except ImportError:
-    pass
+from rich import print
 
 from binaryapi.stable_api import Binary
 
-token = os.environ.get('BINARY_TOKEN', '<YOU BINARY TOKEN GOES HERE>')
+token = os.environ.get('BINARY_TOKEN', '<YOUR BINARY TOKEN GOES HERE>')
 
 if __name__ == '__main__':
     binary = Binary(token=token)

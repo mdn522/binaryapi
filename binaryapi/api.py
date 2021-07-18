@@ -3,6 +3,7 @@ import decimal
 import ssl
 import time
 import logging
+from typing import Optional, Any, Union
 
 import pause
 import threading
@@ -10,6 +11,7 @@ import simplejson as json
 from threading import Thread
 from collections import defaultdict, OrderedDict
 
+from binaryapi.exceptions import MessageByRequestIDNotFound
 from binaryapi.ws.abstract import AbstractAPI
 from binaryapi.ws.client import WebsocketClient
 import binaryapi.global_value as global_value
@@ -44,9 +46,9 @@ class BinaryAPI(AbstractAPI):
 
     # message_callback: Optional[Callable] = None
 
-    results = FixSizeOrderedDict(max=300)
-    msg_by_req_id = FixSizeOrderedDict(max=300)
-    msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=300))
+    results = FixSizeOrderedDict(max=500)
+    msg_by_req_id = FixSizeOrderedDict(max=500)
+    msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=500))
     _request_id = 1
 
     def __init__(self, app_id=28035, token=None):
@@ -64,9 +66,11 @@ class BinaryAPI(AbstractAPI):
 
         self.websocket_client = WebsocketClient(self)
 
-        self.websocket_thread = threading.Thread(target=self.websocket.run_forever, kwargs={'sslopt': {
-            "check_hostname": False, "cert_reqs": ssl.CERT_NONE,
-            "ca_certs": "cacert.pem"},
+        self.websocket_thread = threading.Thread(target=self.websocket.run_forever, kwargs={
+            'sslopt': {
+                "check_hostname": False, "cert_reqs": ssl.CERT_NONE,
+                "ca_certs": "cacert.pem"
+            },
             "ping_interval": 5})  # for fix pyinstall error: cafile, capath and cadata cannot be all omitted
         self.websocket_thread.daemon = True
         self.websocket_thread.start()
@@ -114,7 +118,19 @@ class BinaryAPI(AbstractAPI):
         self._request_id += 1
         return self._request_id - 1
 
-    def send_websocket_request(self, name: str, msg, passthrough=None, req_id: int = None):
+    def wait_for_response_by_req_id(self, req_id: int, type_: Optional[str] = None, type_name: Optional[str] = None, max_timeout: Union[int, float] = 30, delay: Union[int, float] = 0.0005):
+        start_time = time.time()
+
+        type_name_repr: Optional[str] = type_name or type_
+        while (self.msg_by_req_id.get(req_id) is None) if type_ is None else (self.msg_by_type[type_].get(req_id) is None):
+            if time.time() - start_time >= max_timeout:
+                logging.error('**warning** {}late {} sec(s)'.format(max_timeout, (type_name_repr + ' ') if type_name_repr else ''))
+                # return False, None, request_id
+                raise MessageByRequestIDNotFound
+            time.sleep(delay)
+        return
+
+    def send_websocket_request(self, name: str, msg, passthrough: Optional[Any] = None, req_id: int = None):
         """Send websocket request to Binary server.
         :type passthrough: dict
         :type name: str
