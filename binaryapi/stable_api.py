@@ -18,6 +18,7 @@ from binaryapi.constants import PROPOSAL_BASIS
 from binaryapi.exceptions import MessageByReqIDNotFound
 
 
+# noinspection PyShadowingBuiltins
 def nested_dict(n, type):
     if n == 1:
         return defaultdict(type)
