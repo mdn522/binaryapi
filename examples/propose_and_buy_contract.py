@@ -74,7 +74,7 @@ def propose_and_buy(binary: Binary):
 
     try:
         # Wait for the response message for the buy request
-        binary.api.wait_for_response_by_req_id(req_id=buy_req_id, type_='buy')
+        binary.api.wait_for_response_by_req_id(req_id=buy_req_id, type='buy')
     except MessageByReqIDNotFound:
         console.log("[red]No buy response from Binary websocket server")
         return

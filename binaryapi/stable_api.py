@@ -79,10 +79,12 @@ class Binary:
             else:
                 logging.error('**error** reconnect() too many time please look log file')
 
-            time.sleep(0.0005)
+            time.sleep(0.001)
 
     # buy_call_put
     # TODO buy_higher_lower
+    # TODO buy_through_proposal
+    # TODO direct_buy
     def buy_call_put(self, contract_type: str, amount: Union[int, float, Decimal], symbol: str, duration, duration_unit, min_payout=0,
                      basis=PROPOSAL_BASIS.STAKE, subscribe: Optional[bool] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None, no_proposal=False,
                      confirm_request: bool = True) -> Tuple[bool, Optional[str], Optional[int]]:
@@ -114,6 +116,7 @@ class Binary:
             proposal_res = self.api.msg_by_req_id[prop_req_id]
             if 'error' in proposal_res:
                 return False, None, prop_req_id
+
             # min_payout
             proposal_obj = proposal_res['proposal']
             payout = (proposal_obj['payout'] - proposal_obj['ask_price']) / proposal_obj['ask_price'] * 100
@@ -135,7 +138,7 @@ class Binary:
             #     time.sleep(0.0005)
 
             try:
-                self.api.wait_for_response_by_req_id(req_id=req_id, type_='buy')
+                self.api.wait_for_response_by_req_id(req_id=req_id, type='buy')
             except MessageByReqIDNotFound:
                 return False, None, req_id
 

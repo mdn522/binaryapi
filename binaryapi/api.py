@@ -18,6 +18,7 @@ import binaryapi.global_value as global_value
 
 from binaryapi.ws.objects.authorize import Authorize as AuthorizeObject
 
+DEFAULT_MAX_DICT_SIZE = 500
 
 # noinspection PyShadowingBuiltins
 def nested_dict(n, type):
@@ -46,9 +47,9 @@ class BinaryAPI(AbstractAPI):
 
     # message_callback: Optional[Callable] = None
 
-    results = FixSizeOrderedDict(max=500)
-    msg_by_req_id = FixSizeOrderedDict(max=500)
-    msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=500))
+    results = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
+    msg_by_req_id = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
+    msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE))
     _request_id = 1
 
     def __init__(self, app_id=28035, token=None):
@@ -118,11 +119,11 @@ class BinaryAPI(AbstractAPI):
         self._request_id += 1
         return self._request_id - 1
 
-    def wait_for_response_by_req_id(self, req_id: int, type_: Optional[str] = None, type_name: Optional[str] = None, max_timeout: Union[int, float] = 30, delay: Union[int, float] = 0.0005):
+    def wait_for_response_by_req_id(self, req_id: int, type: Optional[str] = None, type_name: Optional[str] = None, max_timeout: Union[int, float] = 30, delay: Union[int, float] = 0.0005):
         start_time = time.time()
 
-        type_name_repr: Optional[str] = type_name or type_
-        while (self.msg_by_req_id.get(req_id) is None) if type_ is None else (self.msg_by_type[type_].get(req_id) is None):
+        type_name_repr: Optional[str] = type_name or type
+        while (self.msg_by_req_id.get(req_id) is None) if type is None else (self.msg_by_type[type].get(req_id) is None):
             if time.time() - start_time >= max_timeout:
                 logging.error('**warning** {}late {} sec(s)'.format(max_timeout, (type_name_repr + ' ') if type_name_repr else ''))
                 # return False, None, request_id
@@ -157,7 +158,9 @@ class BinaryAPI(AbstractAPI):
             raise TypeError
 
         data = json.dumps(msg, default=default)
-        logger.debug(data)
+
         self.websocket.send(data)
+
+        logger.debug(data)
 
         return req_id

@@ -22,7 +22,7 @@ if __name__ == '__main__':
     binary = Binary(token=token, message_callback=message_handler)
     console.log('Logged in')
 
-    # Symbol *can be an array of symbols too. eg: ['R_75', 'R_100'] etc.
+    # Symbol: can be an array of symbols too. eg: ['R_75', 'R_100'] etc.
     symbol = 'R_100'
 
     # Subscribe to ticks stream

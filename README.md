@@ -13,6 +13,10 @@ from binaryapi.stable_api import Binary
 from binaryapi.api import BinaryAPI
 ```
 
+## Compatibility
+
+Requires Python 3.7.0 or later.
+
 ## Installing and Updating
 For Python 3
 ```bash
