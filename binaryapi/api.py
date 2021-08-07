@@ -43,6 +43,7 @@ class FixSizeOrderedDict(OrderedDict):
 
 class BinaryAPI(AbstractAPI):
     websocket_thread: Thread
+    websocket_client: WebsocketClient
     profile = AuthorizeObject()
 
     # message_callback: Optional[Callable] = None

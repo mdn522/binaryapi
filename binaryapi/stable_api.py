@@ -1,6 +1,7 @@
 from decimal import Decimal
 from typing import Optional, Union, Any, Tuple
 
+from binaryapi import global_value
 from binaryapi.api import BinaryAPI
 # noinspection PyPep8Naming
 # import binaryapi.constants as CONSTANTS
@@ -80,6 +81,10 @@ class Binary:
                 logging.error('**error** reconnect() too many time please look log file')
 
             time.sleep(0.001)
+
+    @staticmethod
+    def check_connect():
+        return global_value.check_websocket_if_connect == 1
 
     # buy_call_put
     # TODO buy_higher_lower
