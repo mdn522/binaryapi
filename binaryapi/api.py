@@ -43,7 +43,7 @@ class FixSizeOrderedDict(OrderedDict):
 
 class BinaryAPI(AbstractAPI):
     websocket_thread: Thread
-    websocket_client: WebsocketClient
+    websocket_client: Optional[WebsocketClient]
     profile = AuthorizeObject()
 
     # message_callback: Optional[Callable] = None
@@ -57,10 +57,9 @@ class BinaryAPI(AbstractAPI):
         self.app_id = app_id
         self.token = token
 
-        self.message_callback = None
-
         self.wss_url = "wss://ws.binaryws.com/websockets/v3?app_id={0}".format(self.app_id)
 
+        self.message_callback = None
         self.websocket_client = None
 
     def connect(self):
@@ -85,19 +84,22 @@ class BinaryAPI(AbstractAPI):
                     break
             except Exception:
                 pass
-
             pass
 
         if self.token:
-            self.authorize(authorize=self.token)
+            auth_req_id = self.authorize(authorize=self.token)
 
-        start_t = time.time()
-        while self.profile.msg is None:
-            if time.time() - start_t >= 30:
-                logging.error('**error** authorize late 30 sec')
+            try:
+                self.wait_for_response_by_req_id(req_id=auth_req_id, type='authorize', max_timeout=30, delay=0.01, error_label='error')
+            except MessageByReqIDNotFound:
                 return False
-
-            pause.seconds(0.01)
+        # start_t = time.time()
+        # while self.profile.msg is None:
+        #     if time.time() - start_t >= 30:
+        #         logging.error('**error** authorize late 30 sec')
+        #         return False
+        #
+        #     pause.seconds(0.01)
 
         return True
 
@@ -120,13 +122,13 @@ class BinaryAPI(AbstractAPI):
         self._request_id += 1
         return self._request_id - 1
 
-    def wait_for_response_by_req_id(self, req_id: int, type: Optional[str] = None, type_name: Optional[str] = None, max_timeout: Union[int, float] = 30, delay: Union[int, float] = 0.0005):
+    def wait_for_response_by_req_id(self, req_id: int, type: Optional[str] = None, type_name: Optional[str] = None, max_timeout: Union[int, float] = 30, delay: Union[int, float] = 0.0005, error_label: str = 'warning'):
         start_time = time.time()
 
         type_name_repr: Optional[str] = type_name or type
         while (self.msg_by_req_id.get(req_id) is None) if type is None else (self.msg_by_type[type].get(req_id) is None):
             if time.time() - start_time >= max_timeout:
-                logging.error('**warning** {}late {} sec(s)'.format(max_timeout, (type_name_repr + ' ') if type_name_repr else ''))
+                logging.error('**{}** {}late {} sec(s)'.format(error_label, max_timeout, (type_name_repr + ' ') if type_name_repr else ''))
                 # return False, None, request_id
                 raise MessageByReqIDNotFound
             time.sleep(delay)
