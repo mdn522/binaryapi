@@ -44,14 +44,14 @@ class FixSizeOrderedDict(OrderedDict):
 class BinaryAPI(AbstractAPI):
     websocket_thread: Thread
     websocket_client: Optional[WebsocketClient]
-    profile = AuthorizeObject()
+    profile: AuthorizeObject
 
     # message_callback: Optional[Callable] = None
 
-    results = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
-    msg_by_req_id = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
-    msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE))
-    _request_id = 1
+    results: FixSizeOrderedDict
+    msg_by_req_id: FixSizeOrderedDict
+    msg_by_type: defaultdict
+    _request_id: int
 
     def __init__(self, app_id=28035, token=None):
         self.app_id = app_id
@@ -61,6 +61,12 @@ class BinaryAPI(AbstractAPI):
 
         self.message_callback = None
         self.websocket_client = None
+
+        self.profile = AuthorizeObject()
+        self.results = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
+        self.msg_by_req_id = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
+        self.msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE))
+        self._request_id = 1
 
     def connect(self):
         global_value.check_websocket_if_connect = None
@@ -167,3 +173,6 @@ class BinaryAPI(AbstractAPI):
         logger.debug(data)
 
         return req_id
+
+
+DerivAPI = BinaryAPI

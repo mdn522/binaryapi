@@ -55,3 +55,9 @@ class CONTRACT_TYPE:
     RUNHIGH = "RUNHIGH"
     RUNLOW = "RUNLOW"
 
+
+# noinspection PyPep8Naming
+class MSG_TYPES:
+    BALANCE = 'balance'
+    TICK = 'tick'
+

@@ -1,3 +1,4 @@
+import uuid
 from decimal import Decimal
 from typing import Optional, Union, Any, Tuple
 
@@ -30,11 +31,17 @@ def nested_dict(n, type):
 class Binary:
     api: BinaryAPI
 
+    # Global Value Unique ID
+    gv_uid: str
+
     def __init__(self, token=None, app_id=28035, message_callback=None):
         self.app_id = app_id
         self.token = token
 
         self.message_callback = message_callback
+
+        # TODO
+        self.gv_uid = str(uuid.uuid4())
 
         self.max_reconnect = 5
         self.connect_count = 0
@@ -53,6 +60,14 @@ class Binary:
             self.api.message_callback = self._message_callback
         except:
             pass
+
+    @property
+    def basic(self) -> BinaryAPI:
+        return self.api
+
+    @basic.setter
+    def basic(self, value: BinaryAPI):
+        self.api = value
 
     def connect(self):
         while True:
@@ -95,7 +110,7 @@ class Binary:
                      confirm_request: bool = True) -> Tuple[bool, Optional[str], Optional[int]]:
         """
         :rtype: Tuple[bool, Optional[str], Optional[int]]
-        :desc: Tuple[success, contract_id (if success), req_id]
+        :desc: Tuple[success?, contract_id (if success), req_id]
         """
         buy_id = None
         parameters = None
@@ -155,3 +170,6 @@ class Binary:
             return True, res['buy']['contract_id'], req_id
 
     buy = buy_call_put
+
+
+Deriv = Binary
