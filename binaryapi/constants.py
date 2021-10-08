@@ -57,7 +57,19 @@ class CONTRACT_TYPE:
 
 
 # noinspection PyPep8Naming
-class MSG_TYPES:
+class MSG_TYPE:
+    AUTHORIZE = 'authorize'
     BALANCE = 'balance'
     TICK = 'tick'
+    BUY = 'buy'
+    PROPOSAL = 'proposal'
+    ASSET_INDEX = 'asset_index'
 
+# class BUY_RESPONSE:
+#     BUY_REQUEST: bool
+#     def __init__(self):
+#         self.BUY_REQUEST = False
+#         self.PROPOSAL_REQUEST = False
+#         self.CONTRACT_ID = None
+#         self.BUY_REQ_ID = None
+#         self.PROPOSAL_REQ_ID = None

@@ -33,8 +33,9 @@ binary_token = "YOUR-API-TOKEN-GOES-HERE"
 binary = Binary(token=binary_token)
 
 symbol = "frxEURUSD"
-print("Buy a CALL contract")
-print(binary.buy('CALL', amount=1, symbol=symbol, duration=5, duration_unit='t'))
+print("Buy a [CALL] contract")
+success, contract_id, req_id = binary.buy('CALL', amount=1, symbol=symbol, duration=5, duration_unit='t') 
+print('success={}, contract_id={}, req_id={}'.format(success, contract_id, req_id))
 ```
 
 ---

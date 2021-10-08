@@ -18,7 +18,12 @@ import binaryapi.global_value as global_value
 
 from binaryapi.ws.objects.authorize import Authorize as AuthorizeObject
 
-DEFAULT_MAX_DICT_SIZE = 500
+DEFAULT_RESPONSE_TIMEOUT: Union[int, float] = 30
+DEFAULT_RESPONSE_CHECK_DELAY: Union[int, float] = 0.5 / 1000
+AUTHORIZE_MAX_TIMEOUT: Union[int, float] = 30
+DEFAULT_MAX_DICT_SIZE: int = 500
+DEFAULT_APP_ID: int = 28035
+
 
 # noinspection PyShadowingBuiltins
 def nested_dict(n, type):
@@ -53,7 +58,7 @@ class BinaryAPI(AbstractAPI):
     msg_by_type: defaultdict
     _request_id: int
 
-    def __init__(self, app_id=28035, token=None):
+    def __init__(self, app_id=DEFAULT_APP_ID, token=None):
         self.app_id = app_id
         self.token = token
 
@@ -73,12 +78,16 @@ class BinaryAPI(AbstractAPI):
 
         self.websocket_client = WebsocketClient(self)
 
-        self.websocket_thread = threading.Thread(target=self.websocket.run_forever, kwargs={
-            'sslopt': {
-                "check_hostname": False, "cert_reqs": ssl.CERT_NONE,
-                "ca_certs": "cacert.pem"
-            },
-            "ping_interval": 5})  # for fix pyinstall error: cafile, capath and cadata cannot be all omitted
+        self.websocket_thread = threading.Thread(
+            target=self.websocket.run_forever,
+            kwargs={
+                'sslopt': {
+                    "check_hostname": False, "cert_reqs": ssl.CERT_NONE,
+                    "ca_certs": "cacert.pem"
+                },
+                "ping_interval": 5,
+            }
+        )  # for fix pyinstall error: cafile, capath and cadata cannot be all omitted
         self.websocket_thread.daemon = True
         self.websocket_thread.start()
 
@@ -96,9 +105,10 @@ class BinaryAPI(AbstractAPI):
             auth_req_id = self.authorize(authorize=self.token)
 
             try:
-                self.wait_for_response_by_req_id(req_id=auth_req_id, type='authorize', max_timeout=30, delay=0.01, error_label='error')
+                self.wait_for_response_by_req_id(req_id=auth_req_id, type='authorize', max_timeout=AUTHORIZE_MAX_TIMEOUT, delay=0.01, error_label='error')
             except MessageByReqIDNotFound:
                 return False
+
         # start_t = time.time()
         # while self.profile.msg is None:
         #     if time.time() - start_t >= 30:
@@ -128,7 +138,9 @@ class BinaryAPI(AbstractAPI):
         self._request_id += 1
         return self._request_id - 1
 
-    def wait_for_response_by_req_id(self, req_id: int, type: Optional[str] = None, type_name: Optional[str] = None, max_timeout: Union[int, float] = 30, delay: Union[int, float] = 0.0005, error_label: str = 'warning'):
+    # noinspection PyShadowingBuiltins
+    def wait_for_response_by_req_id(self, req_id: int, type: Optional[str] = None, type_name: Optional[str] = None, max_timeout: Union[int, float] = DEFAULT_RESPONSE_TIMEOUT,
+                                    delay: Union[int, float] = DEFAULT_RESPONSE_CHECK_DELAY, error_label: str = 'warning'):
         start_time = time.time()
 
         type_name_repr: Optional[str] = type_name or type
@@ -138,6 +150,7 @@ class BinaryAPI(AbstractAPI):
                 # return False, None, request_id
                 raise MessageByReqIDNotFound
             time.sleep(delay)
+
         return
 
     def send_websocket_request(self, name: str, msg, passthrough: Optional[Any] = None, req_id: int = None):
@@ -154,6 +167,8 @@ class BinaryAPI(AbstractAPI):
 
         if req_id:
             msg['req_id'] = req_id
+
+            # Delete any data with same req_id
             self.results[req_id] = None
             self.msg_by_req_id[req_id] = None
             self.msg_by_type[name][req_id] = None

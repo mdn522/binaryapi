@@ -7,6 +7,8 @@ import websocket
 import binaryapi.global_value as global_value
 import traceback
 
+from binaryapi.constants import MSG_TYPE
+
 
 class WebsocketClient:
     def __init__(self, api):
@@ -15,10 +17,14 @@ class WebsocketClient:
             <binaryapi.api.BinaryAPI>`.
         """
         self.api = api
+        # noinspection PyTypeChecker
         self.wss = websocket.WebSocketApp(
-            self.api.wss_url, on_message=self.on_message,
-            on_error=self.on_error, on_close=self.on_close,
-            on_open=self.on_open)
+            self.api.wss_url, 
+            on_message=self.on_message, 
+            on_error=self.on_error, 
+            on_close=self.on_close, 
+            on_open=self.on_open
+        )
 
     def on_message(self, ws, message):
         """Method to process websocket messages."""
@@ -35,20 +41,20 @@ class WebsocketClient:
         # TODO callback
 
         # TODO error key
-        if msg_type == 'authorize':
-            self.api.profile.msg = message["authorize"]
+        if msg_type == MSG_TYPE.AUTHORIZE:  # 'authorize'
+            self.api.profile.msg = message[MSG_TYPE.AUTHORIZE]
 
             try:
-                self.api.profile.balance = message["authorize"]["balance"]
+                self.api.profile.balance = message[MSG_TYPE.AUTHORIZE]["balance"]
             except Exception as e:
                 pass
-        elif msg_type == 'balance':
+        elif msg_type == MSG_TYPE.BALANCE:  # 'balance'
             try:
-                self.api.profile.balance = message["balance"]["balance"]
+                self.api.profile.balance = message[MSG_TYPE.BALANCE]["balance"]
             except KeyError:
                 pass
 
-        if self.api.message_callback is not None:
+        if self.api.message_callback is not None:  # TODO: and callable(self.api.message_callback)
             try:
                 self.api.message_callback(message)
             except:

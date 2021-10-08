@@ -3,7 +3,7 @@ from decimal import Decimal
 from typing import Optional, Union, Any, Tuple
 
 from binaryapi import global_value
-from binaryapi.api import BinaryAPI
+from binaryapi.api import BinaryAPI, DEFAULT_APP_ID
 # noinspection PyPep8Naming
 # import binaryapi.constants as CONSTANTS
 import time
@@ -34,7 +34,7 @@ class Binary:
     # Global Value Unique ID
     gv_uid: str
 
-    def __init__(self, token=None, app_id=28035, message_callback=None):
+    def __init__(self, token=None, app_id=DEFAULT_APP_ID, message_callback=None):
         self.app_id = app_id
         self.token = token
 
@@ -86,8 +86,12 @@ class Binary:
                 check = self.api.connect()
 
                 if check:
-                    self.api.balance(subscribe=True)
-                    self.api.transaction(subscribe=True)
+                    if global_value.AUTO_SUBSCRIBE_TO_BALANCE:
+                        self.api.balance(subscribe=True)
+
+                    if global_value.AUTO_SUBSCRIBE_TO_TRANSACTION:
+                        self.api.transaction(subscribe=True)
+
                     break
 
                 time.sleep(self.suspend * 2)
@@ -105,12 +109,16 @@ class Binary:
     # TODO buy_higher_lower
     # TODO buy_through_proposal
     # TODO direct_buy
-    def buy_call_put(self, contract_type: str, amount: Union[int, float, Decimal], symbol: str, duration, duration_unit, min_payout=0,
+    def buy_call_put(self, contract_type: str, amount: Union[int, float, Decimal], symbol: str, duration, duration_unit, min_payout: Union[int, float, Decimal] = 0,
                      basis=PROPOSAL_BASIS.STAKE, subscribe: Optional[bool] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None, no_proposal=False,
                      confirm_request: bool = True) -> Tuple[bool, Optional[str], Optional[int]]:
         """
         :rtype: Tuple[bool, Optional[str], Optional[int]]
         :desc: Tuple[success?, contract_id (if success), req_id]
+        success: Is the request successful?
+        contract_id: Contract ID if successful
+        req_id: req_id for buy request if buy request is successful [OR] req_id for proposal request if buy request is not successful
+        if confirm_request is false then contract_id will be none
         """
         buy_id = None
         parameters = None
@@ -139,7 +147,7 @@ class Binary:
 
             # min_payout
             proposal_obj = proposal_res['proposal']
-            payout = (proposal_obj['payout'] - proposal_obj['ask_price']) / proposal_obj['ask_price'] * 100
+            payout = (proposal_obj['payout'] - proposal_obj['ask_price']) / proposal_obj['ask_price'] * 100  # Current Payout in Percentage %
             if payout >= min_payout:
                 buy_id = proposal_obj['id']
             else:
