@@ -1,4 +1,5 @@
 # Print list of available assets
+# https://developers.binary.com/api/#asset_index
 import os
 import time
 from rich.console import Console
@@ -10,16 +11,8 @@ token = os.environ.get('BINARY_TOKEN', '<YOUR BINARY TOKEN GOES HERE>')
 console = Console(log_path=False)
 
 
-def message_handler(message):
-    msg_type = message.get('msg_type')
-
-    if msg_type == 'tick':
-        # Print tick data from message
-        console.print(message['tick'])
-
-
 if __name__ == '__main__':
-    binary = Binary(token=token, message_callback=message_handler)
+    binary = Binary(token=token)
     console.log('Logged in')
 
     # Send asset index request
