@@ -58,8 +58,8 @@ class BinaryAPI(AbstractAPI):
     msg_by_type: defaultdict
     _request_id: int
 
-    def __init__(self, app_id=DEFAULT_APP_ID, token=None):
-        self.app_id = app_id
+    def __init__(self, token=None, app_id=None):
+        self.app_id = app_id or DEFAULT_APP_ID
         self.token = token
 
         self.wss_url = "wss://ws.binaryws.com/websockets/v3?app_id={0}".format(self.app_id)
@@ -152,6 +152,11 @@ class BinaryAPI(AbstractAPI):
             time.sleep(delay)
 
         return
+
+    # noinspection PyShadowingBuiltins
+    def get_response_by_req_id(self, req_id: int, type: Optional[str] = None, **kwargs):
+        self.wait_for_response_by_req_id(req_id=req_id, type=type, **kwargs)
+        return self.msg_by_req_id.get(req_id) if type is None else self.msg_by_type[type].get(req_id)
 
     def send_websocket_request(self, name: str, msg, passthrough: Optional[Any] = None, req_id: int = None):
         """Send websocket request to Binary server.

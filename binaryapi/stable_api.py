@@ -3,7 +3,7 @@ from decimal import Decimal
 from typing import Optional, Union, Any, Tuple
 
 from binaryapi import global_value
-from binaryapi.api import BinaryAPI, DEFAULT_APP_ID
+from binaryapi.api import BinaryAPI
 # noinspection PyPep8Naming
 # import binaryapi.constants as CONSTANTS
 import time
@@ -34,7 +34,7 @@ class Binary:
     # Global Value Unique ID
     gv_uid: str
 
-    def __init__(self, token=None, app_id=DEFAULT_APP_ID, message_callback=None):
+    def __init__(self, token=None, app_id=None, message_callback=None):
         self.app_id = app_id
         self.token = token
 
@@ -78,7 +78,7 @@ class Binary:
                 pass
                 # logging.error('**warning** self.api.close() fail')
             if self.connect_count < self.max_reconnect or self.max_reconnect < 0:
-                self.api = BinaryAPI(self.app_id, self.token)
+                self.api = BinaryAPI(token=self.token, app_id=self.app_id)
                 # self.api.message_callback = self.message_callback
 
                 self.api.message_callback = self.message_callback
