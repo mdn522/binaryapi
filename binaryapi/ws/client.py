@@ -1,4 +1,5 @@
 """Module for Binary websocket."""
+import time
 
 import simplejson as json
 import logging
@@ -32,6 +33,9 @@ class WebsocketClient:
         logger.debug(message)
 
         message = json.loads(str(message))
+
+        message['timestamp'] = time.time()
+
         msg_type = message.get('msg_type')
         req_id = message.get("req_id")
 
@@ -53,6 +57,38 @@ class WebsocketClient:
                 self.api.profile.balance = message[MSG_TYPE.BALANCE]["balance"]
             except KeyError:
                 pass
+        elif msg_type == MSG_TYPE.TICK:  # 'tick'
+            try:
+                # TODO
+                pass
+            except Exception as e:
+                pass
+        elif msg_type == MSG_TYPE.FORGET:  # 'forget'
+            if global_value.AUTO_REMOVE_SUBSCRIPTION_ID_ON_FORGET_RESPONSE:
+                requested_subscription_id = message['echo_req'].get('forget')
+                if message[MSG_TYPE.FORGET] == 1:
+                    if requested_subscription_id in self.api.subscriptions:
+                        del self.api.subscriptions[requested_subscription_id]
+
+                    if requested_subscription_id in self.api.msg_by_subscription:
+                        del self.api.msg_by_subscription[requested_subscription_id]
+
+        elif msg_type == MSG_TYPE.FORGET_ALL:  # 'forget_all'
+            if global_value.AUTO_REMOVE_SUBSCRIPTION_ID_ON_FORGET_RESPONSE:
+                for requested_subscription_id in message[MSG_TYPE.FORGET_ALL]:
+                    if requested_subscription_id in self.api.subscriptions:
+                        del self.api.subscriptions[requested_subscription_id]
+
+                    if requested_subscription_id in self.api.msg_by_subscription:
+                        del self.api.msg_by_subscription[requested_subscription_id]
+
+        if 'subscription' in message:
+            subscription_id = message['subscription']['id']
+            if subscription_id not in self.api.subscriptions:
+                self.api.subscriptions[subscription_id] = msg_type
+
+            if global_value.STORE_MSG_BY_SUBSCRIPTION:
+                self.api.msg_by_subscription[subscription_id].append(message)
 
         if self.api.message_callback is not None:  # TODO: and callable(self.api.message_callback)
             try:

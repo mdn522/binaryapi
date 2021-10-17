@@ -9,9 +9,10 @@ import pause
 import threading
 import simplejson as json
 from threading import Thread
-from collections import defaultdict, OrderedDict
+from collections import defaultdict, OrderedDict, deque
 
 from binaryapi.exceptions import MessageByReqIDNotFound
+from binaryapi.utils.memory_footprint import total_size
 from binaryapi.ws.abstract import AbstractAPI
 from binaryapi.ws.client import WebsocketClient
 import binaryapi.global_value as global_value
@@ -22,6 +23,7 @@ DEFAULT_RESPONSE_TIMEOUT: Union[int, float] = 30
 DEFAULT_RESPONSE_CHECK_DELAY: Union[int, float] = 0.5 / 1000
 AUTHORIZE_MAX_TIMEOUT: Union[int, float] = 30
 DEFAULT_MAX_DICT_SIZE: int = 500
+DEFAULT_MAX_SUBSCRIPTION_MSG_LIST_SIZE = 100
 DEFAULT_APP_ID: int = 28035
 
 
@@ -58,6 +60,9 @@ class BinaryAPI(AbstractAPI):
     msg_by_type: defaultdict
     _request_id: int
 
+    subscriptions: OrderedDict
+    msg_by_subscription: defaultdict
+
     def __init__(self, token=None, app_id=None):
         self.app_id = app_id or DEFAULT_APP_ID
         self.token = token
@@ -71,10 +76,16 @@ class BinaryAPI(AbstractAPI):
         self.results = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
         self.msg_by_req_id = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
         self.msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE))
+
+        self.subscriptions = OrderedDict()
+        self.msg_by_subscription = nested_dict(1, lambda: deque(maxlen=DEFAULT_MAX_SUBSCRIPTION_MSG_LIST_SIZE))
+
         self._request_id = 1
 
     def connect(self):
         global_value.check_websocket_if_connect = None
+
+        self.subscriptions = OrderedDict()
 
         self.websocket_client = WebsocketClient(self)
 
@@ -193,6 +204,27 @@ class BinaryAPI(AbstractAPI):
         logger.debug(data)
 
         return req_id
+
+    def print_memory_footprint(self):
+        # This function is not 100% accurate but should give a hint about memory usage. (this function is subject to change)
+        # verbose: bool = True
+        # total_size(self, verbose=verbose)
+        object_names = [
+            'msg_by_req_id', 'msg_by_type', 'subscriptions', 'msg_by_subscription',
+            'self'
+        ]
+
+        for object_name in object_names:
+            try:
+                o = None
+                if object_name == 'self':
+                    o = self
+                else:
+                    o = getattr(self, object_name)
+                size = total_size(o)
+                print(object_name, '->', size, 'byte(s)')
+            except:
+                pass
 
 
 DerivAPI = BinaryAPI

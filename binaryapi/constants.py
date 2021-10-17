@@ -64,6 +64,8 @@ class MSG_TYPE:
     BUY = 'buy'
     PROPOSAL = 'proposal'
     ASSET_INDEX = 'asset_index'
+    FORGET = 'forget'
+    FORGET_ALL = 'forget_all'
 
 # class BUY_RESPONSE:
 #     BUY_REQUEST: bool

@@ -1,6 +1,8 @@
 # Prints ticks data for 60 seconds
 import os
 import time
+from datetime import datetime
+
 from rich.console import Console
 from binaryapi.stable_api import Binary
 
@@ -15,7 +17,10 @@ def message_handler(message):
 
     if msg_type == 'tick':
         # Print tick data from message
-        console.print(message['tick'])
+        tick_data = message['tick']
+        # console.print(tick_data)
+        dt = datetime.fromtimestamp(tick_data['epoch'])
+        console.print('{}: {} -> {}'.format(dt, tick_data['symbol'], tick_data['quote']))
 
 
 if __name__ == '__main__':
@@ -23,7 +28,7 @@ if __name__ == '__main__':
     console.log('Logged in')
 
     # Symbol: can be an array of symbols too. eg: ['R_75', 'R_100'] etc.
-    symbol = 'R_100'
+    symbol = ['R_100']
 
     # Subscribe to ticks stream
     binary.api.ticks(symbol, subscribe=True)
