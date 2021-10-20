@@ -87,10 +87,10 @@ class Binary:
                 check = self.api.connect()
 
                 if check:
-                    if global_config.AUTO_SUBSCRIBE_TO_BALANCE:
+                    if global_config.AUTO_SUBSCRIBE_TO_BALANCE_ON_CONNECT:
                         self.api.balance(subscribe=True)
 
-                    if global_config.AUTO_SUBSCRIBE_TO_TRANSACTION:
+                    if global_config.AUTO_SUBSCRIBE_TO_TRANSACTION_ON_CONNECT:
                         self.api.transaction(subscribe=True)
 
                     break
