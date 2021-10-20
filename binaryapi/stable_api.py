@@ -3,6 +3,7 @@ from decimal import Decimal
 from typing import Optional, Union, Any, Tuple
 
 from binaryapi import global_value
+from binaryapi import global_config
 from binaryapi.api import BinaryAPI
 # noinspection PyPep8Naming
 # import binaryapi.constants as CONSTANTS
@@ -86,10 +87,10 @@ class Binary:
                 check = self.api.connect()
 
                 if check:
-                    if global_value.AUTO_SUBSCRIBE_TO_BALANCE:
+                    if global_config.AUTO_SUBSCRIBE_TO_BALANCE:
                         self.api.balance(subscribe=True)
 
-                    if global_value.AUTO_SUBSCRIBE_TO_TRANSACTION:
+                    if global_config.AUTO_SUBSCRIBE_TO_TRANSACTION:
                         self.api.transaction(subscribe=True)
 
                     break

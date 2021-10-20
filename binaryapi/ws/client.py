@@ -1,13 +1,11 @@
 """Module for Binary websocket."""
 import time
-
-import simplejson as json
 import logging
-
 import websocket
-import binaryapi.global_value as global_value
-import traceback
+import simplejson as json
 
+from binaryapi import global_value
+from binaryapi import global_config
 from binaryapi.constants import MSG_TYPE
 
 
@@ -27,6 +25,7 @@ class WebsocketClient:
             on_open=self.on_open
         )
 
+    # noinspection PyUnusedLocal
     def on_message(self, ws, message):
         """Method to process websocket messages."""
         logger = logging.getLogger(__name__)
@@ -48,9 +47,10 @@ class WebsocketClient:
         if msg_type == MSG_TYPE.AUTHORIZE:  # 'authorize'
             self.api.profile.msg = message[MSG_TYPE.AUTHORIZE]
 
+            # noinspection PyBroadException
             try:
                 self.api.profile.balance = message[MSG_TYPE.AUTHORIZE]["balance"]
-            except Exception as e:
+            except Exception:
                 pass
         elif msg_type == MSG_TYPE.BALANCE:  # 'balance'
             try:
@@ -58,13 +58,14 @@ class WebsocketClient:
             except KeyError:
                 pass
         elif msg_type == MSG_TYPE.TICK:  # 'tick'
+            # noinspection PyBroadException
             try:
                 # TODO
                 pass
-            except Exception as e:
+            except Exception:
                 pass
         elif msg_type == MSG_TYPE.FORGET:  # 'forget'
-            if global_value.AUTO_REMOVE_SUBSCRIPTION_ID_ON_FORGET_RESPONSE:
+            if global_config.AUTO_REMOVE_SUBSCRIPTION_ID_ON_FORGET_RESPONSE:
                 requested_subscription_id = message['echo_req'].get('forget')
                 if message[MSG_TYPE.FORGET] == 1:
                     if requested_subscription_id in self.api.subscriptions:
@@ -74,7 +75,7 @@ class WebsocketClient:
                         del self.api.msg_by_subscription[requested_subscription_id]
 
         elif msg_type == MSG_TYPE.FORGET_ALL:  # 'forget_all'
-            if global_value.AUTO_REMOVE_SUBSCRIPTION_ID_ON_FORGET_RESPONSE:
+            if global_config.AUTO_REMOVE_SUBSCRIPTION_ID_ON_FORGET_RESPONSE:
                 for requested_subscription_id in message[MSG_TYPE.FORGET_ALL]:
                     if requested_subscription_id in self.api.subscriptions:
                         del self.api.subscriptions[requested_subscription_id]
@@ -87,15 +88,17 @@ class WebsocketClient:
             if subscription_id not in self.api.subscriptions:
                 self.api.subscriptions[subscription_id] = msg_type
 
-            if global_value.STORE_MSG_BY_SUBSCRIPTION:
+            if global_config.STORE_MSG_BY_SUBSCRIPTION:
                 self.api.msg_by_subscription[subscription_id].append(message)
 
         if self.api.message_callback is not None:  # TODO: and callable(self.api.message_callback)
+            # noinspection PyBroadException
             try:
                 self.api.message_callback(message)
-            except:
+            except Exception:
                 pass
 
+    # noinspection PyUnusedLocal
     @staticmethod
     def on_error(ws, error):  # pylint: disable=unused-argument
         """Method to process websocket errors."""
@@ -103,6 +106,7 @@ class WebsocketClient:
         logger.error(error)
         global_value.check_websocket_if_connect = -1
 
+    # noinspection PyUnusedLocal
     @staticmethod
     def on_open(ws):  # pylint: disable=unused-argument
         """Method to process websocket open."""
@@ -110,6 +114,7 @@ class WebsocketClient:
         logger.debug("Websocket client connected.")
         global_value.check_websocket_if_connect = 1
 
+    # noinspection PyUnusedLocal
     @staticmethod
     def on_close(ws, *args, **kwargs):  # pylint: disable=unused-argument
         """Method to process websocket close."""

@@ -1,21 +1,21 @@
 """Module for Binary API."""
-import decimal
 import ssl
 import time
 import logging
-from typing import Optional, Any, Union
-
-import pause
+import decimal
+import typing
 import threading
 import simplejson as json
 from threading import Thread
+from typing import Optional, Any, Union
 from collections import defaultdict, OrderedDict, deque
 
-from binaryapi.exceptions import MessageByReqIDNotFound
-from binaryapi.utils.memory_footprint import total_size
+from binaryapi import global_value
+from binaryapi import global_config
 from binaryapi.ws.abstract import AbstractAPI
 from binaryapi.ws.client import WebsocketClient
-import binaryapi.global_value as global_value
+from binaryapi.utils.memory_footprint import total_size
+from binaryapi.exceptions import MessageByReqIDNotFound
 
 from binaryapi.ws.objects.authorize import Authorize as AuthorizeObject
 
@@ -55,13 +55,13 @@ class BinaryAPI(AbstractAPI):
 
     # message_callback: Optional[Callable] = None
 
-    results: FixSizeOrderedDict
-    msg_by_req_id: FixSizeOrderedDict
-    msg_by_type: defaultdict
+    results: typing.OrderedDict[int, Any]
+    msg_by_req_id: typing.OrderedDict[int, Any]
+    msg_by_type: typing.DefaultDict[str, typing.OrderedDict[int, Any]]
     _request_id: int
 
-    subscriptions: OrderedDict
-    msg_by_subscription: defaultdict
+    subscriptions: typing.OrderedDict[str, str]  # Subscription ID -> MSG Type
+    msg_by_subscription: typing.DefaultDict[str, typing.Deque]  # Subscription ID -> List of messages in ascending order
 
     def __init__(self, token=None, app_id=None):
         self.app_id = app_id or DEFAULT_APP_ID
@@ -85,10 +85,16 @@ class BinaryAPI(AbstractAPI):
     def connect(self):
         global_value.check_websocket_if_connect = None
 
-        self.subscriptions = OrderedDict()
+        if global_config.AUTO_CLEAR_VAR_SUBSCRIPTIONS_ON_CONNECT:
+            self.subscriptions.clear()
+
+        if global_config.AUTO_CLEAR_VAR_MSG_BY_SUBSCRIPTION_ON_CONNECT:
+            self.msg_by_subscription.clear()
+        # TODO clear more cached messages
 
         self.websocket_client = WebsocketClient(self)
 
+        # noinspection SpellCheckingInspection
         self.websocket_thread = threading.Thread(
             target=self.websocket.run_forever,
             kwargs={
@@ -103,6 +109,7 @@ class BinaryAPI(AbstractAPI):
         self.websocket_thread.start()
 
         while True:
+            # noinspection PyBroadException
             try:
                 if global_value.check_websocket_if_connect == 0 or global_value.check_websocket_if_connect == -1:
                     return False
@@ -215,15 +222,16 @@ class BinaryAPI(AbstractAPI):
         ]
 
         for object_name in object_names:
+            # noinspection PyBroadException
             try:
-                o = None
+                o: Any
                 if object_name == 'self':
                     o = self
                 else:
                     o = getattr(self, object_name)
                 size = total_size(o)
                 print(object_name, '->', size, 'byte(s)')
-            except:
+            except Exception:
                 pass
 
 

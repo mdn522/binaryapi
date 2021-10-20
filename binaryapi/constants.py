@@ -60,7 +60,8 @@ class CONTRACT_TYPE:
 class MSG_TYPE:
     AUTHORIZE = 'authorize'
     BALANCE = 'balance'
-    TICK = 'tick'
+    TICK = 'tick'  # response
+    TICKS = 'ticks'  # request
     BUY = 'buy'
     PROPOSAL = 'proposal'
     ASSET_INDEX = 'asset_index'
