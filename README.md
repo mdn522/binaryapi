@@ -20,8 +20,9 @@ Requires Python 3.7.0 or later.
 ## Installing and Updating
 For Python 3
 ```bash
-pip3 install -U git+git://github.com/mdn522/binaryapi.git
+pip install -U git+git://github.com/mdn522/binaryapi.git
 ```
+Must have git installed
 
 ---
 ## Getting Started
