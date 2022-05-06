@@ -20,7 +20,7 @@ Requires Python 3.7.0 or later.
 ## Installing and Updating
 For Python 3
 ```bash
-pip install -U git+git://github.com/mdn522/binaryapi.git
+pip install -U git+https://github.com/mdn522/binaryapi.git
 ```
 Must have git installed
 
@@ -72,6 +72,7 @@ def message_handler(message):
     
     print(msg_type, "=>", message)
 
+    
 binary = Binary(token="YOUR-API-TOKEN-GOES-HERE", message_callback=message_handler)
 ```
 
@@ -95,5 +96,5 @@ binary.api.proposal(contract_type, currency, symbol, amount=None, barrier=None, 
 # Subscribe to Ticks API - https://developers.binary.com/api/#ticks
 binary.api.ticks(ticks="frxEURUSD", subscribe=None, passthrough=None, req_id=None)
 
-# For More API functions please refer to https://developers.binary.com/api/
+# For More API functions/endpoints please refer to https://developers.binary.com/api/
 ```
