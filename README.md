@@ -15,10 +15,9 @@ from binaryapi.api import BinaryAPI
 
 ## Compatibility
 
-Requires Python 3.7.0 or later.
+Requires **Python 3.7.0** or later.
 
 ## Installing and Updating
-For Python 3
 ```bash
 pip install -U git+https://github.com/mdn522/binaryapi.git
 ```
