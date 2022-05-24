@@ -1,32 +1,16 @@
-import uuid
+from typing import Optional, Union, Any, Tuple, Callable
 from decimal import Decimal
-from typing import Optional, Union, Any, Tuple
+import logging
+import uuid
+import time
 
 from binaryapi import global_value
 from binaryapi import global_config
 from binaryapi.api import BinaryAPI
-# noinspection PyPep8Naming
-# import binaryapi.constants as CONSTANTS
-import time
-import logging
-
-from collections import defaultdict
-
-
-# TODO support tick stream
-
-
-# noinspection PyShadowingBuiltins
 from binaryapi.constants import PROPOSAL_BASIS
 from binaryapi.exceptions import MessageByReqIDNotFound
 
-
-# noinspection PyShadowingBuiltins
-def nested_dict(n, type):
-    if n == 1:
-        return defaultdict(type)
-    else:
-        return defaultdict(lambda: nested_dict(n - 1, type))
+# TODO support tick stream
 
 
 class Binary:
@@ -35,7 +19,7 @@ class Binary:
     # Global Value Unique ID
     gv_uid: str
 
-    def __init__(self, token=None, app_id=None, message_callback=None):
+    def __init__(self, token: str = None, app_id: int = None, message_callback: Optional[Callable] = None):
         self.app_id = app_id
         self.token = token
 
@@ -59,7 +43,7 @@ class Binary:
         self._message_callback = value
         try:
             self.api.message_callback = self._message_callback
-        except:
+        except AttributeError:
             pass
 
     @property
@@ -110,9 +94,21 @@ class Binary:
     # TODO buy_higher_lower
     # TODO buy_through_proposal
     # TODO direct_buy
-    def buy_call_put(self, contract_type: str, amount: Union[int, float, Decimal], symbol: str, duration, duration_unit, min_payout: Union[int, float, Decimal] = 0,
-                     basis=PROPOSAL_BASIS.STAKE, subscribe: Optional[bool] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None, no_proposal=False,
-                     confirm_request: bool = True) -> Tuple[bool, Optional[str], Optional[int]]:
+    def buy_call_put(
+        self,
+        contract_type: str,
+        amount: Union[int, float, Decimal],
+        symbol: str,
+        duration,
+        duration_unit: str,
+        min_payout: Union[int, float, Decimal] = 0,
+        basis=PROPOSAL_BASIS.STAKE,
+        subscribe: Optional[bool] = None,
+        passthrough: Optional[Any] = None,
+        req_id: Optional[int] = None,
+        no_proposal=False,
+        confirm_request: bool = True
+    ) -> Tuple[bool, Optional[str], Optional[int]]:
         """
         :rtype: Tuple[bool, Optional[str], Optional[int]]
         :desc: Tuple[success?, contract_id (if success), req_id]
@@ -124,19 +120,24 @@ class Binary:
         buy_id = None
         parameters = None
         if no_proposal:
-            parameters = dict(symbol=symbol, duration=duration, duration_unit=duration_unit,
-                              basis=PROPOSAL_BASIS.STAKE, amount=amount, currency=self.api.profile.currency, )
+            parameters = dict(
+                symbol=symbol,
+                duration=duration,
+                duration_unit=duration_unit,
+                basis=PROPOSAL_BASIS.STAKE,
+                amount=amount,
+                currency=self.api.profile.currency,
+            )
         else:
-            prop_req_id = self.api.proposal(contract_type=contract_type, currency=self.api.profile.currency,
-                                            symbol=symbol, duration_unit=duration_unit,
-                                            duration=duration, amount=amount, basis=basis)
-            # start_t = time.time()
-            # while self.api.msg_by_req_id.get(prop_req_id) is None:
-            #     if time.time() - start_t >= 30:
-            #         logging.error('**warning** proposal late 30 sec')
-            #         return False, None, prop_req_id
-            #     time.sleep(0.0005)
-
+            prop_req_id = self.api.proposal(
+                contract_type=contract_type,
+                currency=self.api.profile.currency,
+                symbol=symbol,
+                duration_unit=duration_unit,
+                duration=duration,
+                amount=amount,
+                basis=basis,
+            )
             try:
                 self.api.wait_for_response_by_req_id(req_id=prop_req_id, type_name='proposal')
             except MessageByReqIDNotFound:
@@ -158,25 +159,18 @@ class Binary:
 
         if not confirm_request:
             return True, None, req_id
-        else:
-            # start_t = time.time()
-            # while self.api.msg_by_type['buy'].get(req_id) is None:
-            #     if time.time() - start_t >= 30:
-            #         logging.error('**warning** buy late 30 sec')
-            #         return False, None, req_id
-            #     time.sleep(0.0005)
 
-            try:
-                self.api.wait_for_response_by_req_id(req_id=req_id, type='buy')
-            except MessageByReqIDNotFound:
-                return False, None, req_id
+        try:
+            self.api.wait_for_response_by_req_id(req_id=req_id, type='buy')
+        except MessageByReqIDNotFound:
+            return False, None, req_id
 
-            res = self.api.msg_by_type['buy'][req_id]
-            if 'error' in res:
-                return False, None, req_id
+        res = self.api.msg_by_type['buy'][req_id]
+        if 'error' in res:
+            return False, None, req_id
 
-            # TODO
-            return True, res['buy']['contract_id'], req_id
+        # TODO
+        return True, res['buy']['contract_id'], req_id
 
     buy = buy_call_put
 

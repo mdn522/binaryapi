@@ -1,17 +1,18 @@
 """Module for Binary API."""
-import ssl
-import time
+from typing import Optional, Any, Union, Callable
+from collections import OrderedDict, deque
+import threading
 import logging
 import decimal
 import typing
-import threading
+import ssl
+import time
+
 import simplejson as json
-from threading import Thread
-from typing import Optional, Any, Union
-from collections import defaultdict, OrderedDict, deque
 
 from binaryapi import global_value
 from binaryapi import global_config
+from binaryapi.utils import nested_dict
 from binaryapi.ws.abstract import AbstractAPI
 from binaryapi.ws.client import WebsocketClient
 from binaryapi.utils.memory_footprint import total_size
@@ -25,14 +26,6 @@ AUTHORIZE_MAX_TIMEOUT: Union[int, float] = 30
 DEFAULT_MAX_DICT_SIZE: int = 500
 DEFAULT_MAX_SUBSCRIPTION_MSG_LIST_SIZE = 100
 DEFAULT_APP_ID: int = 28035
-
-
-# noinspection PyShadowingBuiltins
-def nested_dict(n, type):
-    if n == 1:
-        return defaultdict(type)
-    else:
-        return defaultdict(lambda: nested_dict(n - 1, type))
 
 
 class FixSizeOrderedDict(OrderedDict):
@@ -49,11 +42,11 @@ class FixSizeOrderedDict(OrderedDict):
 
 
 class BinaryAPI(AbstractAPI):
-    websocket_thread: Thread
+    websocket_thread: threading.Thread
     websocket_client: Optional[WebsocketClient]
     profile: AuthorizeObject
 
-    # message_callback: Optional[Callable] = None
+    message_callback: Optional[Callable]
 
     results: typing.OrderedDict[int, Any]
     msg_by_req_id: typing.OrderedDict[int, Any]
@@ -63,7 +56,7 @@ class BinaryAPI(AbstractAPI):
     subscriptions: typing.OrderedDict[str, str]  # Subscription ID -> MSG Type
     msg_by_subscription: typing.DefaultDict[str, typing.Deque]  # Subscription ID -> List of messages in ascending order
 
-    def __init__(self, token=None, app_id=None):
+    def __init__(self, token: str = None, app_id: int = None):
         self.app_id = app_id or DEFAULT_APP_ID
         self.token = token
 
@@ -90,6 +83,8 @@ class BinaryAPI(AbstractAPI):
 
         if global_config.AUTO_CLEAR_VAR_MSG_BY_SUBSCRIPTION_ON_CONNECT:
             self.msg_by_subscription.clear()
+
+
         # TODO clear more cached messages
 
         self.websocket_client = WebsocketClient(self)
@@ -111,13 +106,12 @@ class BinaryAPI(AbstractAPI):
         while True:
             # noinspection PyBroadException
             try:
-                if global_value.check_websocket_if_connect == 0 or global_value.check_websocket_if_connect == -1:
+                if global_value.check_websocket_if_connect in [0, -1]:
                     return False
                 elif global_value.check_websocket_if_connect == 1:
                     break
             except Exception:
                 pass
-            pass
 
         if self.token:
             auth_req_id = self.authorize(authorize=self.token)
@@ -157,8 +151,15 @@ class BinaryAPI(AbstractAPI):
         return self._request_id - 1
 
     # noinspection PyShadowingBuiltins
-    def wait_for_response_by_req_id(self, req_id: int, type: Optional[str] = None, type_name: Optional[str] = None, max_timeout: Union[int, float] = DEFAULT_RESPONSE_TIMEOUT,
-                                    delay: Union[int, float] = DEFAULT_RESPONSE_CHECK_DELAY, error_label: str = 'warning'):
+    def wait_for_response_by_req_id(
+        self,
+        req_id: int,
+        type: Optional[str] = None,
+        type_name: Optional[str] = None,
+        max_timeout: Union[int, float] = DEFAULT_RESPONSE_TIMEOUT,
+        delay: Union[int, float] = DEFAULT_RESPONSE_CHECK_DELAY,
+        error_label: str = 'warning'
+    ):
         start_time = time.time()
 
         type_name_repr: Optional[str] = type_name or type
@@ -224,12 +225,12 @@ class BinaryAPI(AbstractAPI):
         for object_name in object_names:
             # noinspection PyBroadException
             try:
-                o: Any
+                obj: Any
                 if object_name == 'self':
-                    o = self
+                    obj = self
                 else:
-                    o = getattr(self, object_name)
-                size = total_size(o)
+                    obj = getattr(self, object_name)
+                size = total_size(obj)
                 print(object_name, '->', size, 'byte(s)')
             except Exception:
                 pass

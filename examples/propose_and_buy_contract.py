@@ -1,4 +1,4 @@
-# Proposes for a contract then buys it
+# Proposes for a contract then buys it if payout is greater than threshold
 import os
 import time
 from rich import print
@@ -17,6 +17,13 @@ console = Console(log_path=False)
 def message_handler(message):
     msg_type = message.get('msg_type')
 
+    if msg_type == 'transaction':
+        tx = message['transaction']  # tx = transaction
+
+        if tx['action'] in ['buy', 'sell']:
+            # print(msg_type, tx)  # Full data
+            print(msg_type, {k: tx[k] for k in ['contract_id', 'action', 'amount', 'currency', 'longcode']})  # Short data
+
 
 # noinspection PyShadowingNames
 def propose_and_buy(binary: Binary):
@@ -34,10 +41,13 @@ def propose_and_buy(binary: Binary):
     # Yoo can add any parameter mentioned in the Binary developer api documentation
     # Binary API Documentation: https://developers.binary.com/api/#proposal
     # Deriv API Documentation: https://api.deriv.com/playground/#proposal
-    proposal_req_id = binary.api.proposal(contract_type=CONTRACT_TYPE.CALL,
-                                          basis=basis, amount=amount, currency=account_currency,
-                                          symbol=symbol,
-                                          duration=duration, duration_unit=duration_unit)
+    proposal_req_id = binary.api.proposal(
+        contract_type=CONTRACT_TYPE.CALL,
+        basis=basis, amount=amount, currency=account_currency,
+        symbol=symbol,
+        duration=duration,
+        duration_unit=duration_unit
+    )
 
     # You can also subscribe to the proposal and wait for right opportunity and buy it
     # using the message_callback function.
@@ -88,6 +98,8 @@ def propose_and_buy(binary: Binary):
 
     console.log("[green]Bought contract with contract_id: {}".format(contract_id))
 
+    return contract_id
+
 
 if __name__ == '__main__':
     binary = Binary(token=token, message_callback=message_handler)
@@ -95,4 +107,4 @@ if __name__ == '__main__':
 
     propose_and_buy(binary=binary)
 
-    time.sleep(5)
+    time.sleep(20)

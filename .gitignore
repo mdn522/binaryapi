@@ -200,3 +200,4 @@ robot/
 binaryapi/ws/chanels/backup/
 codealike.json
 .vs/
+venv/
