@@ -2,7 +2,6 @@
 # https://developers.binary.com/api/#ticks_history
 import os
 import time
-from datetime import datetime
 
 from rich.console import Console
 from binaryapi.stable_api import Binary

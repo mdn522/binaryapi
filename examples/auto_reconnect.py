@@ -69,7 +69,7 @@ def on_connect(binary: Binary):
 
 
 # Message callback/handler
-def message_handler(message: dict):
+def message_handler(message):
     msg_type = message.get('msg_type')
 
     print(msg_type, "=>", message)
