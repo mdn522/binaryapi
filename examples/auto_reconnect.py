@@ -33,9 +33,10 @@ def check_connect_helper(api_client: Optional[Binary], on_connect=None, *args, *
             else:
                 try:
                     del api_client
-                    api_client = None
                 except Exception:
                     pass
+
+                api_client = None
 
                 try:
                     api_client = Binary(*args, **kwargs)
@@ -68,7 +69,7 @@ def on_connect(binary: Binary):
 
 
 # Message callback/handler
-def message_handler(message):
+def message_handler(message: dict):
     msg_type = message.get('msg_type')
 
     print(msg_type, "=>", message)
