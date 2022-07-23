@@ -19,6 +19,11 @@ def message_handler(message):
     try:
         if msg_type in ['buy', 'proposal']:
             print(message)
+
+        if msg_type == 'proposal_open_contract':  # When subscribe=true
+            poc = message['proposal_open_contract']
+            print(f'{poc["contract_id"]} {poc["status"]}: {poc["longcode"]}')
+
     except Exception as e:
         traceback.print_exc()
 
@@ -29,11 +34,15 @@ if __name__ == '__main__':
     binary = Binary(token=token, message_callback=message_handler)
     print('Logged in')
 
+    subscribe = False
+
     success, contract_id, req_id = binary.buy(
         contract_type=CONTRACT_TYPE.CALL,
-        amount=1, symbol='R_75',
+        amount=1,
+        symbol='R_75',
         duration=5,
-        duration_unit=DURATION.TICK
+        duration_unit=DURATION.TICK,
+        subscribe=subscribe
     )
     print({'success': success, 'contract_id': contract_id, 'req_id': req_id})
 
