@@ -3,7 +3,7 @@ from setuptools import (setup, find_packages)
 
 setup(
     name="binaryapi",
-    version="0.4.1",
+    version="0.4.5",
     packages=find_packages(),
     install_requires=["requests", "websocket-client", "simplejson", "pause", "rich"],
     include_package_data=True,
