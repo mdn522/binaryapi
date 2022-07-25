@@ -10,10 +10,17 @@ class Authorize(Base):
 
     name = "authorize"
 
-    def __call__(self, authorize: str, add_to_login_history: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        authorize: str, 
+        add_to_login_history: Optional[int] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to authorize websocket channel.
         Authorize (request)
         Authorize current WebSocket session to act on behalf of the owner of a given token. Must precede requests that need to access client account, for example purchasing and selling contracts or viewing portfolio.
+
         :param authorize: Authentication token. May be retrieved from https://www.binary.com/en/user/security/api_tokenws.html
         :type authorize: str
         :param add_to_login_history: [Optional] Send this when you use api tokens for authorization and want to track activity using `login_history` call.
@@ -22,6 +29,8 @@ class Authorize(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

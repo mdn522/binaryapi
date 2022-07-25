@@ -1,7 +1,7 @@
 """Module for Binary sell websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union
 from decimal import Decimal
+from typing import Any, Optional, Union
 
 
 # https://developers.binary.com/api/#sell
@@ -11,10 +11,17 @@ class Sell(Base):
 
     name = "sell"
 
-    def __call__(self, sell: int, price: Union[int, float, Decimal], passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        sell: int, 
+        price: Union[int, float, Decimal], 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to sell websocket channel.
         Sell Contract (request)
         Sell a Contract as identified from a previous `portfolio` call.
+
         :param sell: Pass contract_id received from the `portfolio` call.
         :type sell: int
         :param price: Minimum price at which to sell the contract, or `0` for 'sell at market'.
@@ -23,6 +30,8 @@ class Sell(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

@@ -55,7 +55,7 @@ if __name__ == '__main__':
 
     # DOC: https://api.deriv.com/api-explorer/#statement
     req_id = binary.api.statement(
-        limit=10
+        limit=10,
     )
 
     time.sleep(5)

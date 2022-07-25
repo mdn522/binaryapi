@@ -1,7 +1,7 @@
 """Module for Binary buy websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union
 from decimal import Decimal
+from typing import Any, Optional, Union
 
 
 # https://developers.binary.com/api/#buy
@@ -11,10 +11,19 @@ class Buy(Base):
 
     name = "buy"
 
-    def __call__(self, buy: str, price: Union[int, float, Decimal], parameters=None, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        buy: str, 
+        price: Union[int, float, Decimal], 
+        parameters=None, 
+        subscribe: Optional[Union[bool, int]] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to buy websocket channel.
         Buy Contract (request)
         Buy a Contract
+
         :param buy: Either the ID received from a Price Proposal (`proposal` call), or `1` if contract buy parameters are passed in the `parameters` field.
         :type buy: str
         :param price: Maximum price at which to purchase the contract.
@@ -22,11 +31,13 @@ class Buy(Base):
         :param parameters: [Optional] Used to pass the parameters for contract buy.
         :type parameters: 
         :param subscribe: [Optional] `1` to stream.
-        :type subscribe: Union[bool, int, None]
+        :type subscribe: Optional[Union[bool, int]]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

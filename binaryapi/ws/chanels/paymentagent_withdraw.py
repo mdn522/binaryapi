@@ -1,7 +1,7 @@
 """Module for Binary paymentagent_withdraw websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union
 from decimal import Decimal
+from typing import Any, Optional, Union
 
 
 # https://developers.binary.com/api/#paymentagent_withdraw
@@ -11,10 +11,21 @@ class PaymentagentWithdraw(Base):
 
     name = "paymentagent_withdraw"
 
-    def __call__(self, amount: Union[int, float, Decimal], currency: str, paymentagent_loginid: str, verification_code: str, description: Optional[str] = None, dry_run: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        amount: Union[int, float, Decimal], 
+        currency: str, 
+        paymentagent_loginid: str, 
+        verification_code: str, 
+        description: Optional[str] = None, 
+        dry_run: Optional[int] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to paymentagent_withdraw websocket channel.
         Payment Agent: Withdraw (request)
         Initiate a withdrawal to an approved Payment Agent.
+
         :param amount: The amount to withdraw to the payment agent.
         :type amount: Union[int, float, Decimal]
         :param currency: The currency code.
@@ -31,6 +42,8 @@ class PaymentagentWithdraw(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

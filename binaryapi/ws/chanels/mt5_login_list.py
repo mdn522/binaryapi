@@ -10,14 +10,21 @@ class Mt5LoginList(Base):
 
     name = "mt5_login_list"
 
-    def __call__(self, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to mt5_login_list websocket channel.
         MT5: Accounts List (request)
         Get list of MT5 accounts for client
+
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

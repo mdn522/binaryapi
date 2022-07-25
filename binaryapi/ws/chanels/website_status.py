@@ -10,16 +10,24 @@ class WebsiteStatus(Base):
 
     name = "website_status"
 
-    def __call__(self, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        subscribe: Optional[Union[bool, int]] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to website_status websocket channel.
         Server Status (request)
         Request server status.
+
         :param subscribe: [Optional] `1` to stream the server/website status updates.
-        :type subscribe: Union[bool, int, None]
+        :type subscribe: Optional[Union[bool, int]]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

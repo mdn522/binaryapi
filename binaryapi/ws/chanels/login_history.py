@@ -10,16 +10,24 @@ class LoginHistory(Base):
 
     name = "login_history"
 
-    def __call__(self, limit: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        limit: Optional[int] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to login_history websocket channel.
         Login History (request)
         Retrieve a summary of login history for user.
+
         :param limit: [Optional] Apply limit to count of login history records.
         :type limit: Optional[int]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

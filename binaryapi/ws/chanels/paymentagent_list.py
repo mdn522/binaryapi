@@ -10,10 +10,17 @@ class PaymentagentList(Base):
 
     name = "paymentagent_list"
 
-    def __call__(self, paymentagent_list: str, currency: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        paymentagent_list: str, 
+        currency: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to paymentagent_list websocket channel.
         Payment Agent: List (request)
         Will return a list of Payment Agents for a given country for a given currency. Payment agents allow users to deposit and withdraw funds using local payment methods that might not be available via the main website's cashier system.
+
         :param paymentagent_list: Client's 2-letter country code (obtained from `residence_list` call).
         :type paymentagent_list: str
         :param currency: [Optional] If specified, only payment agents that supports that currency will be returned (obtained from `payout_currencies` call).
@@ -22,6 +29,8 @@ class PaymentagentList(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

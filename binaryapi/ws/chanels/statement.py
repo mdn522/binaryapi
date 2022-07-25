@@ -1,7 +1,7 @@
 """Module for Binary statement websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union
 from decimal import Decimal
+from typing import Any, Optional, Union
 
 
 # https://developers.binary.com/api/#statement
@@ -11,10 +11,21 @@ class Statement(Base):
 
     name = "statement"
 
-    def __call__(self, action_type: Optional[str] = None, date_from: Optional[int] = None, date_to: Optional[int] = None, description: Optional[int] = None, limit: Optional[Union[int, float, Decimal]] = None, offset: Optional[Union[int, float, Decimal]] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        action_type: Optional[str] = None, 
+        date_from: Optional[int] = None, 
+        date_to: Optional[int] = None, 
+        description: Optional[int] = None, 
+        limit: Optional[Union[int, float, Decimal]] = None, 
+        offset: Optional[Union[int, float, Decimal]] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to statement websocket channel.
         Statement (request)
         Retrieve a summary of account transactions, according to given search criteria
+
         :param action_type: [Optional] To filter the statement according to the type of transaction.
         :type action_type: Optional[str]
         :param date_from: [Optional] Start date (epoch)
@@ -31,6 +42,8 @@ class Statement(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

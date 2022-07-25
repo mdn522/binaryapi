@@ -1,6 +1,6 @@
 """Module for Binary p2p_advert_list websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union, List
+from typing import Any, List, Optional, Union
 from decimal import Decimal
 
 
@@ -11,10 +11,26 @@ class P2PAdvertList(Base):
 
     name = "p2p_advert_list"
 
-    def __call__(self, advertiser_id: Optional[str] = None, advertiser_name: Optional[str] = None, amount: Optional[Union[int, float, Decimal]] = None, counterparty_type: Optional[str] = None, limit: Optional[int] = None, local_currency: Optional[str] = None, offset: Optional[int] = None, payment_method: Optional[List] = None, sort_by: Optional[str] = None, use_client_limits: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        advertiser_id: Optional[str] = None, 
+        advertiser_name: Optional[str] = None, 
+        amount: Optional[Union[int, float, Decimal]] = None, 
+        counterparty_type: Optional[str] = None, 
+        favourites_only: Optional[int] = None, 
+        limit: Optional[int] = None, 
+        local_currency: Optional[str] = None, 
+        offset: Optional[int] = None, 
+        payment_method: Optional[List] = None, 
+        sort_by: Optional[str] = None, 
+        use_client_limits: Optional[int] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to p2p_advert_list websocket channel.
         P2P Advert List (request)
-        Returns available adverts for use with `p2p_order_create`. **This API call is still in Beta.**
+        Returns available adverts for use with `p2p_order_create` .
+
         :param advertiser_id: [Optional] ID of the advertiser to list adverts for.
         :type advertiser_id: Optional[str]
         :param advertiser_name: [Optional] Search for advertiser by name. Partial matches will be returned.
@@ -23,6 +39,8 @@ class P2PAdvertList(Base):
         :type amount: Optional[Union[int, float, Decimal]]
         :param counterparty_type: [Optional] Filter the adverts by `counterparty_type`.
         :type counterparty_type: Optional[str]
+        :param favourites_only: [Optional] Only show adverts from favourite advertisers. Default is 0.
+        :type favourites_only: Optional[int]
         :param limit: [Optional] Used for paging.
         :type limit: Optional[int]
         :param local_currency: [Optional] Currency to conduct payment transaction in, defaults to the main currency for the client's country.
@@ -31,7 +49,7 @@ class P2PAdvertList(Base):
         :type offset: Optional[int]
         :param payment_method: [Optional] Search by supported payment methods.
         :type payment_method: Optional[List]
-        :param sort_by: [Optional] How the results are sorted: best rate, or advertiser completion rate.
+        :param sort_by: [Optional] How the results are sorted.
         :type sort_by: Optional[str]
         :param use_client_limits: [Optional] If set to 1, ads that exceed this account's balance or turnover limits will not be shown.
         :type use_client_limits: Optional[int]
@@ -39,6 +57,8 @@ class P2PAdvertList(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {
@@ -56,6 +76,9 @@ class P2PAdvertList(Base):
 
         if counterparty_type:
             data['counterparty_type'] = str(counterparty_type)
+
+        if favourites_only:
+            data['favourites_only'] = int(favourites_only)
 
         if limit:
             data['limit'] = int(limit)

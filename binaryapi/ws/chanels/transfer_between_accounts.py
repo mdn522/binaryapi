@@ -1,7 +1,7 @@
 """Module for Binary transfer_between_accounts websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union
 from decimal import Decimal
+from typing import Any, Optional, Union
 
 
 # https://developers.binary.com/api/#transfer_between_accounts
@@ -11,10 +11,20 @@ class TransferBetweenAccounts(Base):
 
     name = "transfer_between_accounts"
 
-    def __call__(self, account_from: Optional[str] = None, account_to: Optional[str] = None, accounts: Optional[str] = None, amount: Optional[Union[int, float, Decimal]] = None, currency: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        account_from: Optional[str] = None, 
+        account_to: Optional[str] = None, 
+        accounts: Optional[str] = None, 
+        amount: Optional[Union[int, float, Decimal]] = None, 
+        currency: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to transfer_between_accounts websocket channel.
         Transfer Between Accounts (request)
         This call allows transfers between accounts held by a given user. Transfer funds between your fiat and cryptocurrency accounts (for a fee). Please note that account_from should be same as current authorized account.
+
         :param account_from: [Optional] The loginid of the account to transfer funds from.
         :type account_from: Optional[str]
         :param account_to: [Optional] The loginid of the account to transfer funds to.
@@ -29,6 +39,8 @@ class TransferBetweenAccounts(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

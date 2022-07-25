@@ -1,7 +1,7 @@
 """Module for Binary mt5_deposit websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union
 from decimal import Decimal
+from typing import Any, Optional, Union
 
 
 # https://developers.binary.com/api/#mt5_deposit
@@ -11,10 +11,18 @@ class Mt5Deposit(Base):
 
     name = "mt5_deposit"
 
-    def __call__(self, to_mt5: str, amount: Optional[Union[int, float, Decimal]] = None, from_binary: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        to_mt5: str, 
+        amount: Optional[Union[int, float, Decimal]] = None, 
+        from_binary: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to mt5_deposit websocket channel.
         MT5: Deposit (request)
         This call allows deposit into MT5 account from Binary account.
+
         :param to_mt5: MT5 account login to deposit money to
         :type to_mt5: str
         :param amount: Amount to deposit (in the currency of from_binary); min = $1 or an equivalent amount, max = $20000 or an equivalent amount
@@ -25,6 +33,8 @@ class Mt5Deposit(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

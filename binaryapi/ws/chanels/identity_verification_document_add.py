@@ -10,20 +10,30 @@ class IdentityVerificationDocumentAdd(Base):
 
     name = "identity_verification_document_add"
 
-    def __call__(self, document_number: str, document_type: str, issuing_country: str, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        document_number: str, 
+        document_type: str, 
+        issuing_country: str, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to identity_verification_document_add websocket channel.
         Identity Verification Add Document (request)
-        Add document information such as issuing country, type and id for IDV processing.
-        :param document_number: The unique identification number on the provided document.
+        Adds document information such as issuing country, id and type for identity verification processes.
+
+        :param document_number: The identification number of the document.
         :type document_number: str
-        :param document_type: Type of the document provided by the user, e.g. national_id, passport, etc (obtained from `residence_list` call).
+        :param document_type: The type of the document based on provided `issuing_country` (can obtained from `residence_list` call).
         :type document_type: str
-        :param issuing_country: 2-letter country code (obtained from `residence_list` call).
+        :param issuing_country: 2-letter country code (can obtained from `residence_list` call).
         :type issuing_country: str
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

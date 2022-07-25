@@ -10,10 +10,19 @@ class TradingPlatformInvestorPasswordReset(Base):
 
     name = "trading_platform_investor_password_reset"
 
-    def __call__(self, account_id: str, new_password: str, platform: str, verification_code: str, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        account_id: str, 
+        new_password: str, 
+        platform: str, 
+        verification_code: str, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to trading_platform_investor_password_reset websocket channel.
         Trading Platform: Investor Password Reset (request)
         Reset the investor password of a Trading Platform Account
+
         :param account_id: Trading account ID.
         :type account_id: str
         :param new_password: New password of the account. For validation (Accepts any printable ASCII character. Must be within 8-25 characters, and include numbers, lowercase and uppercase letters. Must not be the same as the user's email address).
@@ -26,6 +35,8 @@ class TradingPlatformInvestorPasswordReset(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

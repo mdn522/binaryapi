@@ -10,10 +10,18 @@ class ActiveSymbols(Base):
 
     name = "active_symbols"
 
-    def __call__(self, active_symbols: str, landing_company: Optional[str] = None, product_type: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        active_symbols: str, 
+        landing_company: Optional[str] = None, 
+        product_type: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to active_symbols websocket channel.
         Active Symbols (request)
         Retrieve a list of all currently active symbols (underlying markets upon which contracts are available for trading).
+
         :param active_symbols: If you use `brief`, only a subset of fields will be returned.
         :type active_symbols: str
         :param landing_company: [Optional] If you specify this field, only symbols available for trading by that landing company will be returned. If you are logged in, only symbols available for trading by your landing company will be returned regardless of what you specify in this field.
@@ -24,6 +32,8 @@ class ActiveSymbols(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

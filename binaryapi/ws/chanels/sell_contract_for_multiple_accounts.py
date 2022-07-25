@@ -1,7 +1,7 @@
 """Module for Binary sell_contract_for_multiple_accounts websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, List, Optional, Union
 from decimal import Decimal
-from typing import Any, List, Union, Optional
 
 
 # https://developers.binary.com/api/#sell_contract_for_multiple_accounts
@@ -11,10 +11,18 @@ class SellContractForMultipleAccounts(Base):
 
     name = "sell_contract_for_multiple_accounts"
 
-    def __call__(self, price: Union[int, float, Decimal], shortcode: str, tokens: List, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        price: Union[int, float, Decimal], 
+        shortcode: str, 
+        tokens: List, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to sell_contract_for_multiple_accounts websocket channel.
         Sell Contracts: Multiple Accounts (request)
         Sell contracts for multiple accounts simultaneously. Uses the shortcode response from `buy_contract_for_multiple_accounts` to identify the contract, and authorisation tokens to select which accounts to sell those contracts on. Note that only the accounts identified by the tokens will be affected. This will not sell the contract on the currently-authorised account unless you include the token for the current account.
+
         :param price: Minimum price at which to sell the contract, or `0` for 'sell at market'.
         :type price: Union[int, float, Decimal]
         :param shortcode: An internal ID used to identify the contract which was originally bought. This is returned from the `buy` and `buy_contract_for_multiple_accounts` calls.
@@ -25,6 +33,8 @@ class SellContractForMultipleAccounts(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

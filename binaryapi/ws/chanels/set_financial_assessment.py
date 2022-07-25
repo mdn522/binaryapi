@@ -10,10 +10,32 @@ class SetFinancialAssessment(Base):
 
     name = "set_financial_assessment"
 
-    def __call__(self, education_level: str, employment_industry: str, estimated_worth: str, income_source: str, net_income: str, occupation: str, account_turnover: Optional[str] = None, binary_options_trading_experience: Optional[str] = None, binary_options_trading_frequency: Optional[str] = None, cfd_trading_experience: Optional[str] = None, cfd_trading_frequency: Optional[str] = None, employment_status: Optional[str] = None, forex_trading_experience: Optional[str] = None, forex_trading_frequency: Optional[str] = None, other_instruments_trading_experience: Optional[str] = None, other_instruments_trading_frequency: Optional[str] = None, source_of_wealth: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        education_level: str, 
+        employment_industry: str, 
+        estimated_worth: str, 
+        income_source: str, 
+        net_income: str, 
+        occupation: str, 
+        account_turnover: Optional[str] = None, 
+        binary_options_trading_experience: Optional[str] = None, 
+        binary_options_trading_frequency: Optional[str] = None, 
+        cfd_trading_experience: Optional[str] = None, 
+        cfd_trading_frequency: Optional[str] = None, 
+        employment_status: Optional[str] = None, 
+        forex_trading_experience: Optional[str] = None, 
+        forex_trading_frequency: Optional[str] = None, 
+        other_instruments_trading_experience: Optional[str] = None, 
+        other_instruments_trading_frequency: Optional[str] = None, 
+        source_of_wealth: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to set_financial_assessment websocket channel.
         Set Financial Assessment (request)
         This call sets the financial assessment details based on the client's answers to analyze whether they possess the experience and knowledge to understand the risks involved with binary options trading.
+
         :param education_level: Level of Education.
         :type education_level: str
         :param employment_industry: Industry of Employment.
@@ -52,6 +74,8 @@ class SetFinancialAssessment(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

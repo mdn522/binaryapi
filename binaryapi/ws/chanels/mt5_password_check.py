@@ -10,10 +10,18 @@ class Mt5PasswordCheck(Base):
 
     name = "mt5_password_check"
 
-    def __call__(self, login: str, password: str, password_type: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        login: str, 
+        password: str, 
+        password_type: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to mt5_password_check websocket channel.
         MT5: Password Check (request)
         This call validates the main password for the MT5 user
+
         :param login: MT5 user login
         :type login: str
         :param password: The password of the account.
@@ -24,6 +32,8 @@ class Mt5PasswordCheck(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

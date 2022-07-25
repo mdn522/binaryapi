@@ -1,7 +1,7 @@
 """Module for Binary buy_contract_for_multiple_accounts websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, List, Optional, Union
 from decimal import Decimal
-from typing import Any, List, Union, Optional
 
 
 # https://developers.binary.com/api/#buy_contract_for_multiple_accounts
@@ -11,10 +11,19 @@ class BuyContractForMultipleAccounts(Base):
 
     name = "buy_contract_for_multiple_accounts"
 
-    def __call__(self, buy_contract_for_multiple_accounts: str, price: Union[int, float, Decimal], tokens: List, parameters=None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        buy_contract_for_multiple_accounts: str, 
+        price: Union[int, float, Decimal], 
+        tokens: List, 
+        parameters=None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to buy_contract_for_multiple_accounts websocket channel.
         Buy Contract for Multiple Accounts (request)
         Buy a Contract for multiple Accounts specified by the `tokens` parameter. Note, although this is an authorized call, the contract is not bought for the authorized account.
+
         :param buy_contract_for_multiple_accounts: Either the ID received from a Price Proposal (`proposal` call), or `1` if contract buy parameters are passed in the `parameters` field.
         :type buy_contract_for_multiple_accounts: str
         :param price: Maximum price at which to purchase the contract.
@@ -27,6 +36,8 @@ class BuyContractForMultipleAccounts(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

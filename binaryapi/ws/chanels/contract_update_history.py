@@ -1,7 +1,7 @@
 """Module for Binary contract_update_history websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union
 from decimal import Decimal
+from typing import Any, Optional, Union
 
 
 # https://developers.binary.com/api/#contract_update_history
@@ -11,10 +11,17 @@ class ContractUpdateHistory(Base):
 
     name = "contract_update_history"
 
-    def __call__(self, contract_id: int, limit: Optional[Union[int, float, Decimal]] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        contract_id: int, 
+        limit: Optional[Union[int, float, Decimal]] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to contract_update_history websocket channel.
         Update Contract History (request)
         Request for contract update history.
+
         :param contract_id: Internal unique contract identifier.
         :type contract_id: int
         :param limit: [Optional] Maximum number of historical updates to receive.
@@ -23,6 +30,8 @@ class ContractUpdateHistory(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

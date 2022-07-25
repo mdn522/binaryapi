@@ -10,18 +10,27 @@ class ProposalOpenContract(Base):
 
     name = "proposal_open_contract"
 
-    def __call__(self, contract_id: Optional[int] = None, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        contract_id: Optional[int] = None, 
+        subscribe: Optional[Union[bool, int]] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to proposal_open_contract websocket channel.
         Price Proposal: Open Contracts (request)
         Get latest price (and other information) for a contract in the user's portfolio
+
         :param contract_id: [Optional] Contract ID received from a `portfolio` request. If not set, you will receive stream of all open contracts.
         :type contract_id: Optional[int]
         :param subscribe: [Optional] `1` to stream.
-        :type subscribe: Union[bool, int, None]
+        :type subscribe: Optional[Union[bool, int]]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

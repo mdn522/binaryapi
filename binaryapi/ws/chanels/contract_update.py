@@ -10,10 +10,17 @@ class ContractUpdate(Base):
 
     name = "contract_update"
 
-    def __call__(self, contract_id: int, limit_order, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        contract_id: int, 
+        limit_order, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to contract_update websocket channel.
         Update Contract (request)
         Update a contract condition.
+
         :param contract_id: Internal unique contract identifier.
         :type contract_id: int
         :param limit_order: Specify limit order to update.
@@ -22,6 +29,8 @@ class ContractUpdate(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

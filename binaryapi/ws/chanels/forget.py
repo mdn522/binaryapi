@@ -10,16 +10,24 @@ class Forget(Base):
 
     name = "forget"
 
-    def __call__(self, forget: str, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        forget: str, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to forget websocket channel.
         Forget (request)
         Immediately cancel the real-time stream of messages with a specific ID.
+
         :param forget: ID of the real-time stream of messages to cancel.
         :type forget: str
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

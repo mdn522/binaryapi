@@ -10,10 +10,19 @@ class ContractsFor(Base):
 
     name = "contracts_for"
 
-    def __call__(self, contracts_for: str, currency: Optional[str] = None, landing_company: Optional[str] = None, product_type: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        contracts_for: str, 
+        currency: Optional[str] = None, 
+        landing_company: Optional[str] = None, 
+        product_type: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to contracts_for websocket channel.
         Contracts For Symbol (request)
         For a given symbol, get the list of currently available contracts, and the latest barrier and duration limits for each contract.
+
         :param contracts_for: The short symbol name (obtained from `active_symbols` call).
         :type contracts_for: str
         :param currency: [Optional] Currency of the contract's stake and payout (obtained from `payout_currencies` call).
@@ -26,6 +35,8 @@ class ContractsFor(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

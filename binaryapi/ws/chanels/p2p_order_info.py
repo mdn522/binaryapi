@@ -10,18 +10,27 @@ class P2POrderInfo(Base):
 
     name = "p2p_order_info"
 
-    def __call__(self, id: str, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        id: str, 
+        subscribe: Optional[Union[bool, int]] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to p2p_order_info websocket channel.
         P2P Order Information (request)
-        Retrieves the information about a P2P order. **This API call is still in Beta.**
+        Retrieves the information about a P2P order.
+
         :param id: The unique identifier for the order.
         :type id: str
         :param subscribe: [Optional] If set to 1, will send updates whenever there is an update to order
-        :type subscribe: Union[bool, int, None]
+        :type subscribe: Optional[Union[bool, int]]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

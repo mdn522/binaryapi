@@ -1,7 +1,7 @@
 """Module for Binary app_update websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, List, Optional, Union
 from decimal import Decimal
-from typing import Any, List, Union, Optional
 
 
 # https://developers.binary.com/api/#app_update
@@ -11,16 +11,29 @@ class AppUpdate(Base):
 
     name = "app_update"
 
-    def __call__(self, app_update: int, name: str, redirect_uri: str, scopes: List, app_markup_percentage: Optional[Union[int, float, Decimal]] = None, appstore: Optional[str] = None, github: Optional[str] = None, googleplay: Optional[str] = None, homepage: Optional[str] = None, verification_uri: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        app_update: int, 
+        name: str, 
+        scopes: List, 
+        app_markup_percentage: Optional[Union[int, float, Decimal]] = None, 
+        appstore: Optional[str] = None, 
+        github: Optional[str] = None, 
+        googleplay: Optional[str] = None, 
+        homepage: Optional[str] = None, 
+        redirect_uri: Optional[str] = None, 
+        verification_uri: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to app_update websocket channel.
         Application: Update (request)
         Update a new OAuth application
+
         :param app_update: Application app_id.
         :type app_update: int
         :param name: Application name.
         :type name: str
-        :param redirect_uri: The URL to redirect to after a successful login.
-        :type redirect_uri: str
         :param scopes: Change scopes will revoke all user's grants and log them out.
         :type scopes: List
         :param app_markup_percentage: [Optional] Markup to be added to contract prices (as a percentage of contract payout).
@@ -33,18 +46,21 @@ class AppUpdate(Base):
         :type googleplay: Optional[str]
         :param homepage: [Optional] Application's homepage URL.
         :type homepage: Optional[str]
+        :param redirect_uri: [Optional] The URL to redirect to after a successful login. Required if charging markup percentage.
+        :type redirect_uri: Optional[str]
         :param verification_uri: [Optional] Used when `verify_email` called. If available, a URL containing the verification token will send to the client's email, otherwise only the token will be sent.
         :type verification_uri: Optional[str]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {
             "app_update": int(app_update),
             "name": name,
-            "redirect_uri": redirect_uri,
             "scopes": scopes
         }
 
@@ -62,6 +78,9 @@ class AppUpdate(Base):
 
         if homepage:
             data['homepage'] = str(homepage)
+
+        if redirect_uri:
+            data['redirect_uri'] = str(redirect_uri)
 
         if verification_uri:
             data['verification_uri'] = str(verification_uri)

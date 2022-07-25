@@ -21,6 +21,7 @@ from binaryapi.ws.chanels.copytrading_list import CopytradingList
 from binaryapi.ws.chanels.copytrading_statistics import CopytradingStatistics
 from binaryapi.ws.chanels.copy_start import CopyStart
 from binaryapi.ws.chanels.copy_stop import CopyStop
+from binaryapi.ws.chanels.crypto_config import CryptoConfig
 from binaryapi.ws.chanels.document_upload import DocumentUpload
 from binaryapi.ws.chanels.economic_calendar import EconomicCalendar
 from binaryapi.ws.chanels.exchange_rates import ExchangeRates
@@ -51,6 +52,8 @@ from binaryapi.ws.chanels.oauth_apps import OauthApps
 from binaryapi.ws.chanels.p2p_advertiser_adverts import P2PAdvertiserAdverts
 from binaryapi.ws.chanels.p2p_advertiser_create import P2PAdvertiserCreate
 from binaryapi.ws.chanels.p2p_advertiser_info import P2PAdvertiserInfo
+from binaryapi.ws.chanels.p2p_advertiser_payment_methods import P2PAdvertiserPaymentMethods
+from binaryapi.ws.chanels.p2p_advertiser_relations import P2PAdvertiserRelations
 from binaryapi.ws.chanels.p2p_advertiser_update import P2PAdvertiserUpdate
 from binaryapi.ws.chanels.p2p_advert_create import P2PAdvertCreate
 from binaryapi.ws.chanels.p2p_advert_info import P2PAdvertInfo
@@ -60,8 +63,12 @@ from binaryapi.ws.chanels.p2p_chat_create import P2PChatCreate
 from binaryapi.ws.chanels.p2p_order_cancel import P2POrderCancel
 from binaryapi.ws.chanels.p2p_order_confirm import P2POrderConfirm
 from binaryapi.ws.chanels.p2p_order_create import P2POrderCreate
+from binaryapi.ws.chanels.p2p_order_dispute import P2POrderDispute
 from binaryapi.ws.chanels.p2p_order_info import P2POrderInfo
 from binaryapi.ws.chanels.p2p_order_list import P2POrderList
+from binaryapi.ws.chanels.p2p_order_review import P2POrderReview
+from binaryapi.ws.chanels.p2p_payment_methods import P2PPaymentMethods
+from binaryapi.ws.chanels.p2p_ping import P2PPing
 from binaryapi.ws.chanels.paymentagent_create import PaymentagentCreate
 from binaryapi.ws.chanels.paymentagent_details import PaymentagentDetails
 from binaryapi.ws.chanels.paymentagent_list import PaymentagentList
@@ -278,6 +285,14 @@ class AbstractAPI:
         :returns: The instance of :class:`CopyStop<binaryapi.ws.chanels.copy_stop.CopyStop>`.
         """
         return CopyStop(self)
+
+    @property
+    def crypto_config(self) -> CryptoConfig:
+        """Property for get Binary ws crypto_config resource.
+
+        :returns: The instance of :class:`CryptoConfig<binaryapi.ws.chanels.crypto_config.CryptoConfig>`.
+        """
+        return CryptoConfig(self)
 
     @property
     def document_upload(self) -> DocumentUpload:
@@ -520,6 +535,22 @@ class AbstractAPI:
         return P2PAdvertiserInfo(self)
 
     @property
+    def p2p_advertiser_payment_methods(self) -> P2PAdvertiserPaymentMethods:
+        """Property for get Binary ws p2p_advertiser_payment_methods resource.
+
+        :returns: The instance of :class:`P2PAdvertiserPaymentMethods<binaryapi.ws.chanels.p2p_advertiser_payment_methods.P2PAdvertiserPaymentMethods>`.
+        """
+        return P2PAdvertiserPaymentMethods(self)
+
+    @property
+    def p2p_advertiser_relations(self) -> P2PAdvertiserRelations:
+        """Property for get Binary ws p2p_advertiser_relations resource.
+
+        :returns: The instance of :class:`P2PAdvertiserRelations<binaryapi.ws.chanels.p2p_advertiser_relations.P2PAdvertiserRelations>`.
+        """
+        return P2PAdvertiserRelations(self)
+
+    @property
     def p2p_advertiser_update(self) -> P2PAdvertiserUpdate:
         """Property for get Binary ws p2p_advertiser_update resource.
 
@@ -592,6 +623,14 @@ class AbstractAPI:
         return P2POrderCreate(self)
 
     @property
+    def p2p_order_dispute(self) -> P2POrderDispute:
+        """Property for get Binary ws p2p_order_dispute resource.
+
+        :returns: The instance of :class:`P2POrderDispute<binaryapi.ws.chanels.p2p_order_dispute.P2POrderDispute>`.
+        """
+        return P2POrderDispute(self)
+
+    @property
     def p2p_order_info(self) -> P2POrderInfo:
         """Property for get Binary ws p2p_order_info resource.
 
@@ -606,6 +645,30 @@ class AbstractAPI:
         :returns: The instance of :class:`P2POrderList<binaryapi.ws.chanels.p2p_order_list.P2POrderList>`.
         """
         return P2POrderList(self)
+
+    @property
+    def p2p_order_review(self) -> P2POrderReview:
+        """Property for get Binary ws p2p_order_review resource.
+
+        :returns: The instance of :class:`P2POrderReview<binaryapi.ws.chanels.p2p_order_review.P2POrderReview>`.
+        """
+        return P2POrderReview(self)
+
+    @property
+    def p2p_payment_methods(self) -> P2PPaymentMethods:
+        """Property for get Binary ws p2p_payment_methods resource.
+
+        :returns: The instance of :class:`P2PPaymentMethods<binaryapi.ws.chanels.p2p_payment_methods.P2PPaymentMethods>`.
+        """
+        return P2PPaymentMethods(self)
+
+    @property
+    def p2p_ping(self) -> P2PPing:
+        """Property for get Binary ws p2p_ping resource.
+
+        :returns: The instance of :class:`P2PPing<binaryapi.ws.chanels.p2p_ping.P2PPing>`.
+        """
+        return P2PPing(self)
 
     @property
     def paymentagent_create(self) -> PaymentagentCreate:

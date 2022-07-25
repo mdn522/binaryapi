@@ -10,10 +10,19 @@ class TradingServers(Base):
 
     name = "trading_servers"
 
-    def __call__(self, account_type: Optional[str] = None, environment: Optional[str] = None, market_type: Optional[str] = None, platform: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        account_type: Optional[str] = None, 
+        environment: Optional[str] = None, 
+        market_type: Optional[str] = None, 
+        platform: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to trading_servers websocket channel.
         Server list (request)
-        Get the list of servers for platform. Currently, only mt5 is supported
+        Get the list of servers for a trading platform.
+
         :param account_type: [Optional] Trading account type.
         :type account_type: Optional[str]
         :param environment: [Optional] Pass the environment (installation) instance. Currently, there are one demo and two real environments. Defaults to 'all'.
@@ -26,6 +35,8 @@ class TradingServers(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

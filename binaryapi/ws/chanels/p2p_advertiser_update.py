@@ -10,10 +10,20 @@ class P2PAdvertiserUpdate(Base):
 
     name = "p2p_advertiser_update"
 
-    def __call__(self, contact_info: Optional[str] = None, default_advert_description: Optional[str] = None, is_listed: Optional[int] = None, payment_info: Optional[str] = None, show_name: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        contact_info: Optional[str] = None, 
+        default_advert_description: Optional[str] = None, 
+        is_listed: Optional[int] = None, 
+        payment_info: Optional[str] = None, 
+        show_name: Optional[int] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to p2p_advertiser_update websocket channel.
         P2P Advertiser Update (request)
-        Update the information of the P2P advertiser for the current account. Can only be used by an approved P2P advertiser. **This API call is still in Beta.**
+        Update the information of the P2P advertiser for the current account. Can only be used by an approved P2P advertiser.
+
         :param contact_info: [Optional] Advertiser's contact information, to be used as a default for new sell adverts.
         :type contact_info: Optional[str]
         :param default_advert_description: [Optional] Default description that can be used every time an advert is created.
@@ -28,6 +38,8 @@ class P2PAdvertiserUpdate(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

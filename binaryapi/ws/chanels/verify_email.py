@@ -10,10 +10,18 @@ class VerifyEmail(Base):
 
     name = "verify_email"
 
-    def __call__(self, verify_email: str, type: str, url_parameters=None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        verify_email: str, 
+        type: str, 
+        url_parameters=None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to verify_email websocket channel.
         Verify Email (request)
         Verify an email address for various purposes. The system will send an email to the address containing a security code for verification.
+
         :param verify_email: Email address to be verified.
         :type verify_email: str
         :param type: Purpose of the email verification call.
@@ -24,6 +32,8 @@ class VerifyEmail(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

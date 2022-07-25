@@ -10,16 +10,24 @@ class LandingCompanyDetails(Base):
 
     name = "landing_company_details"
 
-    def __call__(self, landing_company_details: str, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        landing_company_details: str, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to landing_company_details websocket channel.
         Landing Company Details (request)
         The company has a number of licensed subsidiaries in various jurisdictions, which are called Landing Companies (and which are wholly owned subsidiaries of the Deriv Group). This call provides information about each Landing Company.
+
         :param landing_company_details: Landing company shortcode.
         :type landing_company_details: str
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

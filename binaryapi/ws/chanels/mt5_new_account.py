@@ -1,7 +1,7 @@
 """Module for Binary mt5_new_account websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union
 from decimal import Decimal
+from typing import Any, Optional, Union
 
 
 # https://developers.binary.com/api/#mt5_new_account
@@ -11,10 +11,34 @@ class Mt5NewAccount(Base):
 
     name = "mt5_new_account"
 
-    def __call__(self, account_type: str, email: str, leverage: Union[int, float, Decimal], mainPassword: str, name: str, address: Optional[str] = None, city: Optional[str] = None, company: Optional[str] = None, country: Optional[str] = None, currency: Optional[str] = None, dry_run: Optional[int] = None, investPassword: Optional[str] = None, mt5_account_category: Optional[str] = None, mt5_account_type: Optional[str] = None, phone: Optional[str] = None, phonePassword: Optional[str] = None, server=None, state: Optional[str] = None, zipCode: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        account_type: str, 
+        email: str, 
+        leverage: Union[int, float, Decimal], 
+        mainPassword: str, 
+        name: str, 
+        address: Optional[str] = None, 
+        city: Optional[str] = None, 
+        company: Optional[str] = None, 
+        country: Optional[str] = None, 
+        currency: Optional[str] = None, 
+        dry_run: Optional[int] = None, 
+        investPassword: Optional[str] = None, 
+        mt5_account_category: Optional[str] = None, 
+        mt5_account_type: Optional[str] = None, 
+        phone: Optional[str] = None, 
+        phonePassword: Optional[str] = None, 
+        server: Optional[str] = None, 
+        state: Optional[str] = None, 
+        zipCode: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to mt5_new_account websocket channel.
         MT5: New Account (request)
         This call creates new MT5 user, either demo or real money user.
+
         :param account_type: Account type. If set to 'financial', setting 'mt5_account_type' is also required.
         :type account_type: str
         :param email: Email address
@@ -39,7 +63,7 @@ class Mt5NewAccount(Base):
         :type dry_run: Optional[int]
         :param investPassword: [Optional] The investor password of the account. For validation (Accepts any printable ASCII character. Must be within 8-25 characters, and include numbers, lowercase and uppercase letters. Must not be the same as the user's email address).
         :type investPassword: Optional[str]
-        :param mt5_account_category: [Optional] To choose whether account is conventional or swap_free. Unavailable for financial_stp MT5_account_type
+        :param mt5_account_category: [Optional] To choose whether account is conventional or not. Unavailable for financial_stp MT5_account_type
         :type mt5_account_category: Optional[str]
         :param mt5_account_type: [Optional] Financial: Variable spreads, High leverage. Financial STP: Variable spreads, Medium Leverage, more products. If 'account_type' set to 'financial', setting 'mt5_account_type' is also required.
         :type mt5_account_type: Optional[str]
@@ -48,7 +72,7 @@ class Mt5NewAccount(Base):
         :param phonePassword: [Optional] The user's phone password.
         :type phonePassword: Optional[str]
         :param server: [Optional] Trade server.
-        :type server: 
+        :type server: Optional[str]
         :param state: [Optional] User's state (region) of residence.
         :type state: Optional[str]
         :param zipCode: [Optional] User's zip code.
@@ -57,6 +81,8 @@ class Mt5NewAccount(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {
@@ -102,7 +128,7 @@ class Mt5NewAccount(Base):
             data['phonePassword'] = str(phonePassword)
 
         if server:
-            data['server'] = server
+            data['server'] = str(server)
 
         if state:
             data['state'] = str(state)

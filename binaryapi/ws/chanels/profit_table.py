@@ -1,7 +1,7 @@
 """Module for Binary profit_table websocket channel."""
 from binaryapi.ws.chanels.base import Base
+from typing import Any, List, Optional, Union
 from decimal import Decimal
-from typing import Any, List, Union, Optional
 
 
 # https://developers.binary.com/api/#profit_table
@@ -11,10 +11,22 @@ class ProfitTable(Base):
 
     name = "profit_table"
 
-    def __call__(self, contract_type: Optional[List] = None, date_from: Optional[str] = None, date_to: Optional[str] = None, description: Optional[int] = None, limit: Optional[Union[int, float, Decimal]] = None, offset: Optional[Union[int, float, Decimal]] = None, sort: Optional[str] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        contract_type: Optional[List] = None, 
+        date_from: Optional[str] = None, 
+        date_to: Optional[str] = None, 
+        description: Optional[int] = None, 
+        limit: Optional[Union[int, float, Decimal]] = None, 
+        offset: Optional[Union[int, float, Decimal]] = None, 
+        sort: Optional[str] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to profit_table websocket channel.
         Profit Table (request)
         Retrieve a summary of account Profit Table, according to given search criteria
+
         :param contract_type: Return only contracts of the specified types
         :type contract_type: Optional[List]
         :param date_from: [Optional] Start date (epoch or YYYY-MM-DD)
@@ -33,6 +45,8 @@ class ProfitTable(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

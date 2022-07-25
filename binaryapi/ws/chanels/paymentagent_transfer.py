@@ -1,7 +1,7 @@
 """Module for Binary paymentagent_transfer websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union
 from decimal import Decimal
+from typing import Any, Optional, Union
 
 
 # https://developers.binary.com/api/#paymentagent_transfer
@@ -11,10 +11,20 @@ class PaymentagentTransfer(Base):
 
     name = "paymentagent_transfer"
 
-    def __call__(self, amount: Union[int, float, Decimal], currency: str, transfer_to: str, description: Optional[str] = None, dry_run: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        amount: Union[int, float, Decimal], 
+        currency: str, 
+        transfer_to: str, 
+        description: Optional[str] = None, 
+        dry_run: Optional[int] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to paymentagent_transfer websocket channel.
         Payment Agent: Transfer (request)
         Payment Agent Transfer - this call is available only to accounts that are approved Payment Agents.
+
         :param amount: The amount to transfer.
         :type amount: Union[int, float, Decimal]
         :param currency: Currency code.
@@ -29,6 +39,8 @@ class PaymentagentTransfer(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

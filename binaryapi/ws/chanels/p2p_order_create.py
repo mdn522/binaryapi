@@ -1,6 +1,6 @@
 """Module for Binary p2p_order_create websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union, List
+from typing import Any, List, Optional, Union
 from decimal import Decimal
 
 
@@ -11,10 +11,22 @@ class P2POrderCreate(Base):
 
     name = "p2p_order_create"
 
-    def __call__(self, advert_id: str, amount: Union[int, float, Decimal], contact_info: Optional[str] = None, payment_info: Optional[str] = None, payment_method_ids: Optional[List] = None, subscribe: Union[bool, int, None] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        advert_id: str, 
+        amount: Union[int, float, Decimal], 
+        contact_info: Optional[str] = None, 
+        payment_info: Optional[str] = None, 
+        payment_method_ids: Optional[List] = None, 
+        rate: Optional[Union[int, float, Decimal]] = None, 
+        subscribe: Optional[Union[bool, int]] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to p2p_order_create websocket channel.
         P2P Order Create (request)
-        Creates a P2P order for the specified advert. **This API call is still in Beta.**
+        Creates a P2P order for the specified advert.
+
         :param advert_id: The unique identifier for the advert to create an order against.
         :type advert_id: str
         :param amount: The amount of currency to be bought or sold.
@@ -25,12 +37,16 @@ class P2POrderCreate(Base):
         :type payment_info: Optional[str]
         :param payment_method_ids: IDs of payment methods, only applicable for sell orders.
         :type payment_method_ids: Optional[List]
+        :param rate: [Optional] Conversion rate from account currency to local currency, only applicable for floating rate adverts.
+        :type rate: Optional[Union[int, float, Decimal]]
         :param subscribe: [Optional] If set to 1, will send updates whenever there is an update to the order.
-        :type subscribe: Union[bool, int, None]
+        :type subscribe: Optional[Union[bool, int]]
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {
@@ -47,6 +63,9 @@ class P2POrderCreate(Base):
 
         if payment_method_ids:
             data['payment_method_ids'] = payment_method_ids
+
+        if rate:
+            data['rate'] = rate
 
         if subscribe:
             data['subscribe'] = int(subscribe)

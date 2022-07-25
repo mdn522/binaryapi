@@ -1,6 +1,6 @@
 """Module for Binary api_token websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, List
+from typing import Any, List, Optional
 
 
 # https://developers.binary.com/api/#api_token
@@ -10,10 +10,19 @@ class ApiToken(Base):
 
     name = "api_token"
 
-    def __call__(self, delete_token: Optional[str] = None, new_token: Optional[str] = None, new_token_scopes: Optional[List] = None, valid_for_current_ip_only: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        delete_token: Optional[str] = None, 
+        new_token: Optional[str] = None, 
+        new_token_scopes: Optional[List] = None, 
+        valid_for_current_ip_only: Optional[int] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to api_token websocket channel.
         API Token (request)
         This call manages API tokens
+
         :param delete_token: [Optional] The token to remove.
         :type delete_token: Optional[str]
         :param new_token: [Optional] The name of the created token.
@@ -26,6 +35,8 @@ class ApiToken(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

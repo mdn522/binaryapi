@@ -10,10 +10,18 @@ class EconomicCalendar(Base):
 
     name = "economic_calendar"
 
-    def __call__(self, currency: Optional[str] = None, end_date: Optional[int] = None, start_date: Optional[int] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        currency: Optional[str] = None, 
+        end_date: Optional[int] = None, 
+        start_date: Optional[int] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to economic_calendar websocket channel.
         Economic Calendar (request)
         Specify a currency to receive a list of events related to that specific currency. For example, specifying USD will return a list of USD-related events. If the currency is omitted, you will receive a list for all currencies.
+
         :param currency: [Optional] Currency symbol.
         :type currency: Optional[str]
         :param end_date: [Optional] End date.
@@ -24,6 +32,8 @@ class EconomicCalendar(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

@@ -1,7 +1,7 @@
 """Module for Binary API."""
 from typing import Optional, Any, Union, Callable
 from collections import OrderedDict, deque
-import threading
+from threading import Thread
 import logging
 import decimal
 import typing
@@ -42,13 +42,13 @@ class FixSizeOrderedDict(OrderedDict):
 
 
 class BinaryAPI(AbstractAPI):
-    websocket_thread: threading.Thread
+    websocket_thread: Thread
     websocket_client: Optional[WebsocketClient]
     profile: AuthorizeObject
 
     message_callback: Optional[Callable]
 
-    results: typing.OrderedDict[int, Any]
+    # results: typing.OrderedDict[int, Any]
     msg_by_req_id: typing.OrderedDict[int, Any]
     msg_by_type: typing.DefaultDict[str, typing.OrderedDict[int, Any]]
     _request_id: int
@@ -66,7 +66,7 @@ class BinaryAPI(AbstractAPI):
         self.websocket_client = None
 
         self.profile = AuthorizeObject()
-        self.results = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
+        # self.results = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
         self.msg_by_req_id = FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE)
         self.msg_by_type = nested_dict(1, lambda: FixSizeOrderedDict(max=DEFAULT_MAX_DICT_SIZE))
 
@@ -90,7 +90,7 @@ class BinaryAPI(AbstractAPI):
         self.websocket_client = WebsocketClient(self)
 
         # noinspection SpellCheckingInspection
-        self.websocket_thread = threading.Thread(
+        self.websocket_thread = Thread(
             target=self.websocket.run_forever,
             kwargs={
                 'sslopt': {
@@ -173,11 +173,26 @@ class BinaryAPI(AbstractAPI):
         return
 
     # noinspection PyShadowingBuiltins
-    def get_response_by_req_id(self, req_id: int, type: Optional[str] = None, **kwargs):
+    def get_response_by_req_id(
+            self,
+            req_id: int,
+            type: Optional[str] = None,
+            **kwargs
+    ):
         self.wait_for_response_by_req_id(req_id=req_id, type=type, **kwargs)
         return self.msg_by_req_id.get(req_id) if type is None else self.msg_by_type[type].get(req_id)
 
-    def send_websocket_request(self, name: str, msg, passthrough: Optional[Any] = None, req_id: int = None):
+    wait_for_msg_by_req_id = wait_for_response_by_req_id
+    get_msg_by_req_id = get_response_by_req_id
+
+    def send_websocket_request(
+            self,
+            name: str,
+            msg: Any,
+            passthrough:
+            Optional[Any] = None,
+            req_id: int = None
+    ) -> int:
         """Send websocket request to Binary server.
         :type passthrough: dict
         :type name: str
@@ -193,7 +208,7 @@ class BinaryAPI(AbstractAPI):
             msg['req_id'] = req_id
 
             # Delete any data with same req_id
-            self.results[req_id] = None
+            # self.results[req_id] = None
             self.msg_by_req_id[req_id] = None
             self.msg_by_type[name][req_id] = None
 

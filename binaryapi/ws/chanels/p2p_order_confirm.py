@@ -10,16 +10,24 @@ class P2POrderConfirm(Base):
 
     name = "p2p_order_confirm"
 
-    def __call__(self, id: str, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        id: str, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to p2p_order_confirm websocket channel.
         P2P Order Confirm (request)
-        Confirm a P2P order. **This API call is still in Beta.**
+        Confirm a P2P order.
+
         :param id: The unique identifier for this order.
         :type id: str
         :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {

@@ -1,6 +1,6 @@
 """Module for Binary app_markup_details websocket channel."""
 from binaryapi.ws.chanels.base import Base
-from typing import Any, Optional, Union, List
+from typing import Any, List, Optional, Union
 from decimal import Decimal
 
 
@@ -11,10 +11,24 @@ class AppMarkupDetails(Base):
 
     name = "app_markup_details"
 
-    def __call__(self, date_from: str, date_to: str, app_id: Optional[int] = None, client_loginid: Optional[str] = None, description: Optional[int] = None, limit: Optional[Union[int, float, Decimal]] = None, offset: Optional[Union[int, float, Decimal]] = None, sort: Optional[str] = None, sort_fields: Optional[List] = None, passthrough: Optional[Any] = None, req_id: Optional[int] = None):
+    def __call__(
+        self, 
+        date_from: str, 
+        date_to: str, 
+        app_id: Optional[int] = None, 
+        client_loginid: Optional[str] = None, 
+        description: Optional[int] = None, 
+        limit: Optional[Union[int, float, Decimal]] = None, 
+        offset: Optional[Union[int, float, Decimal]] = None, 
+        sort: Optional[str] = None, 
+        sort_fields: Optional[List] = None, 
+        passthrough: Optional[Any] = None, 
+        req_id: Optional[int] = None
+    ) -> int:
         """Method to send message to app_markup_details websocket channel.
         Application: Markup Details (request)
         Retrieve details of `app_markup` according to criteria specified.
+
         :param date_from: Start date (epoch or YYYY-MM-DD HH:MM:SS). Results are inclusive of this time.
         :type date_from: str
         :param date_to: End date (epoch or YYYY-MM-DD HH::MM::SS). Results are inclusive of this time.
@@ -37,6 +51,8 @@ class AppMarkupDetails(Base):
         :type passthrough: Optional[Any]
         :param req_id: [Optional] Used to map request to response.
         :type req_id: Optional[int]
+        :returns: req_id
+        :rtype: int
         """
 
         data = {
