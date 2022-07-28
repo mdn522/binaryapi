@@ -6,7 +6,7 @@ import logging
 def _prepare_logging():
     """Prepare logger for module Binary API."""
     logger = logging.getLogger(__name__)
-    logger.setLevel(logging.DEBUG)
+    # logger.setLevel(logging.DEBUG)
     logger.addHandler(logging.NullHandler())
 
     websocket_logger = logging.getLogger("websocket")
