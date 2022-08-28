@@ -3,8 +3,17 @@
 [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://paypal.me/mdn522)
 
 
+## Documentation
+
+---
+
+Documentation is also available online at https://binaryapi.readthedocs.io
+
+
+
 ## About API
 
+---
 ```python
 # High Level API, This API is based on "binaryapi.api" for easy usage
 from binaryapi.stable_api import Binary
@@ -15,16 +24,20 @@ from binaryapi.api import BinaryAPI
 
 ## Compatibility
 
+---
 Requires **Python 3.7.0** or later.
 
 ## Installing and Updating
+
+---
 ```bash
 pip install -U git+https://github.com/mdn522/binaryapi.git
 ```
-Must have git installed
+**Must have git installed**
+
+## Getting Started
 
 ---
-## Getting Started
 ```python
 from binaryapi.stable_api import Binary
 
@@ -45,19 +58,21 @@ print('success={}, contract_id={}, req_id={}'.format(success, contract_id, req_i
 ## Document
 
 ### Import 
+
+---
 ```python
 from binaryapi.stable_api import Binary
 ```
----
 ### Enabling Debug Logs
 
+---
 ```python
 import logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 ```
----
 ### Authorize/Login
 
+---
 ```python
 binary = Binary(token="YOUR-API-TOKEN-GOES-HERE")
 ```
@@ -65,6 +80,8 @@ binary = Binary(token="YOUR-API-TOKEN-GOES-HERE")
 *It automatically subscribes to `balance` and `transaction` API
 
 ### Authorize/Login with a message handler function
+
+---
 ```python
 def message_handler(message):
     msg_type = message.get('msg_type')
