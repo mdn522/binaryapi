@@ -2,7 +2,7 @@ from typing import Optional, Union, Any, Tuple, Callable
 from decimal import Decimal
 import logging
 import uuid
-import time
+import pause
 
 from binaryapi import global_value
 from binaryapi import global_config
@@ -11,6 +11,8 @@ from binaryapi.constants import PROPOSAL_BASIS
 from binaryapi.exceptions import MessageByReqIDNotFound
 
 # TODO support tick stream
+DEFAULT_MAX_RECONNECT = 5
+DEFAULT_SUSPEND = 0.5
 
 
 class Binary:
@@ -28,9 +30,9 @@ class Binary:
         # TODO
         self.gv_uid = str(uuid.uuid4())
 
-        self.max_reconnect = 5
+        self.max_reconnect = DEFAULT_MAX_RECONNECT
         self.connect_count = 0
-        self.suspend = 0.5
+        self.suspend = DEFAULT_SUSPEND
 
         self.connect()
 
@@ -79,12 +81,12 @@ class Binary:
 
                     break
 
-                time.sleep(self.suspend * 2)
+                pause.sleep(self.suspend * 2)
                 self.connect_count = self.connect_count + 1
             else:
                 logging.error('**error** reconnect() too many time please look log file')
 
-            time.sleep(0.001)
+            pause.sleep(0.001)
 
     @staticmethod
     def check_connect():

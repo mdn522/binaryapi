@@ -2,13 +2,14 @@
 from typing import Optional, Any, Union, Callable
 from collections import OrderedDict, deque
 from threading import Thread
+import simplejson as json
 import logging
 import decimal
 import typing
-import ssl
+import pause
 import time
+import ssl
 
-import simplejson as json
 
 from binaryapi import global_value
 from binaryapi import global_config
@@ -84,7 +85,6 @@ class BinaryAPI(AbstractAPI):
         if global_config.AUTO_CLEAR_VAR_MSG_BY_SUBSCRIPTION_ON_CONNECT:
             self.msg_by_subscription.clear()
 
-
         # TODO clear more cached messages
 
         self.websocket_client = WebsocketClient(self)
@@ -117,7 +117,13 @@ class BinaryAPI(AbstractAPI):
             auth_req_id = self.authorize(authorize=self.token)
 
             try:
-                self.wait_for_response_by_req_id(req_id=auth_req_id, type='authorize', max_timeout=AUTHORIZE_MAX_TIMEOUT, delay=0.01, error_label='error')
+                self.wait_for_response_by_req_id(
+                    req_id=auth_req_id,
+                    type='authorize',
+                    max_timeout=AUTHORIZE_MAX_TIMEOUT,
+                    delay=0.01,
+                    error_label='error'
+                )
             except MessageByReqIDNotFound:
                 return False
 
@@ -165,19 +171,17 @@ class BinaryAPI(AbstractAPI):
         type_name_repr: Optional[str] = type_name or type
         while (self.msg_by_req_id.get(req_id) is None) if type is None else (self.msg_by_type[type].get(req_id) is None):
             if time.time() - start_time >= max_timeout:
-                logging.error('**{}** {}late {} sec(s)'.format(error_label, max_timeout, (type_name_repr + ' ') if type_name_repr else ''))
+                logging.error('**{}** {} late {} sec(s)'.format(error_label, max_timeout, (type_name_repr + ' ') if type_name_repr else ''))
                 # return False, None, request_id
                 raise MessageByReqIDNotFound
-            time.sleep(delay)
-
-        return
+            pause.sleep(delay)
 
     # noinspection PyShadowingBuiltins
     def get_response_by_req_id(
-            self,
-            req_id: int,
-            type: Optional[str] = None,
-            **kwargs
+        self,
+        req_id: int,
+        type: Optional[str] = None,
+        **kwargs
     ):
         self.wait_for_response_by_req_id(req_id=req_id, type=type, **kwargs)
         return self.msg_by_req_id.get(req_id) if type is None else self.msg_by_type[type].get(req_id)
@@ -186,12 +190,11 @@ class BinaryAPI(AbstractAPI):
     get_msg_by_req_id = get_response_by_req_id
 
     def send_websocket_request(
-            self,
-            name: str,
-            msg: Any,
-            passthrough:
-            Optional[Any] = None,
-            req_id: int = None
+        self,
+        name: str,
+        msg: Any,
+        passthrough: Optional[Any] = None,
+        req_id: int = None
     ) -> int:
         """Send websocket request to Binary server.
         :type passthrough: dict
@@ -213,7 +216,7 @@ class BinaryAPI(AbstractAPI):
             self.msg_by_type[name][req_id] = None
 
         if passthrough:
-            msg["passthrough"] = passthrough
+            msg['passthrough'] = passthrough
 
         def default(obj):
             if isinstance(obj, decimal.Decimal):
