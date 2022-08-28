@@ -1,0 +1,55 @@
+
+Document Upload (document_upload)
+==================================================================
+
+Request KYC information from client
+
+Auth Scope(s): :code:`admin`
+
+
+.. py:method:: document_upload(document_format: str, document_type: str, expected_checksum: str, file_size: int, document_id: Optional[str] = None, document_issuing_country: Optional[str] = None, expiration_date: Optional[str] = None, lifetime_valid: Optional[int] = None, page_type: Optional[str] = None, proof_of_ownership=None, passthrough: Optional[Any] = None, req_id: Optional[int] = None) -> int
+
+   :param document_format: Document file format
+   :type document_format: str
+   :param document_type: Document type
+   :type document_type: str
+   :param expected_checksum: The checksum of the file to be uploaded
+   :type expected_checksum: str
+   :param file_size: Document size (should be less than 10MB)
+   :type file_size: int
+   :param document_id: [Optional] Document ID (required for Passport, Proof of ID and Driver's License)
+   :type document_id: Optional[str]
+   :param document_issuing_country: [Optional] 2-letter country code
+   :type document_issuing_country: Optional[str]
+   :param expiration_date: [Optional] Document expiration date (required for Passport, Proof of ID and Driver's License)
+   :type expiration_date: Optional[str]
+   :param lifetime_valid: [Optional] Boolean value that indicates whether this document is lifetime valid (only applies to POI document types, cancels out the expiration_date given if any)
+   :type lifetime_valid: Optional[int]
+   :param page_type: [Optional] To determine document side
+   :type page_type: Optional[str]
+   :param proof_of_ownership: [Optional] It contains info about the proof of ownership being uploaded (mandatory for proof_of_ownership document type)
+   :type proof_of_ownership: 
+   :param passthrough: [Optional] Used to pass data through the websocket, which may be retrieved via the `echo_req` output field.
+   :type passthrough: Optional[Any]
+   :param req_id: [Optional] Used to map request to response.
+   :type req_id: Optional[int]
+   :returns: req_id
+   :rtype: int
+
+
+Example
+"""""""
+
+.. code-block:: python
+  :name: binary.api.document_upload
+
+  binary.api.document_upload(
+      document_format='JPG'
+      document_type='bankstatement'
+      expected_checksum='1a79a4d60de6718e8e5b326e338ae533'
+      file_size=12345
+  )
+
+.. seealso::
+   * `Binary API Docs for document_upload <https://developers.binary.com/api/#document_upload>`_
+    
